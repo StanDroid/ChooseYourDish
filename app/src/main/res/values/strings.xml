@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ComposeTraining</string>
+    <string name="title_activity_main">MainActivity</string>
+</resources>
