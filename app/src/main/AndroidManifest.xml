@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ComposeTraining">
         <activity
-            android:name=".ui.MainActivity"
+            android:name="com.example.composetraining.feature.meme_list.ui.MemeListActivity"
             android:exported="true"
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.ComposeTraining.NoActionBar">
