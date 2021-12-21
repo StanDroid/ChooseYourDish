@@ -1,16 +1,8 @@
 package com.example.composetraining.core.data.repository
 
-import com.example.composetraining.core.data.model.MemeModel
+import com.example.composetraining.core.data.model.MemeResponse
+import io.reactivex.Single
 
-class MemeRepository {
-
-    companion object {
-
-        fun getMemes(): List<MemeModel> {
-            return generateSequence(0) { it + 1 }
-                .take(50)
-                .map { MemeModel(it.toString()) }
-                .toList()
-        }
-    }
+interface MemeRepository {
+    fun getMemes(page: Int = 1): Single<MemeResponse>
 }
