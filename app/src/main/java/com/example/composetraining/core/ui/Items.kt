@@ -3,6 +3,8 @@ package com.example.composetraining.core.ui
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.spring
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.ExperimentalMaterialApi
@@ -14,8 +16,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.composetraining.core.data.model.MemeModel
+import coil.annotation.ExperimentalCoilApi
+import coil.compose.rememberImagePainter
+import com.example.composetraining.core.data.model.memes.MemeModel
 
+@ExperimentalCoilApi
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun MemeItem(model: MemeModel, onClicked: (MemeModel) -> Unit) {
@@ -29,7 +34,7 @@ fun MemeItem(model: MemeModel, onClicked: (MemeModel) -> Unit) {
     )
 
     Surface(
-        color = MaterialTheme.colors.primary,
+        color = Color.Gray,
         modifier = Modifier
             .fillMaxWidth()
             .padding(top = 4.dp, bottom = 4.dp),
@@ -39,17 +44,21 @@ fun MemeItem(model: MemeModel, onClicked: (MemeModel) -> Unit) {
             onClicked.invoke(model)
         }
     ) {
-        Text(
-            modifier = Modifier.padding(
-                top = 32.dp,
-                start = 8.dp,
-                end = 8.dp,
-                bottom = extraPadding.coerceAtLeast(0.dp)
-            ),
-            text = "Hello ${model.name}!",
-            color = Color.DarkGray,
-            style = MaterialTheme.typography.h4
-        )
+        Column() {
+            val painter = rememberImagePainter(data = model.image, builder = {})
+            Image(painter = painter, contentDescription = "")
+            Text(
+                modifier = Modifier.padding(
+                    top = 32.dp,
+                    start = 8.dp,
+                    end = 8.dp,
+                    bottom = extraPadding.coerceAtLeast(0.dp)
+                ),
+                text = "Hello ${model.name}!",
+                color = Color.DarkGray,
+                style = MaterialTheme.typography.h4
+            )
+        }
     }
 }
 
@@ -61,5 +70,5 @@ fun MemeItemDetailed(model: MemeModel) {
 @Composable
 @Preview
 private fun ShowMemeItem() {
-    MemeItem(model = MemeModel("Test Text"), onClicked = {})
+    MemeItem(model = MemeModel("Test Text", "", ""), onClicked = {})
 }

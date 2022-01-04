@@ -1,4 +1,4 @@
-package com.example.composetraining.core.network
+package com.example.composetraining.core.network.memes
 
 import com.example.composetraining.core.data.model.MemeResponse
 import io.reactivex.Single

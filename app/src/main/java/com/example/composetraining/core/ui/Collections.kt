@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.composetraining.core.data.model.MemeModel
+import com.example.composetraining.core.data.model.memes.MemeModel
 
 @Composable
 fun ItemList(list: List<MemeModel>, onClickAction: (MemeModel) -> Unit) {
@@ -25,8 +25,8 @@ fun ItemList(list: List<MemeModel>, onClickAction: (MemeModel) -> Unit) {
 @Composable
 private fun ShowMemeItemList() {
     ItemList(listOf(
-        MemeModel("Test 1"),
-        MemeModel("Test 2")
+        MemeModel("Test 1","",""),
+        MemeModel("Test 2","","")
     ),
         onClickAction = {})
 }

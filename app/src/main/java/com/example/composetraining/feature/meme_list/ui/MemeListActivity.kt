@@ -12,7 +12,6 @@ import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -20,10 +19,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.composetraining.core.data.model.MemeModel
 import com.example.composetraining.core.ui.ItemList
 import com.example.composetraining.core.ui.style.BasicTheme
 import com.example.composetraining.feature.meme_list.viewmodel.MemeListViewModel
+import com.example.composetraining.feature.random_meal.usecase.RandomMealViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -35,6 +34,7 @@ class MemeListActivity : ComponentActivity() {
     }
 
     private val viewModel by lazy { getViewModel<MemeListViewModel>() }
+    private val mealViewModel by lazy { getViewModel<RandomMealViewModel>() }
 
     companion object {
         const val TAG = "MEMETAG"
@@ -86,5 +86,7 @@ class MemeListActivity : ComponentActivity() {
             ).show()
         }
         Log.e(TAG, "Call MemeListScreen finished")
+        val mealViewModel by mealViewModel.uiState
+        Log.e(TAG, mealViewModel.toUiState().toString())
     }
 }
