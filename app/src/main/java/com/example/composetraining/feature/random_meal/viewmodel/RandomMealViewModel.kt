@@ -1,4 +1,4 @@
-package com.example.composetraining.feature.random_meal.usecase
+package com.example.composetraining.feature.random_meal.viewmodel
 
 import android.util.Log
 import androidx.compose.runtime.MutableState
@@ -8,6 +8,7 @@ import com.example.composetraining.core.data.model.mealdb.RandomMeal
 import com.example.composetraining.core.data.usecase.execute
 import com.example.composetraining.core.data.viewmodel.BaseViewModel
 import com.example.composetraining.core.utils.ErrorMessage
+import com.example.composetraining.feature.random_meal.usecase.GetRandomMealUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

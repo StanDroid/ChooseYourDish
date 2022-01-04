@@ -21,8 +21,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.composetraining.core.ui.ItemList
 import com.example.composetraining.core.ui.style.BasicTheme
+import com.example.composetraining.feature.meal_categories.viewmodel.CategoriesViewModel
 import com.example.composetraining.feature.meme_list.viewmodel.MemeListViewModel
-import com.example.composetraining.feature.random_meal.usecase.RandomMealViewModel
+import com.example.composetraining.feature.random_meal.viewmodel.RandomMealViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -35,6 +36,7 @@ class MemeListActivity : ComponentActivity() {
 
     private val viewModel by lazy { getViewModel<MemeListViewModel>() }
     private val mealViewModel by lazy { getViewModel<RandomMealViewModel>() }
+    private val mealCategoriesViewModel by lazy { getViewModel<CategoriesViewModel>() }
 
     companion object {
         const val TAG = "MEMETAG"
@@ -87,6 +89,9 @@ class MemeListActivity : ComponentActivity() {
         }
         Log.e(TAG, "Call MemeListScreen finished")
         val mealViewModel by mealViewModel.uiState
-        Log.e(TAG, mealViewModel.toUiState().toString())
+        Log.e(TAG, "mealViewModel" + mealViewModel.toUiState().toString())
+
+        val categoriesViewModel by mealCategoriesViewModel.uiState
+        Log.e(TAG, "categoriesViewModel:" + categoriesViewModel.toUiState().toString())
     }
 }
