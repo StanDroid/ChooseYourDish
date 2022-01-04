@@ -20,7 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.composetraining.core.ui.ItemList
-import com.example.composetraining.core.ui.style.BasicTheme
+import com.example.composetraining.core.ui.base.style.BasicTheme
 import com.example.composetraining.feature.meal_categories.viewmodel.CategoriesViewModel
 import com.example.composetraining.feature.meme_list.viewmodel.MemeListViewModel
 import com.example.composetraining.feature.random_meal.viewmodel.RandomMealViewModel

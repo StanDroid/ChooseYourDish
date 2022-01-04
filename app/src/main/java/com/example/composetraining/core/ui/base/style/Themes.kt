@@ -1,4 +1,4 @@
-package com.example.composetraining.core.ui.style
+package com.example.composetraining.core.ui.base.style
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme

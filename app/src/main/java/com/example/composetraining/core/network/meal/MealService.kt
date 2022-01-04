@@ -5,6 +5,9 @@ import com.example.composetraining.core.data.model.mealdb.response.CategoriesRes
 import io.reactivex.Single
 import retrofit2.http.GET
 
+/**
+ * https://www.themealdb.com/api.php
+ */
 interface MealService {
 
     @GET("random.php")

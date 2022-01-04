@@ -1,4 +1,4 @@
-package com.example.composetraining.core.ui.style
+package com.example.composetraining.core.ui.base.style
 
 import androidx.compose.ui.graphics.Color
 

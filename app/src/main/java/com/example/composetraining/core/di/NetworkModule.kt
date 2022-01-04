@@ -1,11 +1,7 @@
 package com.example.composetraining.core.di
 
-import com.example.composetraining.core.data.repository.MealRepository
-import com.example.composetraining.core.data.repository.MealRepositoryImpl
-import com.example.composetraining.core.data.repository.MemeRepository
-import com.example.composetraining.core.data.repository.MemeRepositoryImpl
-import com.example.composetraining.core.network.memes.MemeService
 import com.example.composetraining.core.network.meal.MealService
+import com.example.composetraining.core.network.memes.MemeService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -36,19 +32,5 @@ object NetworkModule {
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
             .create(MealService::class.java)
-    }
-
-    @Provides
-    fun provideMemeRepository(
-        memeService: MemeService
-    ): MemeRepository {
-        return MemeRepositoryImpl(memeService)
-    }
-
-    @Provides
-    fun provideMealRepository(
-        mealService: MealService
-    ): MealRepository {
-        return MealRepositoryImpl(mealService)
     }
 }
