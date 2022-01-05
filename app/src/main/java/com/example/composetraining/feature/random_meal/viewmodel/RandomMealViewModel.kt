@@ -34,7 +34,7 @@ sealed interface HomeUiState {
      */
     data class NoRandomMeal(
         override val isLoading: Boolean,
-        override val errorMessages: List<ErrorMessage>
+        override val errorMessages: List<ErrorMessage> = listOf()
     ) : HomeUiState
 
     /**
@@ -93,6 +93,7 @@ class RandomMealViewModel @Inject constructor(
 
     fun loadRandomMeal() {
         Log.e("TAG", "loadRandomMeal started")
+        viewModelState.value = HomeViewModelState(isLoading = true)
         useCase.execute()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

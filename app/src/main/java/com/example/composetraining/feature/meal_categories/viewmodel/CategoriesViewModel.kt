@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.MutableLiveData
 import com.example.composetraining.core.data.model.mealdb.Category
 import com.example.composetraining.core.data.usecase.execute
 import com.example.composetraining.core.data.viewmodel.BaseViewModel
@@ -80,6 +81,8 @@ class CategoriesViewModel @Inject constructor(
     private val useCase: GetMealCategoriesUseCase
 ) : BaseViewModel() {
 
+    val categories = MutableLiveData<CategoriesViewModelState>()
+
     private val viewModelState: MutableState<CategoriesViewModelState> =
         mutableStateOf(CategoriesViewModelState(isLoading = true))
 
@@ -96,7 +99,7 @@ class CategoriesViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ list ->
                 Log.e("TAG", "loadCategories success: $list")
-                viewModelState.value =
+                categories.value =
                     CategoriesViewModelState(list = list, isLoading = false)
             }, {
                 it.printStackTrace()

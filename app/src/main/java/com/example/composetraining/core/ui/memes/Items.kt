@@ -1,4 +1,4 @@
-package com.example.composetraining.core.ui
+package com.example.composetraining.core.ui.memes
 
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateDpAsState
@@ -7,6 +7,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -20,8 +21,8 @@ import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import com.example.composetraining.core.data.model.memes.MemeModel
 
+@ExperimentalMaterialApi
 @ExperimentalCoilApi
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun MemeItem(model: MemeModel, onClicked: (MemeModel) -> Unit) {
     var expanded by remember { mutableStateOf(false) }
@@ -32,9 +33,8 @@ fun MemeItem(model: MemeModel, onClicked: (MemeModel) -> Unit) {
             stiffness = Spring.StiffnessLow
         )
     )
-
     Surface(
-        color = Color.Gray,
+        color = Color.LightGray,
         modifier = Modifier
             .fillMaxWidth()
             .padding(top = 4.dp, bottom = 4.dp),
@@ -46,7 +46,7 @@ fun MemeItem(model: MemeModel, onClicked: (MemeModel) -> Unit) {
     ) {
         Column() {
             val painter = rememberImagePainter(data = model.image, builder = {})
-            Image(painter = painter, contentDescription = "")
+            Image(modifier = Modifier.size(50.dp), painter = painter, contentDescription = "")
             Text(
                 modifier = Modifier.padding(
                     top = 32.dp,
@@ -67,8 +67,10 @@ fun MemeItemDetailed(model: MemeModel) {
     Text(text = "Hello ${model.name}!")
 }
 
+@ExperimentalCoilApi
+@ExperimentalMaterialApi
 @Composable
-@Preview
+@Preview(showBackground = true, name = "Model")
 private fun ShowMemeItem() {
-    MemeItem(model = MemeModel("Test Text", "", ""), onClicked = {})
+    MemeItem(model = MemeModel("Test Text", "TOP TEXT", ""), onClicked = {})
 }

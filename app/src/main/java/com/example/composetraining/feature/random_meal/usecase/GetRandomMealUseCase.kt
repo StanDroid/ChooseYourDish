@@ -15,14 +15,14 @@ class GetRandomMealUseCase @Inject constructor(
             .map { list ->
                 list.meals.firstOrNull()?.let {
                     RandomMeal(
-                        idMeal = it.idMeal,
-                        strArea = it.strArea,
-                        strMeal = it.strMeal,
-                        strCategory = it.strCategory,
-                        strInstructions = it.strInstructions,
-                        strMealThumb = it.strMealThumb,
-                        strSource = it.strSource,
-                        strYoutube = it.strYoutube
+                        idMeal = it.idMeal.orEmpty(),
+                        strArea = it.strArea.orEmpty(),
+                        strMeal = it.strMeal.orEmpty(),
+                        strCategory = it.strCategory.orEmpty(),
+                        strInstructions = it.strInstructions.orEmpty(),
+                        strMealThumb = it.strMealThumb.orEmpty(),
+                        strSource = it.strSource.orEmpty(),
+                        strYoutube = it.strYoutube.orEmpty()
                     )
                 }
             }
