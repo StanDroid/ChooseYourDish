@@ -1,19 +1,27 @@
 package com.example.composetraining.core.ui.meal
 
 import androidx.compose.animation.animateContentSize
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
+import androidx.compose.animation.core.*
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
+import androidx.compose.ui.Alignment.Companion.End
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import coil.transform.RoundedCornersTransformation
@@ -27,7 +35,16 @@ fun RandomMealView(
     onLoadNextRandomMeal: () -> Unit = {},
     onNavigateToCategories: () -> Unit = {}
 ) {
-    var expandable by remember { mutableStateOf(false) }
+    var expanded by remember { mutableStateOf(false) }
+
+    val extraPadding by animateDpAsState(
+        if (expanded) 32.dp else 8.dp,
+        animationSpec = spring(
+            dampingRatio = Spring.DampingRatioMediumBouncy,
+            stiffness = Spring.StiffnessLow
+        )
+    )
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -45,8 +62,13 @@ fun RandomMealView(
             modifier = Modifier
                 .verticalScroll(rememberScrollState(0))
                 .fillMaxWidth()
-                .animateContentSize()
+                .animateContentSize(
+                    animationSpec = tween(
+                        300, easing = LinearOutSlowInEasing
+                    )
+                )
                 .clickable { onLoadNextRandomMeal.invoke() },
+            shape = RoundedCornerShape(4.dp)
         ) {
             Column(
                 modifier = Modifier.fillMaxSize()
@@ -55,58 +77,108 @@ fun RandomMealView(
                     data = model.strMealThumb,
                     builder = { transformations(RoundedCornersTransformation()) }
                 )
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.Center
+                Text(
+                    modifier = Modifier.align(CenterHorizontally),
+                    text = "Tap on Card to get a new one"
+                )
+                Image(
+                    painter = painter,
+                    contentScale = ContentScale.Crop,
+                    contentDescription = "",
+                    modifier = Modifier
+                        .height(200.dp)
+                        .fillMaxWidth()
+                )
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp)
                 ) {
-                    Image(
-                        painter = painter,
-                        contentScale = ContentScale.Crop,
-                        contentDescription = "",
-                        modifier = Modifier
-                            .height(200.dp)
-                            .fillMaxWidth()
-                    )
-                }
-                Column(modifier = Modifier.padding(16.dp)) {
                     Text(
                         modifier = Modifier
                             .align(CenterHorizontally)
                             .padding(bottom = 8.dp),
                         text = model.strMeal, style = MaterialTheme.typography.h5
                     )
-                    Text(text = "Area: ${model.strArea}", style = MaterialTheme.typography.h6)
                     Text(
+                        modifier = Modifier.padding(bottom = 8.dp),
+                        text = "Area: ${model.strArea}",
+                        style = MaterialTheme.typography.subtitle1
+                    )
+                    Text(
+                        modifier = Modifier.padding(bottom = 8.dp),
                         text = "Category: ${model.strCategory}",
                         style = MaterialTheme.typography.subtitle1
                     )
-                    if (expandable) {
+                    if (expanded) {
                         Text(
-                            modifier = Modifier.clickable { expandable = !expandable },
-                            text = "Instructions: ${model.strInstructions}",
+                            modifier = Modifier.clickable { expanded = !expanded },
+                            text = "Instructions:",
+                            style = MaterialTheme.typography.subtitle2
+                        )
+                        Text(
+                            modifier = Modifier
+                                .background(Color.Green)
+                                .clickable { expanded = !expanded }
+                                .padding(bottom = 8.dp),
+                            text = model.strInstructions,
                             style = MaterialTheme.typography.subtitle2
                         )
                     } else {
                         Text(
-                            modifier = Modifier.clickable { expandable = !expandable },
+                            modifier = Modifier
+                                .align(End)
+                                .padding(bottom = 8.dp)
+                                .clickable { expanded = !expanded },
                             text = "Click here to see instructions",
-                            style = MaterialTheme.typography.subtitle2
+                            style = MaterialTheme.typography.subtitle2,
+                            color = Color.DarkGray
                         )
                     }
-                    Text(
-                        text = "Source: ${model.strSource}",
-                        style = MaterialTheme.typography.body1
-                    )
-                    Text(
-                        text = "Youtube: ${model.strYoutube}",
-                        style = MaterialTheme.typography.body2
-                    )
+                    AnnotatedClickableText("See on Youtube", model.strYoutube)
+                    AnnotatedClickableText("Original post", model.strSource)
                 }
             }
         }
     }
 }
 
+@Composable
+fun AnnotatedClickableText(str: String, link: String) {
+    if (str.isEmpty()) return
+    val annotatedLinkString: AnnotatedString = buildAnnotatedString {
+        append(str)
+        addStyle(
+            style = SpanStyle(
+                color = Color(0xff64B5F6),
+                fontSize = 14.sp,
+                textDecoration = TextDecoration.Underline
+            ), start = 0, end = str.length
+        )
+
+        // attach a string annotation that stores a URL to the text "link"
+        addStringAnnotation(
+            tag = "URL",
+            annotation = link,
+            start = 0,
+            end = str.length - 1
+        )
+    }
+    val uriHandler = LocalUriHandler.current
+    ClickableText(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 8.dp),
+        text = annotatedLinkString,
+        onClick = {
+            annotatedLinkString
+                .getStringAnnotations("URL", it, it)
+                .firstOrNull()?.let { string ->
+                    uriHandler.openUri(string.item)
+                }
+        }
+    )
+}
 
 @Composable
 fun NoRandomMealView(state: HomeUiState) {
