@@ -29,15 +29,15 @@ fun BasicTheme(
 }
 
 private val DarkColorsPalette = darkColors(
-    surface = Blue,
-    onSurface = Navy,
+    surface = Color.Black,
+    onSurface = Color.DarkGray,
     primary = Navy,
     onPrimary = Chartreuse,
 )
 
 private val LightColorsPalette = lightColors(
-    surface = Blue,
-    onSurface = Color.White,
+    surface = Yellow,
+    onSurface = Color.Black,
     primary = LightBlue,
     onPrimary = Navy
 )
