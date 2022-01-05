@@ -16,6 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
+import coil.transform.RoundedCornersTransformation
 import com.example.composetraining.core.data.model.mealdb.RandomMeal
 import com.example.composetraining.feature.random_meal.viewmodel.HomeUiState
 
@@ -28,7 +29,7 @@ fun RandomMealView(
 ) {
     var expandable by remember { mutableStateOf(false) }
     Column(
-        Modifier
+        modifier = Modifier
             .fillMaxSize()
             .padding(16.dp)
     ) {
@@ -41,19 +42,19 @@ fun RandomMealView(
             Text(text = "Go to Categories")
         }
         Card(
-            Modifier
-                .verticalScroll(rememberScrollState())
+            modifier = Modifier
+                .verticalScroll(rememberScrollState(0))
                 .fillMaxWidth()
                 .animateContentSize()
                 .clickable { onLoadNextRandomMeal.invoke() },
         ) {
             Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(16.dp)
+                modifier = Modifier.fillMaxSize()
             ) {
-                val painter = rememberImagePainter(data = model.strMealThumb,
-                    builder = { /*transformations(CircleCropTransformation())*/ })
+                val painter = rememberImagePainter(
+                    data = model.strMealThumb,
+                    builder = { transformations(RoundedCornersTransformation()) }
+                )
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.Center
@@ -62,41 +63,45 @@ fun RandomMealView(
                         painter = painter,
                         contentScale = ContentScale.Crop,
                         contentDescription = "",
-                        modifier = Modifier.size(250.dp)
+                        modifier = Modifier
+                            .height(200.dp)
+                            .fillMaxWidth()
                     )
                 }
-                Text(
-                    modifier = Modifier
-                        .align(CenterHorizontally)
-                        .padding(bottom = 8.dp),
-                    text = model.strMeal, style = MaterialTheme.typography.h5
-                )
-                Text(text = "Area: ${model.strArea}", style = MaterialTheme.typography.h6)
-                Text(
-                    text = "Category: ${model.strCategory}",
-                    style = MaterialTheme.typography.subtitle1
-                )
-                if (expandable) {
+                Column(modifier = Modifier.padding(16.dp)) {
                     Text(
-                        modifier = Modifier.clickable { expandable = !expandable },
-                        text = "Instructions: ${model.strInstructions}",
-                        style = MaterialTheme.typography.subtitle2
+                        modifier = Modifier
+                            .align(CenterHorizontally)
+                            .padding(bottom = 8.dp),
+                        text = model.strMeal, style = MaterialTheme.typography.h5
                     )
-                } else {
+                    Text(text = "Area: ${model.strArea}", style = MaterialTheme.typography.h6)
                     Text(
-                        modifier = Modifier.clickable { expandable = !expandable },
-                        text = "Click here to see instructions",
-                        style = MaterialTheme.typography.subtitle2
+                        text = "Category: ${model.strCategory}",
+                        style = MaterialTheme.typography.subtitle1
+                    )
+                    if (expandable) {
+                        Text(
+                            modifier = Modifier.clickable { expandable = !expandable },
+                            text = "Instructions: ${model.strInstructions}",
+                            style = MaterialTheme.typography.subtitle2
+                        )
+                    } else {
+                        Text(
+                            modifier = Modifier.clickable { expandable = !expandable },
+                            text = "Click here to see instructions",
+                            style = MaterialTheme.typography.subtitle2
+                        )
+                    }
+                    Text(
+                        text = "Source: ${model.strSource}",
+                        style = MaterialTheme.typography.body1
+                    )
+                    Text(
+                        text = "Youtube: ${model.strYoutube}",
+                        style = MaterialTheme.typography.body2
                     )
                 }
-                Text(
-                    text = "Source: ${model.strSource}",
-                    style = MaterialTheme.typography.body1
-                )
-                Text(
-                    text = "Youtube: ${model.strYoutube}",
-                    style = MaterialTheme.typography.body2
-                )
             }
         }
     }
