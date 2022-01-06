@@ -54,7 +54,6 @@ sealed interface CategoriesUiState {
     val list: List<Category>? = null,
     val isLoading: Boolean = false,
     val errorMessages: List<ErrorMessage> = emptyList(),
-    val searchInput: String = "",
 ) {
 
     /**
