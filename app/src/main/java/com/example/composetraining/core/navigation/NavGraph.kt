@@ -6,6 +6,7 @@ import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.composetraining.core.navigation.route.RandomMealRoute
 import com.example.composetraining.core.ui.meal.screen.CategoryListScreen
 import com.example.composetraining.core.ui.meal.screen.RandomMealScreen
 import com.example.composetraining.feature.meal_categories.viewmodel.CategoriesViewModel
@@ -21,7 +22,7 @@ fun NavigationSystem() {
         composable(NavScreen.RandomMeal.route) {
             val viewModel: RandomMealViewModel =
                 hiltViewModel(viewModelStoreOwner = viewModelStoreOwner)
-            RandomMealScreen(navController, viewModel)
+            RandomMealRoute(navController, viewModel)
         }
         composable(NavScreen.CategoryList.route){
             val viewModel: CategoriesViewModel =
