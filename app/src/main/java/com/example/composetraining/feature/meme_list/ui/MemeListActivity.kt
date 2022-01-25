@@ -89,7 +89,7 @@ class MemeListActivity : BaseActivity() {
 //        val mealViewModel by mealViewModel.uiState
 //        Log.e(TAG, "mealViewModel" + mealViewModel.toUiState().toString())
 
-        val categoriesViewModel by mealCategoriesViewModel.categories.observeAsState()
-        Log.e(TAG, "categoriesViewModel:" + categoriesViewModel?.toUiState().toString())
+//        val categoriesViewModel by mealCategoriesViewModel.categories.observeAsState()
+//        Log.e(TAG, "categoriesViewModel:" + categoriesViewModel?.toUiState().toString())
     }
 }

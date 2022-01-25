@@ -16,10 +16,10 @@ class GetMealCategoriesUseCase @Inject constructor(
             .flatMapIterable { it.categories }
             .map {
                 Category(
-                    id = it.idCategory,
-                    name = it.strCategory,
-                    description = it.strCategoryDescription,
-                    thumb = it.strCategoryThumb
+                    id = it.idCategory.orEmpty(),
+                    name = it.strCategory.orEmpty(),
+                    description = it.strCategoryDescription.orEmpty(),
+                    thumb = it.strCategoryThumb.orEmpty()
                 )
             }
             .toList()
