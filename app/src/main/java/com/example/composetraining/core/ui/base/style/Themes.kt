@@ -4,20 +4,21 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.MaterialTheme.shapes
-import androidx.compose.material.MaterialTheme.typography
 import androidx.compose.material.Shapes
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Composable
 fun BasicTheme(
     isDarkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
+    val systemUiController = rememberSystemUiController()
+
     val colors = if (isDarkTheme) {
         DarkColorsPalette
     } else {
@@ -30,6 +31,7 @@ fun BasicTheme(
         shapes = MealsShapes,
         content = content
     )
+    systemUiController.setSystemBarsColor(color = colors.primaryVariant)
 }
 
 private val DarkColorsPalette = darkColors(

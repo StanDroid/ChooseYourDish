@@ -41,7 +41,7 @@ fun NoRandomMealView(
             contentAlignment = Alignment.Center
         ) {
             if (state.isLoading) {
-                CircularProgressIndicator()
+                ProgressLoadingView()
             } else {
                 Text(
                     text = "There is no random meal",
