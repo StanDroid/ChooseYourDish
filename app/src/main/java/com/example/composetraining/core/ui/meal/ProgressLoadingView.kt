@@ -1,4 +1,4 @@
-package com.example.composetraining.core.ui.meal.views
+package com.example.composetraining.core.ui.meal
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,6 +21,6 @@ fun ProgressLoadingView(){
 
 @Preview(showBackground = true)
 @Composable
-fun ProgressLoadingViewPreview(){
+private fun ProgressLoadingViewPreview(){
     ProgressLoadingView()
 }

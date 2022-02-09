@@ -8,10 +8,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.composetraining.core.navigation.route.CategoryDetailsRoute
+import com.example.composetraining.core.navigation.route.MealListRoute
 import com.example.composetraining.core.navigation.route.CategoryListRoute
+import com.example.composetraining.core.navigation.route.MealDetailsRoute
 import com.example.composetraining.core.navigation.route.RandomMealRoute
 import com.example.composetraining.feature.meal_categories.viewmodel.CategoriesViewModel
+import com.example.composetraining.feature.meal_details.viewmodel.MealDetailsViewModel
+import com.example.composetraining.feature.meal_details.viewmodel.MealListViewModel
 import com.example.composetraining.feature.random_meal.viewmodel.RandomMealViewModel
 
 @Composable
@@ -32,17 +35,38 @@ fun NavigationSystem() {
             CategoryListRoute(navController, viewModel)
         }
         composable(
-            route = NavScreen.CategoryDetails.route + "/{$PARAM_ID}/{$PARAM_NAME}",
+            route = NavScreen.MealList.route + "/{$PARAM_ID}/{$PARAM_NAME}",
             arguments = listOf(
                 navArgument(PARAM_ID) { type = NavType.StringType },
                 navArgument(PARAM_NAME) { type = NavType.StringType }
             )
         ) {
             it.arguments?.let { args ->
-                CategoryDetailsRoute(
+                val viewModel: MealListViewModel =
+                    hiltViewModel(viewModelStoreOwner = viewModelStoreOwner)
+                MealListRoute(
                     args.getString(PARAM_ID).orEmpty(),
                     args.getString(PARAM_NAME).orEmpty(),
-                    navController
+                    navController,
+                    viewModel
+                )
+            }
+        }
+        composable(
+            route = NavScreen.MealDetails.route + "/{$PARAM_ID}/{$PARAM_NAME}",
+            arguments = listOf(
+                navArgument(PARAM_ID) { type = NavType.StringType },
+                navArgument(PARAM_NAME) { type = NavType.StringType }
+            )
+        ) {
+            it.arguments?.let { args ->
+                val viewModel: MealDetailsViewModel =
+                    hiltViewModel(viewModelStoreOwner = viewModelStoreOwner)
+                MealDetailsRoute(
+                    args.getString(PARAM_ID).orEmpty(),
+                    args.getString(PARAM_NAME).orEmpty(),
+                    navController,
+                    viewModel
                 )
             }
         }

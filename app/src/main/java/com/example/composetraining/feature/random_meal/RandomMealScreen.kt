@@ -1,9 +1,9 @@
-package com.example.composetraining.core.ui.meal.screen
+package com.example.composetraining.feature.random_meal
 
 import androidx.compose.runtime.Composable
 import com.example.composetraining.core.ui.base.MealScaffold
-import com.example.composetraining.core.ui.meal.views.NoRandomMealView
-import com.example.composetraining.core.ui.meal.views.RandomMealView
+import com.example.composetraining.core.ui.meal.NoRandomMealView
+import com.example.composetraining.core.ui.meal.RandomMealView
 import com.example.composetraining.feature.random_meal.viewmodel.RandomMealUiState
 
 @Composable

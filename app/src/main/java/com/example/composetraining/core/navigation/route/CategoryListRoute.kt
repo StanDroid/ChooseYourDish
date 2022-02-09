@@ -5,7 +5,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.navigation.NavHostController
 import com.example.composetraining.core.navigation.NavScreen
-import com.example.composetraining.core.ui.meal.screen.CategoryListScreen
+import com.example.composetraining.feature.meal_categories.CategoryListScreen
 import com.example.composetraining.feature.meal_categories.viewmodel.CategoriesViewModel
 
 @Composable
@@ -18,7 +18,7 @@ fun CategoryListRoute(
         state.toUiState()
     ) {
         navController.navigate(
-            NavScreen.CategoryDetails.withStringArgs(
+            NavScreen.MealList.withStringArgs(
                 it.id,
                 it.name
             )

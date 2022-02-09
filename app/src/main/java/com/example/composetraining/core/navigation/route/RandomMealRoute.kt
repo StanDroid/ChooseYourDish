@@ -5,7 +5,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.navigation.NavHostController
 import com.example.composetraining.core.navigation.NavScreen
-import com.example.composetraining.core.ui.meal.screen.RandomMealScreen
+import com.example.composetraining.feature.random_meal.RandomMealScreen
 import com.example.composetraining.feature.random_meal.viewmodel.RandomMealViewModel
 
 @Composable

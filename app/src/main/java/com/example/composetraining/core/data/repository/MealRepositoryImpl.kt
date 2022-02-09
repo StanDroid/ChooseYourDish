@@ -10,4 +10,8 @@ class MealRepositoryImpl @Inject constructor(
     override fun getRandomMeal() = mealService.getRandomMeal()
 
     override fun getMealCategories() = mealService.getMealCategories()
+
+    override fun getMealsByCategory(name: String) = mealService.getMealsByCategory(name)
+
+    override fun getMealDetails(id: String) = mealService.getMealDetails(id)
 }

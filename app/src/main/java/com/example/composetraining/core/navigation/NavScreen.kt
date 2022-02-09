@@ -3,7 +3,8 @@ package com.example.composetraining.core.navigation
 sealed class NavScreen(val route: String) {
     object RandomMeal : NavScreen("RandomMeal")
     object CategoryList : NavScreen("CategoryList")
-    object CategoryDetails : NavScreen("CategoryDetails")
+    object MealList : NavScreen("MealList")
+    object MealDetails : NavScreen("MealDetails")
 
     fun withStringArgs(vararg args: String): String {
         return buildString {

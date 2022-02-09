@@ -1,4 +1,4 @@
-package com.example.composetraining.core.ui.meal.views
+package com.example.composetraining.core.ui.meal
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring

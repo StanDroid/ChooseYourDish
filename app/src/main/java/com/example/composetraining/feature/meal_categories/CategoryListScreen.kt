@@ -1,4 +1,4 @@
-package com.example.composetraining.core.ui.meal.screen
+package com.example.composetraining.feature.meal_categories
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -12,8 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.composetraining.core.data.model.mealdb.Category
 import com.example.composetraining.core.ui.base.MealScaffold
-import com.example.composetraining.core.ui.meal.views.CategoryItemView
-import com.example.composetraining.core.ui.meal.views.ProgressLoadingView
+import com.example.composetraining.core.ui.meal.CategoryItemView
+import com.example.composetraining.core.ui.meal.ProgressLoadingView
 import com.example.composetraining.feature.meal_categories.viewmodel.CategoriesUiState
 
 @Composable
