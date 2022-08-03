@@ -1,4 +1,4 @@
-package com.example.composetraining.core.ui.base.AnnotatedClickableText
+package com.example.composetraining.core.ui.base
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding

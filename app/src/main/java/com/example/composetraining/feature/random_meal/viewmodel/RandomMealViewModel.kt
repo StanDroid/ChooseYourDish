@@ -3,7 +3,6 @@ package com.example.composetraining.feature.random_meal.viewmodel
 import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.mutableStateOf
 import com.example.composetraining.core.data.model.mealdb.RandomMeal
 import com.example.composetraining.core.data.usecase.execute

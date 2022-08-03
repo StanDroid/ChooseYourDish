@@ -32,7 +32,7 @@ import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import coil.transform.RoundedCornersTransformation
 import com.example.composetraining.core.data.model.mealdb.RandomMeal
-import com.example.composetraining.core.ui.base.AnnotatedClickableText.AnnotatedClickableText
+import com.example.composetraining.core.ui.base.AnnotatedClickableText
 
 @OptIn(ExperimentalCoilApi::class)
 @Composable
