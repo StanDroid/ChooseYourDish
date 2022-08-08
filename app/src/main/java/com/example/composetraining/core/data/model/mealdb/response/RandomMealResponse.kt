@@ -1,4 +1,4 @@
-package com.example.composetraining.core.data.model.mealdb
+package com.example.composetraining.core.data.model.mealdb.response
 
 data class RandomMealResponse(
     val meals: List<RandomMealDTO>

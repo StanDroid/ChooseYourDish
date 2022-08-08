@@ -4,15 +4,13 @@ import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import com.example.composetraining.core.data.model.mealdb.Category
+import androidx.lifecycle.viewModelScope
 import com.example.composetraining.core.data.model.mealdb.Meal
-import com.example.composetraining.core.data.usecase.execute
 import com.example.composetraining.core.data.viewmodel.BaseViewModel
 import com.example.composetraining.core.utils.ErrorMessage
 import com.example.composetraining.feature.meal_details.usecase.GetMealDetailsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
@@ -88,20 +86,20 @@ class MealDetailsViewModel @Inject constructor(
     fun loadMealDetails(id: String) {
         Log.e("TAG", "loadMealDetails started")
         viewModelState.value = MealDetailsViewModelState(isLoading = true)
-        useCase.execute(id)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ data ->
-                Log.e("TAG", "loadCategories success: $data")
-                viewModelState.value =
-                    MealDetailsViewModelState(data = data, isLoading = false)
-            }, {
-                it.printStackTrace()
+        viewModelScope.launch {
+            try {
+                viewModelState.value = MealDetailsViewModelState(
+                    data = useCase.execute(id),
+                    isLoading = false
+                )
+            } catch (ex: Exception) {
+                ex.printStackTrace()
                 Log.e("TAG", "loadCategories failure")
                 viewModelState.value = MealDetailsViewModelState(
                     isLoading = false, errorMessages =
-                    listOf(ErrorMessage(it.hashCode(), it.stackTrace.toString()))
+                    listOf(ErrorMessage(ex.hashCode(), ex.stackTrace.toString()))
                 )
-            }).run(compositeDisposable::add)
+            }
+        }
     }
 }

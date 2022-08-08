@@ -4,14 +4,14 @@ import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.viewModelScope
 import com.example.composetraining.core.data.model.mealdb.RandomMeal
 import com.example.composetraining.core.data.usecase.execute
 import com.example.composetraining.core.data.viewmodel.BaseViewModel
 import com.example.composetraining.core.utils.ErrorMessage
 import com.example.composetraining.feature.random_meal.usecase.GetRandomMealUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
@@ -87,22 +87,20 @@ class RandomMealViewModel @Inject constructor(
     fun loadRandomMeal() {
         Log.e("TAG", "loadRandomMeal started")
         viewModelState.value = RandomMealViewModelState(isLoading = true)
-        useCase.execute()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ randomMeal ->
-                Log.e("TAG", "loadRandomMeal success: $randomMeal")
+        viewModelScope.launch {
+            try {
+                val randomMeal = useCase.execute()
                 viewModelState.value =
                     RandomMealViewModelState(randomMeal = randomMeal, isLoading = false)
-            }, {
+                Log.e("TAG", "loadRandomMeal success: $randomMeal")
+            } catch (it: Exception) {
                 it.printStackTrace()
                 Log.e("TAG", "loadRandomMeal failure")
                 viewModelState.value = RandomMealViewModelState(
                     isLoading = false, errorMessages =
                     listOf(ErrorMessage(it.hashCode(), it.stackTrace.toString()))
                 )
-            }).run {
-                compositeDisposable.add(this)
             }
+        }
     }
 }

@@ -4,13 +4,13 @@ import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.viewModelScope
 import com.example.composetraining.core.data.model.mealdb.MealItem
 import com.example.composetraining.core.data.viewmodel.BaseViewModel
 import com.example.composetraining.core.utils.ErrorMessage
 import com.example.composetraining.feature.meals_by_category.usecase.GetMealListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 sealed interface MealListUiState {
@@ -76,20 +76,20 @@ class MealListViewModel @Inject constructor(
     fun loadMealsByCategory(name: String) {
         Log.e("TAG", "loadMealsByCategory started")
         viewModelState.value = MealListViewModelState(isLoading = true)
-        useCase.execute(name)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ list ->
+        viewModelScope.launch {
+            try {
+                val list = useCase.execute(name)
                 Log.e("TAG", "loadMealsByCategory success: $list")
                 viewModelState.value =
                     MealListViewModelState(list = list, isLoading = false)
-            }, {
-                it.printStackTrace()
+            } catch (ex: Exception) {
+                ex.printStackTrace()
                 Log.e("TAG", "loadMealsByCategory failure")
                 viewModelState.value = MealListViewModelState(
                     isLoading = false, errorMessages =
-                    listOf(ErrorMessage(it.hashCode(), it.stackTrace.toString()))
+                    listOf(ErrorMessage(ex.hashCode(), ex.stackTrace.toString()))
                 )
-            }).run(compositeDisposable::add)
+            }
+        }
     }
 }

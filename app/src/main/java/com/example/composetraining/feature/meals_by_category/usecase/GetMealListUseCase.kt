@@ -2,25 +2,20 @@ package com.example.composetraining.feature.meals_by_category.usecase
 
 import com.example.composetraining.core.data.model.mealdb.MealItem
 import com.example.composetraining.core.data.repository.MealRepository
-import com.example.composetraining.core.data.usecase.UseCase
-import io.reactivex.Single
+import com.example.composetraining.core.data.usecase.UseCaseSuspend
 import javax.inject.Inject
 
 class GetMealListUseCase @Inject constructor(
     private val repository: MealRepository
-) : UseCase<String, Single<List<MealItem>>> {
+) : UseCaseSuspend<String, List<MealItem>?> {
 
-    override fun execute(params: String): Single<List<MealItem>> {
-        return repository.getMealsByCategory(params)
-            .toObservable()
-            .flatMapIterable { it.meals }
-            .map {
-                MealItem(
-                    id = it.idMeal.orEmpty(),
-                    name = it.strMeal.orEmpty(),
-                    thumb = it.strMealThumb.orEmpty()
-                )
-            }
-            .toList()
+    override suspend fun execute(params: String): List<MealItem>? {
+        return repository.getMealsByCategory(params).meals?.map {
+            MealItem(
+                id = it.idMeal.orEmpty(),
+                name = it.strMeal.orEmpty(),
+                thumb = it.strMealThumb.orEmpty()
+            )
+        }
     }
 }

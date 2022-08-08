@@ -1,17 +1,16 @@
 package com.example.composetraining.core.data.repository
 
-import com.example.composetraining.core.data.model.mealdb.RandomMealResponse
 import com.example.composetraining.core.data.model.mealdb.response.CategoriesResponse
 import com.example.composetraining.core.data.model.mealdb.response.MealDetailsResponse
 import com.example.composetraining.core.data.model.mealdb.response.MealListResponse
-import io.reactivex.Single
+import com.example.composetraining.core.data.model.mealdb.response.RandomMealResponse
 
 interface MealRepository {
-    fun getRandomMeal(): Single<RandomMealResponse>
+  suspend fun getRandomMeal(): RandomMealResponse
 
-    fun getMealCategories(): Single<CategoriesResponse>
+  suspend fun getMealCategories(): CategoriesResponse
 
-    fun getMealsByCategory(name: String): Single<MealListResponse>
+  suspend fun getMealsByCategory(name: String): MealListResponse
 
-    fun getMealDetails(id: String): Single<MealDetailsResponse>
+  suspend fun getMealDetails(id: String): MealDetailsResponse
 }
