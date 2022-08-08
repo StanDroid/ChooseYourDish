@@ -7,7 +7,7 @@ import com.example.composetraining.core.data.model.mealdb.Meal
 
 @Composable
 fun MealDetailsView(meal: Meal) {
-    Column() {
+    Column {
         Text(text = "MealDetailsView")
         Text(text = meal.meal)
         Text(text = meal.instructions)
