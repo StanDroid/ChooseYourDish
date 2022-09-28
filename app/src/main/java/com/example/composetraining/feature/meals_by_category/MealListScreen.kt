@@ -25,7 +25,6 @@ fun MealListScreen(
     initLoading: () -> Unit
 ) {
     MealScaffold(name) {
-        Text(text = "ID is $id")
         when (uiState) {
             is MealListUiState.NoData -> {
                 when {
