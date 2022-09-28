@@ -2,15 +2,14 @@ package com.example.composetraining.core.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.composetraining.core.navigation.route.MealListRoute
 import com.example.composetraining.core.navigation.route.CategoryListRoute
 import com.example.composetraining.core.navigation.route.MealDetailsRoute
+import com.example.composetraining.core.navigation.route.MealListRoute
 import com.example.composetraining.core.navigation.route.RandomMealRoute
 import com.example.composetraining.feature.meal_categories.viewmodel.CategoriesViewModel
 import com.example.composetraining.feature.meal_details.viewmodel.MealDetailsViewModel
@@ -19,19 +18,14 @@ import com.example.composetraining.feature.random_meal.viewmodel.RandomMealViewM
 
 @Composable
 fun NavigationSystem() {
-    val viewModelStoreOwner = checkNotNull(LocalViewModelStoreOwner.current) {
-        "No ViewModelStoreOwner was provided via LocalViewModelStoreOwner"
-    }
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = NavScreen.RandomMeal.route) {
         composable(NavScreen.RandomMeal.route) {
-            val viewModel: RandomMealViewModel =
-                hiltViewModel(viewModelStoreOwner = viewModelStoreOwner)
+            val viewModel = hiltViewModel<RandomMealViewModel>()
             RandomMealRoute(navController, viewModel)
         }
         composable(NavScreen.CategoryList.route) {
-            val viewModel: CategoriesViewModel =
-                hiltViewModel(viewModelStoreOwner = viewModelStoreOwner)
+            val viewModel = hiltViewModel<CategoriesViewModel>()
             CategoryListRoute(navController, viewModel)
         }
         composable(
@@ -42,8 +36,7 @@ fun NavigationSystem() {
             )
         ) {
             it.arguments?.let { args ->
-                val viewModel: MealListViewModel =
-                    hiltViewModel(viewModelStoreOwner = viewModelStoreOwner)
+                val viewModel = hiltViewModel<MealListViewModel>()
                 MealListRoute(
                     args.getString(PARAM_ID).orEmpty(),
                     args.getString(PARAM_NAME).orEmpty(),
@@ -60,8 +53,7 @@ fun NavigationSystem() {
             )
         ) {
             it.arguments?.let { args ->
-                val viewModel: MealDetailsViewModel =
-                    hiltViewModel(viewModelStoreOwner = viewModelStoreOwner)
+                val viewModel = hiltViewModel<MealDetailsViewModel>()
                 MealDetailsRoute(
                     args.getString(PARAM_ID).orEmpty(),
                     args.getString(PARAM_NAME).orEmpty(),

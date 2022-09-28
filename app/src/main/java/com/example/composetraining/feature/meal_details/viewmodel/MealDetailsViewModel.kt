@@ -84,7 +84,7 @@ class MealDetailsViewModel @Inject constructor(
     val uiState: State<MealDetailsViewModelState> = viewModelState
 
     fun loadMealDetails(id: String) {
-        Log.e("TAG", "loadMealDetails started")
+        Log.e("TAG", "loadMealDetails started $id")
         viewModelState.value = MealDetailsViewModelState(isLoading = true)
         viewModelScope.launch {
             try {
@@ -94,7 +94,7 @@ class MealDetailsViewModel @Inject constructor(
                 )
             } catch (ex: Exception) {
                 ex.printStackTrace()
-                Log.e("TAG", "loadCategories failure")
+                Log.e("TAG", "loadCategories failure $id")
                 viewModelState.value = MealDetailsViewModelState(
                     isLoading = false, errorMessages =
                     listOf(ErrorMessage(ex.hashCode(), ex.stackTrace.toString()))
