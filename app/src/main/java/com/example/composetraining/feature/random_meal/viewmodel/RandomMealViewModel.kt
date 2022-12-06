@@ -1,9 +1,6 @@
 package com.example.composetraining.feature.random_meal.viewmodel
 
 import android.util.Log
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.viewModelScope
 import com.example.composetraining.core.data.model.mealdb.RandomMeal
 import com.example.composetraining.core.data.usecase.execute
@@ -11,6 +8,9 @@ import com.example.composetraining.core.data.viewmodel.BaseViewModel
 import com.example.composetraining.core.utils.ErrorMessage
 import com.example.composetraining.feature.random_meal.usecase.GetRandomMealUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -75,31 +75,38 @@ class RandomMealViewModel @Inject constructor(
     private val useCase: GetRandomMealUseCase
 ) : BaseViewModel() {
 
-    private val viewModelState: MutableState<RandomMealViewModelState> =
-        mutableStateOf(RandomMealViewModelState(isLoading = true))
+    private val viewModelState: MutableStateFlow<RandomMealViewModelState> =
+        MutableStateFlow(RandomMealViewModelState(isLoading = true))
 
-    val uiState: State<RandomMealViewModelState> = viewModelState
+    val uiState: StateFlow<RandomMealViewModelState> = viewModelState
 
     init {
         loadRandomMeal()
     }
 
-    fun loadRandomMeal() {
+    fun onLoadNextRandomMealClick() {
+        loadRandomMeal()
+    }
+
+    private fun loadRandomMeal() {
         Log.e("TAG", "loadRandomMeal started")
-        viewModelState.value = RandomMealViewModelState(isLoading = true)
+        viewModelState.update { RandomMealViewModelState(isLoading = true) }
         viewModelScope.launch {
             try {
                 val randomMeal = useCase.execute()
-                viewModelState.value =
+                viewModelState.update {
                     RandomMealViewModelState(randomMeal = randomMeal, isLoading = false)
+                }
                 Log.e("TAG", "loadRandomMeal success: $randomMeal")
             } catch (it: Exception) {
                 it.printStackTrace()
                 Log.e("TAG", "loadRandomMeal failure")
-                viewModelState.value = RandomMealViewModelState(
-                    isLoading = false, errorMessages =
-                    listOf(ErrorMessage(it.hashCode(), it.stackTrace.toString()))
-                )
+                viewModelState.update { _ ->
+                    RandomMealViewModelState(
+                        isLoading = false, errorMessages =
+                        listOf(ErrorMessage(it.hashCode(), it.stackTrace.toString()))
+                    )
+                }
             }
         }
     }
