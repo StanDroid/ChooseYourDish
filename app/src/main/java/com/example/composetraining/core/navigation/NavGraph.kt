@@ -13,7 +13,7 @@ import com.example.composetraining.core.navigation.route.MealListRoute
 import com.example.composetraining.core.navigation.route.RandomMealRoute
 import com.example.composetraining.feature.meal_categories.viewmodel.CategoriesViewModel
 import com.example.composetraining.feature.meal_details.viewmodel.MealDetailsViewModel
-import com.example.composetraining.feature.meal_details.viewmodel.MealListViewModel
+import com.example.composetraining.feature.meals_by_category.viewmodel.MealListViewModel
 import com.example.composetraining.feature.random_meal.viewmodel.RandomMealViewModel
 
 @Composable

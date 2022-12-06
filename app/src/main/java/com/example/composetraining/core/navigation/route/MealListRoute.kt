@@ -5,8 +5,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.navigation.NavHostController
 import com.example.composetraining.core.navigation.NavScreen
-import com.example.composetraining.feature.meal_details.viewmodel.MealListViewModel
 import com.example.composetraining.feature.meals_by_category.MealListScreen
+import com.example.composetraining.feature.meals_by_category.viewmodel.MealListViewModel
 
 @Composable
 fun MealListRoute(

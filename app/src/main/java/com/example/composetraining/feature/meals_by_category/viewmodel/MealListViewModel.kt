@@ -1,4 +1,4 @@
-package com.example.composetraining.feature.meal_details.viewmodel
+package com.example.composetraining.feature.meals_by_category.viewmodel
 
 import android.util.Log
 import androidx.compose.runtime.MutableState

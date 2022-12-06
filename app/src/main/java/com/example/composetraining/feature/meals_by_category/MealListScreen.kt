@@ -14,7 +14,7 @@ import com.example.composetraining.core.data.model.mealdb.MealItem
 import com.example.composetraining.core.ui.base.MealScaffold
 import com.example.composetraining.core.ui.meal.MealItemView
 import com.example.composetraining.core.ui.meal.ProgressLoadingView
-import com.example.composetraining.feature.meal_details.viewmodel.MealListUiState
+import com.example.composetraining.feature.meals_by_category.viewmodel.MealListUiState
 
 @Composable
 fun MealListScreen(

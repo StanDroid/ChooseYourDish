@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 /**
  *
- * This is derived from [CategoriesViewModelState], but split into two possible subclasses to more
+ * This is derived from [MealDetailsViewModelState], but split into two possible subclasses to more
  * precisely represent the state available to render the UI.
  */
 sealed interface MealDetailsUiState {
@@ -35,7 +35,7 @@ sealed interface MealDetailsUiState {
     ) : MealDetailsUiState
 
     /**
-     * There are data to render, as contained in [list].
+     * There are data to render, as contained in [errorMessages].
      */
     data class HasData(
         val data: Meal,
@@ -55,7 +55,7 @@ sealed interface MealDetailsUiState {
 ) {
 
     /**
-     * Converts this [CategoriesViewModelState] into a more strongly typed [CategoriesUiState] for driving
+     * Converts this [MealDetailsViewModelState] into a more strongly typed [MealDetailsUiState] for driving
      * the ui.
      */
     fun toUiState(): MealDetailsUiState =
