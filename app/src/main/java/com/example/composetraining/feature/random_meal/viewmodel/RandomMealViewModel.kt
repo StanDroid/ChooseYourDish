@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.composetraining.core.data.model.mealdb.RandomMeal
 import com.example.composetraining.core.data.usecase.execute
 import com.example.composetraining.core.data.viewmodel.BaseViewModel
+import com.example.composetraining.core.extension.map
 import com.example.composetraining.core.utils.ErrorMessage
 import com.example.composetraining.feature.random_meal.usecase.GetRandomMealUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -78,7 +79,8 @@ class RandomMealViewModel @Inject constructor(
     private val viewModelState: MutableStateFlow<RandomMealViewModelState> =
         MutableStateFlow(RandomMealViewModelState(isLoading = true))
 
-    val uiState: StateFlow<RandomMealViewModelState> = viewModelState
+    val uiState: StateFlow<RandomMealUiState> =
+        viewModelState.map(viewModelScope) { it.toUiState() }
 
     init {
         loadRandomMeal()
