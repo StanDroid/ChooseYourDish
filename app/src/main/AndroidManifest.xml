@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.composetraining">
+    package="com.example.chooseyourdish">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -10,12 +10,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:name=".core.ComposeTrainingApp"
-        android:theme="@style/Theme.ComposeTraining">
+        android:name="com.example.chooseyourdish.core.ChooseYourDishApp"
+        android:theme="@style/Theme.ChooseYourDish">
         <activity
-            android:name=".feature.MainActivity"
+            android:name="com.example.chooseyourdish.feature.MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.ComposeTraining.NoActionBar">
+            android:theme="@style/Theme.ChooseYourDish.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
