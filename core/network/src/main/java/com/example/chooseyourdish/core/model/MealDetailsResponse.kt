@@ -1,17 +1,17 @@
-package com.example.chooseyourdish.core.data.model.mealdb.response
+package com.example.chooseyourdish.core.model
 
-data class RandomMealResponse(
-    val meals: List<RandomMealDTO>
+data class MealDetailsResponse(
+    val meals: List<MealDetailsDTO>?
 )
 
-data class RandomMealDTO(
-    val dateModified: Any?,
+data class MealDetailsDTO(
+    val dateModified: String?,
     val idMeal: String?,
     val strArea: String?,
     val strCategory: String?,
-    val strCreativeCommonsConfirmed: Any?,
-    val strDrinkAlternate: Any?,
-    val strImageSource: Any?,
+    val strCreativeCommonsConfirmed: String?,
+    val strDrinkAlternate: String?,
+    val strImageSource: String?,
     val strIngredient1: String?,
     val strIngredient10: String?,
     val strIngredient11: String?,
@@ -56,6 +56,6 @@ data class RandomMealDTO(
     val strMeasure8: String?,
     val strMeasure9: String?,
     val strSource: String?,
-    val strTags: Any?,
+    val strTags: String?,
     val strYoutube: String?
 )

@@ -1,7 +1,7 @@
-package com.example.chooseyourdish.core.data.model.mealdb.response
+package com.example.chooseyourdish.core.model
 
 data class CategoriesResponse(
-    val categories: List<Category>
+    val categories: List<Category>?
 )
 
 data class Category(

@@ -1,8 +1,8 @@
 package com.example.chooseyourdish.feature.random_meal.usecase
 
 import com.example.chooseyourdish.core.data.model.mealdb.RandomMeal
-import com.example.chooseyourdish.core.data.repository.MealRepository
 import com.example.chooseyourdish.core.data.usecase.UseCaseSuspend
+import com.example.data.meal.MealRepository
 import javax.inject.Inject
 
 class GetRandomMealUseCase @Inject constructor(
@@ -10,7 +10,7 @@ class GetRandomMealUseCase @Inject constructor(
 ) : UseCaseSuspend<Nothing?, RandomMeal?> {
 
     override suspend fun execute(params: Nothing?): RandomMeal? {
-        return repository.getRandomMeal().meals.firstOrNull()?.let {
+        return repository.getRandomMeal()?.let {
             RandomMeal(
                 idMeal = it.idMeal.orEmpty(),
                 strArea = it.strArea.orEmpty(),

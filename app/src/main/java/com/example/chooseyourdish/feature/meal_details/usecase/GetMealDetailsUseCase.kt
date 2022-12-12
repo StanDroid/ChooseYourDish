@@ -1,8 +1,8 @@
 package com.example.chooseyourdish.feature.meal_details.usecase
 
 import com.example.chooseyourdish.core.data.model.mealdb.Meal
-import com.example.chooseyourdish.core.data.repository.MealRepository
 import com.example.chooseyourdish.core.data.usecase.UseCaseSuspend
+import com.example.data.meal.MealRepository
 import javax.inject.Inject
 
 class GetMealDetailsUseCase @Inject constructor(
@@ -10,7 +10,7 @@ class GetMealDetailsUseCase @Inject constructor(
 ) : UseCaseSuspend<String, Meal?> {
 
     override suspend fun execute(params: String): Meal? {
-        return repository.getMealDetails(params).meals?.firstOrNull()?.let {
+        return repository.getMealDetails(params)?.let {
                 Meal(
                     id = it.idMeal.orEmpty(),
                     dateModified = it.dateModified.orEmpty(),
