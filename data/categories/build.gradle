@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace 'com.example.data.categories'
+    namespace 'com.cyd.data.categories'
     compileSdk 33
 }
 

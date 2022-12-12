@@ -9,7 +9,7 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.chooseyourdish"
+        applicationId "com.cyd"
         minSdk 21
         targetSdk 33
         versionCode 1
