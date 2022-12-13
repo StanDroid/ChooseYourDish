@@ -29,7 +29,6 @@ fun NoRandomMealView(
             onClick = { onClickGoToCategories.invoke() },
             modifier = Modifier
                 .align(Alignment.End)
-                .padding(bottom = 16.dp)
         ) {
             Text(text = "Go to Categories")
         }

@@ -27,7 +27,6 @@ fun CategoryItemView(
     Column(
         Modifier
             .fillMaxWidth()
-
             .clickable { onCategoryClick.invoke(category) }
             .padding(start = 16.dp, end = 16.dp)
             .animateContentSize(

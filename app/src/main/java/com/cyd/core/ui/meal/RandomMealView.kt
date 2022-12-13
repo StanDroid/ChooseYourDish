@@ -29,91 +29,96 @@ fun RandomMealView(
     onClickGoToCategories: () -> Unit = {}
 ) {
     var expanded by remember { mutableStateOf(false) }
-    Column(modifier = Modifier
+    Box(modifier = Modifier
         .fillMaxSize()
         .padding(16.dp)
     ) {
         Button(
             onClick = { onClickGoToCategories.invoke() },
             modifier = Modifier
-                .align(Alignment.End)
-                .padding(bottom = 16.dp)
+                .align(Alignment.TopEnd)
         ) {
             Text(text = "Go to Categories")
         }
-        Card(
-            modifier = Modifier
-                .verticalScroll(rememberScrollState(0))
-                .fillMaxWidth()
-                .animateContentSize(animationSpec = tween(100))
-                .clickable { onLoadNextRandomMeal.invoke() },
-            shape = RoundedCornerShape(4.dp)
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
         ) {
-            Column(
-                modifier = Modifier.fillMaxSize()
-            ) {
-                Text(
-                    modifier = Modifier
-                        .padding(8.dp)
-                        .align(Alignment.CenterHorizontally),
-                    text = "Tap on Card to get a new one"
-                )
-                ProgressAsyncImage(
-                    model = model.strMealThumb,
-                    modifier = Modifier
-                        .height(200.dp)
-                        .fillMaxWidth(),
-                    withLoadingIndicator = false
-                )
+            Card(
+                modifier = Modifier
+                    .verticalScroll(rememberScrollState(0))
+                    .fillMaxWidth()
+                    .animateContentSize(animationSpec = tween(100))
+                    .clickable { onLoadNextRandomMeal.invoke() },
+                shape = RoundedCornerShape(16.dp)
+            )   {
                 Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp)
+                    modifier = Modifier.fillMaxSize()
                 ) {
                     Text(
                         modifier = Modifier
-                            .align(Alignment.CenterHorizontally)
-                            .padding(bottom = 8.dp),
-                        text = model.strMeal,
-                        textAlign = TextAlign.Center,
-                        style = MaterialTheme.typography.h5
+                            .padding(8.dp)
+                            .align(Alignment.CenterHorizontally),
+                        text = "Tap on Card to get a new one"
                     )
-                    Text(
-                        modifier = Modifier.padding(bottom = 8.dp),
-                        text = "Area: ${model.strArea}",
-                        style = MaterialTheme.typography.subtitle1
+                    ProgressAsyncImage(
+                        model = model.strMealThumb,
+                        modifier = Modifier
+                            .height(200.dp)
+                            .fillMaxWidth(),
+                        withLoadingIndicator = false
                     )
-                    Text(
-                        modifier = Modifier.padding(bottom = 8.dp),
-                        text = "Category: ${model.strCategory}",
-                        style = MaterialTheme.typography.subtitle1
-                    )
-                    if (expanded) {
-                        Text(
-                            modifier = Modifier.clickable { expanded = !expanded },
-                            text = "Instructions:",
-                            style = MaterialTheme.typography.subtitle2
-                        )
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp)
+                    ) {
                         Text(
                             modifier = Modifier
-                                .clickable { expanded = !expanded }
+                                .align(Alignment.CenterHorizontally)
                                 .padding(bottom = 8.dp),
-                            text = model.strInstructions,
-                            style = MaterialTheme.typography.subtitle2
+                            text = model.strMeal,
+                            textAlign = TextAlign.Center,
+                            style = MaterialTheme.typography.h5
                         )
-                    } else {
                         Text(
-                            modifier = Modifier
-                                .align(Alignment.End)
-                                .padding(bottom = 8.dp)
-                                .clickable { expanded = !expanded },
-                            text = "Click here to see instructions",
-                            style = MaterialTheme.typography.subtitle2,
-                            color = Color.DarkGray
+                            modifier = Modifier.padding(bottom = 8.dp),
+                            text = "Area: ${model.strArea}",
+                            style = MaterialTheme.typography.subtitle1
                         )
+                        Text(
+                            modifier = Modifier.padding(bottom = 8.dp),
+                            text = "Category: ${model.strCategory}",
+                            style = MaterialTheme.typography.subtitle1
+                        )
+                        if (expanded) {
+                            Text(
+                                modifier = Modifier.clickable { expanded = !expanded },
+                                text = "Instructions:",
+                                style = MaterialTheme.typography.subtitle2
+                            )
+                            Text(
+                                modifier = Modifier
+                                    .clickable { expanded = !expanded }
+                                    .padding(bottom = 8.dp),
+                                text = model.strInstructions,
+                                style = MaterialTheme.typography.subtitle2
+                            )
+                        } else {
+                            Text(
+                                modifier = Modifier
+                                    .align(Alignment.End)
+                                    .padding(bottom = 8.dp)
+                                    .clickable { expanded = !expanded },
+                                text = "Click here to see instructions",
+                                style = MaterialTheme.typography.subtitle2,
+                                color = Color.DarkGray
+                            )
+                        }
+                        AnnotatedClickableText("See on Youtube", model.strYoutube)
+                        AnnotatedClickableText("Original post", model.strSource)
                     }
-                    AnnotatedClickableText("See on Youtube", model.strYoutube)
-                    AnnotatedClickableText("Original post", model.strSource)
                 }
             }
         }
