@@ -6,6 +6,7 @@ import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import com.cyd.core.navigation.NavScreen
+import com.cyd.core.ui.base.MealScaffold
 import com.cyd.feature.random_meal.RandomMealScreen
 import com.cyd.feature.random_meal.viewmodel.RandomMealUiState
 import com.cyd.feature.random_meal.viewmodel.RandomMealViewModel
@@ -17,9 +18,10 @@ fun RandomMealRoute(
     viewModel: RandomMealViewModel
 ) {
     val state: RandomMealUiState by viewModel.uiState.collectAsStateWithLifecycle()
-
-    RandomMealScreen(
-        state,
-        viewModel::onLoadNextRandomMealClick
-    ) { navController.navigate(NavScreen.CategoryList.route) }
+    MealScaffold("Dish Of The Day") {
+        RandomMealScreen(
+            state,
+            viewModel::onLoadNextRandomMealClick
+        ) { navController.navigate(NavScreen.CategoryList.route) }
+    }
 }

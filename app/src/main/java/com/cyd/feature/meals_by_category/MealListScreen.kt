@@ -11,7 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.cyd.core.data.model.mealdb.MealItem
-import com.cyd.core.ui.base.MealScaffold
 import com.cyd.core.ui.meal.MealItemView
 import com.cyd.core.ui.meal.ProgressLoadingView
 import com.cyd.feature.meals_by_category.viewmodel.MealListUiState
@@ -24,18 +23,21 @@ fun MealListScreen(
     onMealClick: (MealItem) -> Unit,
     initLoading: () -> Unit
 ) {
-    MealScaffold(name) {
-        when (uiState) {
-            is MealListUiState.NoData -> {
-                when {
-                    uiState.isLoading -> { ProgressLoadingView() }
-                    uiState.errorMessages.isNotEmpty() -> {
-                        Box(Modifier.fillMaxSize()) {
-                            Text(text = "No data")
-                        }
-                    }
-                    else -> { initLoading.invoke() }
+    when (uiState) {
+        is MealListUiState.NoData -> {
+            when {
+                uiState.isLoading -> {
+                    ProgressLoadingView()
                 }
+                uiState.errorMessages.isNotEmpty() -> {
+                    Box(Modifier.fillMaxSize()) {
+                        Text(text = "No data")
+                    }
+                }
+                else -> {
+                    initLoading.invoke()
+                }
+            }
             }
             is MealListUiState.HasData -> {
                 val list = uiState.list
@@ -49,5 +51,4 @@ fun MealListScreen(
                 }
             }
         }
-    }
 }

@@ -31,7 +31,9 @@ fun ProgressAsyncImage(
         },
         error = {
             Image(
-                modifier = Modifier.alpha(0.3f).padding(16.dp),
+                modifier = Modifier
+                    .alpha(0.3f)
+                    .padding(16.dp),
                 painter = painterResource(id = R.drawable.no_data_found),
                 contentDescription = null
             )

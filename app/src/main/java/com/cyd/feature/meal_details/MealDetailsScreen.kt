@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.cyd.core.ui.base.MealScaffold
 import com.cyd.core.ui.meal.MealDetailsView
 import com.cyd.core.ui.meal.ProgressLoadingView
 import com.cyd.feature.meal_details.viewmodel.MealDetailsUiState
@@ -17,7 +16,6 @@ fun MealDetailsScreen(
     uiState: MealDetailsUiState,
     loadMealDetailsAction: ()-> Unit
 ) {
-    MealScaffold(name) {
         when (uiState) {
             is MealDetailsUiState.NoData -> {
                 when {
@@ -35,5 +33,4 @@ fun MealDetailsScreen(
                 MealDetailsView(meal)
             }
         }
-    }
 }
