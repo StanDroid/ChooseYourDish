@@ -47,7 +47,7 @@ class RetrofitMealNetwork @Inject constructor() : MealDataSource {
         return retrofit.getRandomMeal().meals.firstOrNull()
     }
 
-    override suspend fun getMealCategories(): List<Category>? {
+    override suspend fun getMealCategories(): List<CategoryDTO>? {
         return retrofit.getMealCategories().categories
     }
 

@@ -7,16 +7,16 @@ import javax.inject.Inject
 
 class GetMealCategoriesUseCase @Inject constructor(
     private val repository: CategoriesRepository
-) : UseCaseSuspend<Nothing?, List<Category>?> {
+) : UseCaseSuspend<Nothing?, List<Category>> {
 
-    override suspend fun execute(params: Nothing?): List<Category>? {
+    override suspend fun execute(params: Nothing?): List<Category> {
         return repository.getMealCategories()?.map {
             Category(
-                id = it.idCategory.orEmpty(),
-                name = it.strCategory.orEmpty(),
-                description = it.strCategoryDescription.orEmpty(),
-                thumb = it.strCategoryThumb.orEmpty()
+                id = it.id.orEmpty(),
+                name = it.name.orEmpty(),
+                description = it.description.orEmpty(),
+                thumb = it.imageThumb.orEmpty()
             )
-        }
+        }.orEmpty()
     }
 }
