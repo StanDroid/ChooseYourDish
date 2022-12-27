@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.transform.RoundedCornersTransformation
 import com.cyd.core.data.model.mealdb.RandomMeal
 import com.cyd.core.ui.base.AnnotatedClickableText
 import com.cyd.core.ui.base.ProgressAsyncImage
@@ -67,7 +68,8 @@ fun RandomMealView(
                         modifier = Modifier
                             .height(200.dp)
                             .fillMaxWidth(),
-                        withLoadingIndicator = false
+                        withLoadingIndicator = false,
+                        transformation = RoundedCornersTransformation(8f)
                     )
                     Column(
                         modifier = Modifier

@@ -10,11 +10,13 @@ import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.cyd.core.data.model.mealdb.Category
@@ -28,7 +30,7 @@ fun CategoryItemView(
     var expanded by remember { mutableStateOf(false) }
     Card(
         backgroundColor = Color.White,
-        elevation = 4.dp,
+        elevation = 2.dp,
     ) {
         Column(
             modifier = Modifier
@@ -64,8 +66,8 @@ fun CategoryItemView(
                             .clickable { expanded = !expanded }
                             .padding(16.dp)
                             .align(CenterVertically),
-                        painter = painterResource(id = android.R.drawable.arrow_up_float),
-                        contentDescription = null // decorative element
+                        imageVector = Icons.Filled.KeyboardArrowUp,
+                        contentDescription = null
                     )
                 } else {
                     Icon(
@@ -73,8 +75,8 @@ fun CategoryItemView(
                             .clickable { expanded = !expanded }
                             .padding(16.dp)
                             .align(CenterVertically),
-                        painter = painterResource(id = android.R.drawable.arrow_down_float),
-                        contentDescription = null // decorative element
+                        imageVector = Icons.Filled.KeyboardArrowDown,
+                        contentDescription = null
                     )
                 }
             }

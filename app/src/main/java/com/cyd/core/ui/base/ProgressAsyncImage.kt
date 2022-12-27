@@ -1,43 +1,43 @@
 package com.cyd.core.ui.base
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
-import coil.compose.SubcomposeAsyncImage
+import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import coil.transform.RoundedCornersTransformation
+import coil.size.Dimension
+import coil.size.Size
+import coil.transform.Transformation
 import com.cyd.R
 
 @Composable
 fun ProgressAsyncImage(
     model: String,
     modifier: Modifier = Modifier,
-    withLoadingIndicator: Boolean = true
+    withLoadingIndicator: Boolean = true,
+    transformation: Transformation? = null
 ) {
-    SubcomposeAsyncImage(
-        model = ImageRequest.Builder(LocalContext.current)
-            .data(model)
-            .transformations(RoundedCornersTransformation(4f))
-            .crossfade(true)
-            .build(),
-        loading = {
-            if (withLoadingIndicator) GifImage(modifier = Modifier.padding(16.dp))
-        },
-        error = {
-            Image(
-                modifier = Modifier
-                    .alpha(0.3f)
-                    .padding(16.dp),
-                painter = painterResource(id = R.drawable.no_data_found),
-                contentDescription = null
-            )
-        },
+    val density = LocalDensity.current
+    val size = (32 * density.density).toInt()
+    val gif = getGitPainter(
+        Size(
+            Dimension.Pixels(size),
+            Dimension.Pixels(size)
+        )
+    )
+    val builder = ImageRequest.Builder(LocalContext.current)
+        .data(model)
+        .crossfade(true)
+    transformation?.let {
+        builder.transformations(it)
+    }
+    AsyncImage(
+        model = builder.build(),
+        placeholder = if (withLoadingIndicator) gif else null,
+        error = painterResource(id = R.drawable.no_data_found),
         contentScale = ContentScale.Inside,
         contentDescription = "",
         modifier = modifier

@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.transform.CircleCropTransformation
 import com.cyd.core.data.model.mealdb.MealItem
 import com.cyd.core.ui.base.ProgressAsyncImage
 
@@ -38,7 +39,8 @@ fun MealItemView(
                 model = mealItem.thumb,
                 modifier = Modifier
                     .height(70.dp)
-                    .width(70.dp)
+                    .width(70.dp),
+                transformation = CircleCropTransformation()
             )
             Text(
                 text = mealItem.name,
