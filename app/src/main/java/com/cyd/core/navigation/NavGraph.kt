@@ -1,7 +1,6 @@
 package com.cyd.core.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -11,22 +10,16 @@ import com.cyd.core.navigation.route.CategoryListRoute
 import com.cyd.core.navigation.route.MealDetailsRoute
 import com.cyd.core.navigation.route.MealListRoute
 import com.cyd.core.navigation.route.RandomMealRoute
-import com.cyd.feature.meal_categories.viewmodel.CategoriesViewModel
-import com.cyd.feature.meal_details.viewmodel.MealDetailsViewModel
-import com.cyd.feature.meals_by_category.viewmodel.MealListViewModel
-import com.cyd.feature.random_meal.viewmodel.RandomMealViewModel
 
 @Composable
 fun NavigationSystem() {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = NavScreen.RandomMeal.route) {
         composable(NavScreen.RandomMeal.route) {
-            val viewModel = hiltViewModel<RandomMealViewModel>()
-            RandomMealRoute(navController, viewModel)
+            RandomMealRoute(navController)
         }
         composable(NavScreen.CategoryList.route) {
-            val viewModel = hiltViewModel<CategoriesViewModel>()
-            CategoryListRoute(navController, viewModel)
+            CategoryListRoute(navController)
         }
         composable(
             route = NavScreen.MealList.route + "/{$PARAM_ID}/{$PARAM_NAME}",
@@ -36,12 +29,10 @@ fun NavigationSystem() {
             )
         ) {
             it.arguments?.let { args ->
-                val viewModel = hiltViewModel<MealListViewModel>()
                 MealListRoute(
                     args.getString(PARAM_ID).orEmpty(),
                     args.getString(PARAM_NAME).orEmpty(),
-                    navController,
-                    viewModel
+                    navController
                 )
             }
         }
@@ -53,12 +44,10 @@ fun NavigationSystem() {
             )
         ) {
             it.arguments?.let { args ->
-                val viewModel = hiltViewModel<MealDetailsViewModel>()
                 MealDetailsRoute(
                     args.getString(PARAM_ID).orEmpty(),
                     args.getString(PARAM_NAME).orEmpty(),
                     navController,
-                    viewModel
                 )
             }
         }
