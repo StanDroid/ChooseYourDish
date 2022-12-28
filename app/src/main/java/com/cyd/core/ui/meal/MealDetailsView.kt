@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -22,6 +23,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.size.Size
+import com.cyd.R
 import com.cyd.core.data.model.mealdb.Meal
 
 @Composable
@@ -46,8 +48,8 @@ fun MealDetailsView(meal: Meal) {
         Column(
             Modifier.padding(16.dp),
         ) {
-            RowTitleText("Area", meal.area.orEmpty())
-            RowTitleText("Tags", meal.tags.orEmpty())
+            RowTitleText(stringResource(R.string.area), meal.area.orEmpty())
+            RowTitleText(stringResource(R.string.tags), meal.tags.orEmpty())
 
             Text(
                 modifier = Modifier.padding(top = 16.dp),
@@ -58,7 +60,7 @@ fun MealDetailsView(meal: Meal) {
 
             Text(
                 modifier = Modifier.padding(top = 16.dp),
-                text = "Source:",
+                text = stringResource(R.string.source),
                 fontWeight = FontWeight.W600
             )
             Text(
@@ -68,7 +70,7 @@ fun MealDetailsView(meal: Meal) {
 
             Text(
                 modifier = Modifier.padding(top = 16.dp),
-                text = "Youtube:",
+                text = stringResource(R.string.youtube),
                 fontWeight = FontWeight.W600
             )
             Text(

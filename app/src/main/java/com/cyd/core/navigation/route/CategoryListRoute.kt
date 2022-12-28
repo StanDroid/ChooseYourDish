@@ -5,8 +5,10 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.cyd.R
 import com.cyd.core.navigation.NavScreen
 import com.cyd.core.ui.base.MealScaffold
 import com.cyd.feature.meal_categories.CategoryListScreen
@@ -19,7 +21,7 @@ fun CategoryListRoute(
     val viewModel = hiltViewModel<CategoriesViewModel>()
     val state by remember { viewModel.uiState }
     MealScaffold(
-        "Categories",
+        stringResource(R.string.categories),
         icon = Icons.Default.ArrowBack,
         onIconClick = { navController.navigateUp() }
     ) {

@@ -11,8 +11,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.cyd.R
 import com.cyd.feature.random_meal.viewmodel.RandomMealUiState
 
 @Composable
@@ -30,7 +32,7 @@ fun NoRandomMealView(
             modifier = Modifier
                 .align(Alignment.End)
         ) {
-            Text(text = "Go to Categories")
+            Text(text = stringResource(id = R.string.go_to_categories))
         }
         Box(
             Modifier
@@ -42,7 +44,7 @@ fun NoRandomMealView(
                 ProgressLoadingView()
             } else {
                 Text(
-                    text = "There is no random meal",
+                    text = stringResource(R.string.no_random_meal),
                     style = MaterialTheme.typography.subtitle1
                 )
             }

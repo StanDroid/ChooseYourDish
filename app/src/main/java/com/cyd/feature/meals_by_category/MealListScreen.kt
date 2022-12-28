@@ -9,7 +9,9 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.cyd.R
 import com.cyd.core.data.model.mealdb.MealItem
 import com.cyd.core.ui.meal.MealItemView
 import com.cyd.core.ui.meal.ProgressLoadingView
@@ -31,7 +33,7 @@ fun MealListScreen(
                 }
                 uiState.errorMessages.isNotEmpty() -> {
                     Box(Modifier.fillMaxSize()) {
-                        Text(text = "No data")
+                        Text(text = stringResource(R.string.no_data))
                     }
                 }
                 else -> {

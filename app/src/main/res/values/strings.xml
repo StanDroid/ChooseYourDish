@@ -1,4 +1,19 @@
 <resources>
     <string name="app_name">Choose Your Dish</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="no_data">No data</string>
+    <string name="go_to_categories">Go to Categories</string>
+    <string name="tap_on_card_title">Tap on Card to get a new one</string>
+    <string name="click_to_see_instructions">Click here to see instructions</string>
+    <string name="see_on_youtube">See on Youtube</string>
+    <string name="original_post">Original post</string>
+    <string name="area">Area</string>
+    <string name="area_s">Area: %s</string>
+    <string name="category_s">Category: %s</string>
+    <string name="tags">Tags</string>
+    <string name="source">Source:</string>
+    <string name="youtube">Youtube:</string>
+    <string name="no_random_meal">There is no random meal</string>
+    <string name="instructions">Instructions:</string>
+    <string name="categories">Categories</string>
 </resources>

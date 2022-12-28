@@ -15,10 +15,12 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.transform.RoundedCornersTransformation
+import com.cyd.R
 import com.cyd.core.data.model.mealdb.RandomMeal
 import com.cyd.core.ui.base.AnnotatedClickableText
 import com.cyd.core.ui.base.ProgressAsyncImage
@@ -39,7 +41,7 @@ fun RandomMealView(
             modifier = Modifier
                 .align(Alignment.TopEnd)
         ) {
-            Text(text = "Go to Categories")
+            Text(text = stringResource(R.string.go_to_categories))
         }
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -61,7 +63,7 @@ fun RandomMealView(
                         modifier = Modifier
                             .padding(8.dp)
                             .align(Alignment.CenterHorizontally),
-                        text = "Tap on Card to get a new one"
+                        text = stringResource(R.string.tap_on_card_title)
                     )
                     ProgressAsyncImage(
                         model = model.strMealThumb,
@@ -86,18 +88,18 @@ fun RandomMealView(
                         )
                         Text(
                             modifier = Modifier.padding(bottom = 8.dp),
-                            text = "Area: ${model.strArea}",
+                            text = stringResource(id = R.string.area_s, model.strArea),
                             style = MaterialTheme.typography.subtitle1
                         )
                         Text(
                             modifier = Modifier.padding(bottom = 8.dp),
-                            text = "Category: ${model.strCategory}",
+                            text = stringResource(id = R.string.category_s, model.strCategory),
                             style = MaterialTheme.typography.subtitle1
                         )
                         if (expanded) {
                             Text(
                                 modifier = Modifier.clickable { expanded = !expanded },
-                                text = "Instructions:",
+                                text = stringResource(R.string.instructions),
                                 style = MaterialTheme.typography.subtitle2
                             )
                             Text(
@@ -113,13 +115,19 @@ fun RandomMealView(
                                     .align(Alignment.End)
                                     .padding(bottom = 8.dp)
                                     .clickable { expanded = !expanded },
-                                text = "Click here to see instructions",
+                                text = stringResource(R.string.click_to_see_instructions),
                                 style = MaterialTheme.typography.subtitle2,
                                 color = Color.DarkGray
                             )
                         }
-                        AnnotatedClickableText("See on Youtube", model.strYoutube)
-                        AnnotatedClickableText("Original post", model.strSource)
+                        AnnotatedClickableText(
+                            stringResource(R.string.see_on_youtube),
+                            model.strYoutube
+                        )
+                        AnnotatedClickableText(
+                            stringResource(R.string.original_post),
+                            model.strSource
+                        )
                     }
                 }
             }
