@@ -40,7 +40,6 @@ android {
     }
     composeOptions {
         kotlinCompilerExtensionVersion compose_version
-        kotlinCompilerVersion '1.7.10'
     }
     packagingOptions {
         resources {
@@ -96,4 +95,12 @@ dependencies {
     implementation project(":feature:categories")
     implementation project(":feature:random_meal")
 
+}
+
+allprojects {
+    gradle.projectsEvaluated {
+        tasks.withType(JavaCompile) {
+            options.compilerArgs << "-Xlint:deprecation"
+        }
+    }
 }
