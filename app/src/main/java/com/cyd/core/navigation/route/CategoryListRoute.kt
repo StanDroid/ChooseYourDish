@@ -10,9 +10,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.cyd.R
 import com.cyd.core.navigation.NavScreen
-import com.cyd.core.ui.base.MealScaffold
-import com.cyd.feature.meal_categories.CategoryListScreen
-import com.cyd.feature.meal_categories.viewmodel.CategoriesViewModel
+import com.cyd.feature.categories.CategoryListScreen
+import com.cyd.feature.categories.viewmodel.CategoriesViewModel
+import com.cyd.ui.view.base.MealScaffold
 
 @Composable
 fun CategoryListRoute(

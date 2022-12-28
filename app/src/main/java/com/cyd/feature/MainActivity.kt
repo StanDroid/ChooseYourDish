@@ -5,7 +5,7 @@ import android.util.Log
 import androidx.activity.compose.setContent
 import com.cyd.core.BaseActivity
 import com.cyd.core.navigation.NavigationSystem
-import com.cyd.core.ui.base.style.BasicTheme
+import com.cyd.ui.view.base.style.BasicTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

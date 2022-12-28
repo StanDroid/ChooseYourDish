@@ -5,9 +5,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.cyd.core.ui.meal.MealDetailsView
-import com.cyd.core.ui.meal.ProgressLoadingView
 import com.cyd.feature.meal_details.viewmodel.MealDetailsUiState
+import com.cyd.ui.view.meal.MealDetailsView
+import com.cyd.ui.view.meal.ProgressLoadingView
 
 @Composable
 fun MealDetailsScreen(

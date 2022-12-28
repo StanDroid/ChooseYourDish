@@ -7,9 +7,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.cyd.core.ui.base.MealScaffold
 import com.cyd.feature.meal_details.MealDetailsScreen
 import com.cyd.feature.meal_details.viewmodel.MealDetailsViewModel
+import com.cyd.ui.view.base.MealScaffold
 
 @Composable
 fun MealDetailsRoute(

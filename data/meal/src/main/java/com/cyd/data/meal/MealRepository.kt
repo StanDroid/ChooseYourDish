@@ -1,13 +1,13 @@
 package com.cyd.data.meal
 
-import com.cyd.core.network.model.MealDetailsDTO
-import com.cyd.core.network.model.MealListItemDTO
-import com.cyd.core.network.model.RandomMealDTO
+import com.cyd.base.mealdb.Meal
+import com.cyd.base.mealdb.MealItem
+import com.cyd.base.mealdb.RandomMeal
 
 interface MealRepository {
-  suspend fun getRandomMeal(): RandomMealDTO?
+  suspend fun getRandomMeal(): RandomMeal?
 
-  suspend fun getMealsByCategory(name: String): List<MealListItemDTO>?
+  suspend fun getMealsByCategory(name: String): List<MealItem>
 
-  suspend fun getMealDetails(id: String): MealDetailsDTO?
+  suspend fun getMealDetails(id: String): Meal?
 }

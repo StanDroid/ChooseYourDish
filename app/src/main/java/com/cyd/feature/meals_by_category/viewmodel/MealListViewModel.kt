@@ -5,9 +5,9 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.viewModelScope
-import com.cyd.core.data.model.mealdb.MealItem
-import com.cyd.core.data.viewmodel.BaseViewModel
-import com.cyd.core.utils.ErrorMessage
+import com.cyd.base.mealdb.MealItem
+import com.cyd.base.utils.ErrorMessage
+import com.cyd.base.viewmodel.BaseViewModel
 import com.cyd.feature.meals_by_category.usecase.GetMealListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

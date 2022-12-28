@@ -7,10 +7,10 @@ import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import com.cyd.core.navigation.NavScreen
-import com.cyd.core.ui.base.MealScaffold
 import com.cyd.feature.random_meal.RandomMealScreen
 import com.cyd.feature.random_meal.viewmodel.RandomMealUiState
 import com.cyd.feature.random_meal.viewmodel.RandomMealViewModel
+import com.cyd.ui.view.base.MealScaffold
 
 @OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable

@@ -1,8 +1,8 @@
 package com.cyd.data.categories
 
-import com.cyd.core.network.model.CategoryDTO
+import com.cyd.base.mealdb.Category
 
 interface CategoriesRepository {
 
-    suspend fun getMealCategories(): List<CategoryDTO>?
+    suspend fun getMealCategories(): List<Category>
 }

@@ -12,10 +12,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.cyd.R
-import com.cyd.core.data.model.mealdb.MealItem
-import com.cyd.core.ui.meal.MealItemView
-import com.cyd.core.ui.meal.ProgressLoadingView
+import com.cyd.base.mealdb.MealItem
 import com.cyd.feature.meals_by_category.viewmodel.MealListUiState
+import com.cyd.ui.view.meal.MealItemView
+import com.cyd.ui.view.meal.ProgressLoadingView
 
 @Composable
 fun MealListScreen(
