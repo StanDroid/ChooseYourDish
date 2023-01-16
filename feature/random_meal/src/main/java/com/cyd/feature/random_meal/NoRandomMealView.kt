@@ -11,10 +11,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.cyd.feature.random_meal.viewmodel.RandomMealUiState
+import com.cyd.ui.view.base.RandomMealScreenConstants
 import com.cyd.ui.view.meal.ProgressLoadingView
 
 @Composable
@@ -31,6 +33,7 @@ fun NoRandomMealView(
             onClick = { onClickGoToCategories.invoke() },
             modifier = Modifier
                 .align(Alignment.End)
+                .testTag(RandomMealScreenConstants.GO_TO_CATEGORIES)
         ) {
             Text(text = stringResource(id = R.string.go_to_categories))
         }

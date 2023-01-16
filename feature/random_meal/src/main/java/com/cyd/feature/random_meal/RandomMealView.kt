@@ -15,6 +15,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -23,6 +24,7 @@ import coil.transform.RoundedCornersTransformation
 import com.cyd.base.mealdb.RandomMeal
 import com.cyd.ui.view.base.AnnotatedClickableText
 import com.cyd.ui.view.base.ProgressAsyncImage
+import com.cyd.ui.view.base.RandomMealScreenConstants
 
 @Composable
 fun RandomMealView(
@@ -39,6 +41,7 @@ fun RandomMealView(
             onClick = { onClickGoToCategories.invoke() },
             modifier = Modifier
                 .align(Alignment.TopEnd)
+                .testTag(RandomMealScreenConstants.GO_TO_CATEGORIES)
         ) {
             Text(text = stringResource(R.string.go_to_categories))
         }
