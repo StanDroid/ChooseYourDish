@@ -29,6 +29,7 @@ android {
         benchmark {
             signingConfig signingConfigs.debug
             matchingFallbacks = ['release']
+            proguardFiles('benchmark-rules.pro')
             debuggable false
         }
     }
@@ -88,6 +89,8 @@ dependencies {
 
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinx_coroutines_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinx_coroutines_version"
+
+    implementation "androidx.profileinstaller:profileinstaller:$profile_installer_version"
 
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
 
