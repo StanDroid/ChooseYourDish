@@ -26,6 +26,15 @@ class StartupBenchmark {
     @Test
     fun startupCompilationFull() = startup(CompilationMode.Full())
 
+    @Test
+    fun goToCategoriesAndScrollNone() = goToCategoriesAndScroll(CompilationMode.None())
+
+    @Test
+    fun goToCategoriesAndScrollPartial() = goToCategoriesAndScroll(CompilationMode.Partial())
+
+    @Test
+    fun goToCategoriesAndScrollFull() = goToCategoriesAndScroll(CompilationMode.Full())
+
     private fun startup(compilationMode: CompilationMode) = benchmarkRule.measureRepeated(
         packageName = "com.cyd",
         metrics = listOf(StartupTimingMetric()),
@@ -41,12 +50,12 @@ class StartupBenchmark {
         startActivityAndWait()
     }
 
-    @Test
-    fun goToCategoriesAndScroll() = benchmarkRule.measureRepeated(
+    private fun goToCategoriesAndScroll(compilationMode: CompilationMode) = benchmarkRule.measureRepeated(
         packageName = "com.cyd",
         metrics = listOf(FrameTimingMetric()),
         iterations = 5,
         startupMode = StartupMode.COLD,
+        compilationMode = compilationMode,
         setupBlock = {
             startUp()
             device.findObject(By.text("Go to Categories"))
