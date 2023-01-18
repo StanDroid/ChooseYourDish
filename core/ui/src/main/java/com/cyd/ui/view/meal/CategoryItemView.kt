@@ -17,9 +17,11 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.cyd.base.mealdb.Category
+import com.cyd.ui.view.base.CategoryListScreenConstants.CATEGORY_ITEM
 import com.cyd.ui.view.base.ProgressAsyncImage
 
 @Composable
@@ -43,6 +45,7 @@ fun CategoryItemView(
                         stiffness = Spring.StiffnessLow
                     )
                 )
+                .testTag(CATEGORY_ITEM)
         ) {
             Row(Modifier.fillMaxWidth()) {
                 ProgressAsyncImage(

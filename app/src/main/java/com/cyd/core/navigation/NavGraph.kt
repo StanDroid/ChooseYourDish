@@ -1,6 +1,10 @@
 package com.cyd.core.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -11,10 +15,17 @@ import com.cyd.core.navigation.route.MealDetailsRoute
 import com.cyd.core.navigation.route.MealListRoute
 import com.cyd.core.navigation.route.RandomMealRoute
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun NavigationSystem() {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = NavScreen.RandomMeal.route) {
+    NavHost(
+        navController = navController,
+        startDestination = NavScreen.RandomMeal.route,
+        modifier = Modifier.semantics {
+            testTagsAsResourceId = true
+        }
+    ) {
         composable(NavScreen.RandomMeal.route) {
             RandomMealRoute(navController)
         }
