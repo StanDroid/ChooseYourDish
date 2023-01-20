@@ -1,23 +1,24 @@
 package com.cyd.ui.view.base
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MealScaffold(
     topBarText: String,
     icon: ImageVector = Icons.Default.Home,
     onIconClick: () -> Unit = { },
-    content: @Composable (PaddingValues) -> Unit
+    content: @Composable () -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -32,15 +33,28 @@ fun MealScaffold(
                             .padding(16.dp)
                     )
                 },
-                backgroundColor = MaterialTheme.colors.primary
+                colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = MaterialTheme.colorScheme.primary)
             )
         },
-        content = content
+        content = {
+            Surface(modifier = Modifier.padding(it)) {
+                content.invoke()
+            }
+        }
     )
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun MealScaffoldPreview() {
-    MealScaffold(topBarText = "Test Topbar") {}
+    MealScaffold(topBarText = "Test Topbar") {
+        Column() {
+            Text(text = "test")
+            Text(text = "test")
+            Text(text = "test")
+            Text(text = "test")
+            Text(text = "test")
+            Text(text = "test")
+        }
+    }
 }

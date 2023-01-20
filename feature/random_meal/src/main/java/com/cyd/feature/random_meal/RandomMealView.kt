@@ -7,10 +7,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Button
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -86,30 +86,30 @@ fun RandomMealView(
                                 .padding(bottom = 8.dp),
                             text = model.strMeal,
                             textAlign = TextAlign.Center,
-                            style = MaterialTheme.typography.h5
+                            style = MaterialTheme.typography.headlineMedium
                         )
                         Text(
                             modifier = Modifier.padding(bottom = 8.dp),
                             text = stringResource(id = R.string.area_s, model.strArea),
-                            style = MaterialTheme.typography.subtitle1
+                            style = MaterialTheme.typography.labelMedium
                         )
                         Text(
                             modifier = Modifier.padding(bottom = 8.dp),
                             text = stringResource(id = R.string.category_s, model.strCategory),
-                            style = MaterialTheme.typography.subtitle1
+                            style = MaterialTheme.typography.labelMedium
                         )
                         if (expanded) {
                             Text(
                                 modifier = Modifier.clickable { expanded = !expanded },
                                 text = stringResource(R.string.instructions),
-                                style = MaterialTheme.typography.subtitle2
+                                style = MaterialTheme.typography.labelSmall
                             )
                             Text(
                                 modifier = Modifier
                                     .clickable { expanded = !expanded }
                                     .padding(bottom = 8.dp),
                                 text = model.strInstructions,
-                                style = MaterialTheme.typography.subtitle2
+                                style = MaterialTheme.typography.labelSmall
                             )
                         } else {
                             Text(
@@ -118,7 +118,7 @@ fun RandomMealView(
                                     .padding(bottom = 8.dp)
                                     .clickable { expanded = !expanded },
                                 text = stringResource(R.string.click_to_see_instructions),
-                                style = MaterialTheme.typography.subtitle2,
+                                style = MaterialTheme.typography.labelSmall,
                                 color = Color.DarkGray
                             )
                         }

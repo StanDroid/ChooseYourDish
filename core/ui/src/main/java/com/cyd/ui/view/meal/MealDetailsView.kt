@@ -7,8 +7,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -51,7 +51,7 @@ fun MealDetailsView(meal: Meal) {
             Text(
                 modifier = Modifier.padding(top = 16.dp),
                 text = meal.instructions.orEmpty(),
-                style = MaterialTheme.typography.body2,
+                style = MaterialTheme.typography.bodySmall,
                 lineHeight = 19.sp
             )
 
@@ -62,7 +62,7 @@ fun MealDetailsView(meal: Meal) {
             )
             Text(
                 text = meal.source.orEmpty(),
-                style = MaterialTheme.typography.body1
+                style = MaterialTheme.typography.bodyMedium
             )
 
             Text(
@@ -72,7 +72,7 @@ fun MealDetailsView(meal: Meal) {
             )
             Text(
                 text = meal.youtube.orEmpty(),
-                style = MaterialTheme.typography.body1
+                style = MaterialTheme.typography.bodyMedium
             )
         }
     }
@@ -84,11 +84,11 @@ private fun RowTitleText(title: String, text: String) {
         Row(modifier = Modifier.padding(top = 16.dp)) {
             Text(
                 text = "$title: ",
-                style = MaterialTheme.typography.body2
+                style = MaterialTheme.typography.bodyLarge
             )
             Text(
                 text = text,
-                style = MaterialTheme.typography.subtitle1
+                style = MaterialTheme.typography.bodyMedium
             )
         }
     }
