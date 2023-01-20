@@ -3,7 +3,6 @@ package com.cyd.ui.view.meal
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
@@ -46,7 +45,6 @@ fun MealItemView(
                 text = mealItem.name,
                 modifier = Modifier
                     .align(CenterVertically)
-                    .background(MaterialTheme.colors.background)
                     .padding(16.dp)
                     .weight(1f),
                 style = MaterialTheme.typography.subtitle1
