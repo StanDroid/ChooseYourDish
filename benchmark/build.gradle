@@ -2,6 +2,7 @@ plugins {
     id 'com.android.test'
     id 'org.jetbrains.kotlin.android'
 }
+apply from: "$project.rootDir/jacoco/jacoco.gradle"
 
 android {
     namespace 'com.cyd.benchmark'
@@ -18,7 +19,6 @@ android {
 
     defaultConfig {
         minSdk 24
-        targetSdk 33
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunnerArguments["androidx.benchmark.suppressErrors"] = 'EMULATOR'

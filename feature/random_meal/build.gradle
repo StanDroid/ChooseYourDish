@@ -3,11 +3,14 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
 }
+apply from: "$project.rootDir/jacoco/jacoco.gradle"
 
 android {
     namespace 'com.cyd.feature.random_meal'
     compileSdk 33
-
+    defaultConfig {
+        minSdk 24
+    }
     buildFeatures {
         compose true
     }

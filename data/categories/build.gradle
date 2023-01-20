@@ -3,10 +3,14 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
 }
+apply from: "$project.rootDir/jacoco/jacoco.gradle"
 
 android {
     namespace 'com.cyd.data.categories'
     compileSdk 33
+    defaultConfig {
+        minSdk 24
+    }
 }
 
 dependencies {
