@@ -5,8 +5,8 @@ import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
@@ -47,7 +47,7 @@ fun MealItemView(
                     .align(CenterVertically)
                     .padding(16.dp)
                     .weight(1f),
-                style = MaterialTheme.typography.subtitle1
+                style = MaterialTheme.typography.labelSmall
             )
         }
     }

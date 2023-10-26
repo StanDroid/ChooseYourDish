@@ -23,12 +23,16 @@ android {
 dependencies {
     implementation project(":core:base")
 
-    implementation "androidx.compose.ui:ui:$compose_version"
-    implementation "androidx.compose.material:material:$compose_version"
-    implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
-    implementation "androidx.compose.material:material-icons-extended:$compose_version"
-    implementation "com.google.accompanist:accompanist-systemuicontroller:$systemuicontroller_version"
+//    debugImplementation "androidx.compose.ui:ui-tooling:1.4.0-alpha04"
+//    implementation "androidx.compose.ui:ui-tooling-preview:1.4.0-alpha04"
+    debugImplementation "androidx.compose.ui:ui-tooling:1.0.0-rc01"
+    implementation "androidx.compose.ui:ui-tooling-preview:1.0.0-rc01"
 
+    implementation "com.google.accompanist:accompanist-systemuicontroller:$systemuicontroller_version"
+    implementation "androidx.compose.material3:material3:$compose_material_ui3_version"
+    implementation "androidx.compose.material3:material3-window-size-class:$compose_material_ui3_version"
+    implementation "androidx.customview:customview:1.2.0-alpha02"
+    implementation "androidx.customview:customview-poolingcontainer:1.0.0"
     implementation "io.coil-kt:coil-compose:$coil_version"
     implementation "io.coil-kt:coil-gif:$coil_version"
 }
