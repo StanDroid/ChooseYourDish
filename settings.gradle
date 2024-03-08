@@ -3,8 +3,20 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        jcenter() // Warning: this repository is going to shut down soon
     }
 }
-rootProject.name = "ComposeTraining"
+rootProject.name = "ChooseYourDish"
+
 include ':app'
+
+include ':data:categories'
+include ':data:meal'
+
+include ':core:network'
+include ':core:ui'
+include ':core:data'
+include ':core:base'
+
+include ':feature:random_meal'
+include ':feature:categories'
+include ':benchmark'
