@@ -14,7 +14,14 @@ buildscript {
         android_material_version = "1.7.0"
         macro_benchmark_version = "1.1.1"
         profile_installer_version = "1.2.2"
-        jacoco_version ="0.8.8"
+        jacoco_version = "0.8.8"
+        customview_version = "1.2.0-alpha02"
+        customview_poolingcontainer_version = "1.0.0"
+        junit_version = "1.1.5"
+        espresso_core_version = "3.5.1"
+        uiautomator_version = "2.3.0"
+        retrofit_version = "2.9.0"
+        urlconnection_version = "4.8.1"
     }
 
     repositories {
