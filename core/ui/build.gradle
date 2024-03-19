@@ -7,7 +7,7 @@ apply from: "$project.rootDir/jacoco/jacoco.gradle"
 
 android {
     namespace 'com.cyd.ui'
-    compileSdk 33
+    compileSdk 34
     defaultConfig {
         minSdk 24
     }
@@ -15,7 +15,11 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion compose_version
+        kotlinCompilerExtensionVersion compose_compile_version
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 }
 

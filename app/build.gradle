@@ -7,12 +7,12 @@ plugins {
 apply from: "$project.rootDir/jacoco/jacoco.gradle"
 
 android {
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.cyd"
         minSdk 24
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
@@ -49,7 +49,7 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion compose_version
+        kotlinCompilerExtensionVersion compose_compile_version
     }
     packagingOptions {
         resources {
@@ -95,7 +95,7 @@ dependencies {
     implementation "io.coil-kt:coil-gif:$coil_version"
 
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinx_coroutines_version"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinx_coroutines_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinx_coroutines_android_version"
 
     implementation "androidx.profileinstaller:profileinstaller:$profile_installer_version"
 
@@ -110,8 +110,10 @@ dependencies {
 allprojects {
     apply plugin: 'jacoco'
     gradle.projectsEvaluated {
-        tasks.withType(JavaCompile) {
-            options.compilerArgs << "-Xlint:deprecation"
+        tasks.withType(JavaCompile).tap {
+            configureEach {
+                options.compilerArgs << "-Xlint:deprecation"
+            }
         }
     }
 }

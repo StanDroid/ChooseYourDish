@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-sdk android:minSdkVersion="21" />
 
     <application
         android:name="com.cyd.core.ChooseYourDishApp"
@@ -18,7 +17,7 @@
         tools:ignore="GoogleAppIndexingWarning">
         <profileable
             android:shell="true"
-            tools:targetApi="29" />
+            tools:targetApi="34" />
 
         <activity
             android:name="com.cyd.feature.MainActivity"
