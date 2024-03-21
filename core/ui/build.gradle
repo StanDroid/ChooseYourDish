@@ -7,7 +7,7 @@ apply from: "$project.rootDir/jacoco/jacoco.gradle"
 
 android {
     namespace 'com.cyd.ui'
-    compileSdk 33
+    compileSdk 34
     defaultConfig {
         minSdk 24
     }
@@ -15,7 +15,11 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion compose_version
+        kotlinCompilerExtensionVersion compose_compile_version
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 }
 
@@ -23,16 +27,16 @@ android {
 dependencies {
     implementation project(":core:base")
 
-//    debugImplementation "androidx.compose.ui:ui-tooling:1.4.0-alpha04"
-//    implementation "androidx.compose.ui:ui-tooling-preview:1.4.0-alpha04"
-    debugImplementation "androidx.compose.ui:ui-tooling:1.0.0-rc01"
-    implementation "androidx.compose.ui:ui-tooling-preview:1.0.0-rc01"
+    debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
+    implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
 
     implementation "com.google.accompanist:accompanist-systemuicontroller:$systemuicontroller_version"
     implementation "androidx.compose.material3:material3:$compose_material_ui3_version"
     implementation "androidx.compose.material3:material3-window-size-class:$compose_material_ui3_version"
-    implementation "androidx.customview:customview:1.2.0-alpha02"
-    implementation "androidx.customview:customview-poolingcontainer:1.0.0"
+
+    debugImplementation "androidx.customview:customview:$customview_version"
+    debugImplementation "androidx.customview:customview-poolingcontainer:$customview_poolingcontainer_version"
+
     implementation "io.coil-kt:coil-compose:$coil_version"
     implementation "io.coil-kt:coil-gif:$coil_version"
 }

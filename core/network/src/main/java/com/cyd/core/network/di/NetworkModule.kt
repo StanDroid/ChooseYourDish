@@ -12,6 +12,6 @@ import dagger.hilt.components.SingletonComponent
 interface NetworkModule {
 
     @Binds
-    fun RetrofitMealNetwork.binds(): MealDataSource
+    fun bindRetrofitMealNetwork(retrofitMealNetwork: RetrofitMealNetwork): MealDataSource
 
 }
