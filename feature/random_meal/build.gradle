@@ -16,7 +16,7 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion compose_compile_version
+        kotlinCompilerExtensionVersion libs.versions.compose.compile.version.toString()
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17

@@ -49,7 +49,7 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion compose_compile_version
+        kotlinCompilerExtensionVersion libs.versions.compose.compile.version.toString()
     }
     packagingOptions {
         resources {
