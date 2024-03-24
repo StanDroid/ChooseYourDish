@@ -1,6 +1,13 @@
-package com.cyd.core.network
+package com.cyd.data.network
 
-import com.cyd.core.network.model.*
+import com.cyd.data.network.model.CategoriesResponse
+import com.cyd.data.network.model.CategoryDTO
+import com.cyd.data.network.model.MealDetailsDTO
+import com.cyd.data.network.model.MealDetailsResponse
+import com.cyd.data.network.model.MealListItemDTO
+import com.cyd.data.network.model.MealListResponse
+import com.cyd.data.network.model.RandomMealDTO
+import com.cyd.data.network.model.RandomMealResponse
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory

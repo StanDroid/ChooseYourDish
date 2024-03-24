@@ -1,7 +1,7 @@
-package com.cyd.core.network.di
+package com.cyd.data.network.di
 
-import com.cyd.core.network.MealDataSource
-import com.cyd.core.network.RetrofitMealNetwork
+import com.cyd.data.network.MealDataSource
+import com.cyd.data.network.RetrofitMealNetwork
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

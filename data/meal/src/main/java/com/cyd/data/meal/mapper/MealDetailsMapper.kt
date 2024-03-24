@@ -2,7 +2,7 @@ package com.cyd.data.meal.mapper
 
 import com.cyd.base.mapper.Mapper
 import com.cyd.base.mealdb.Meal
-import com.cyd.core.network.model.MealDetailsDTO
+import com.cyd.data.network.model.MealDetailsDTO
 import javax.inject.Inject
 
 class MealDetailsMapper @Inject constructor() : Mapper<MealDetailsDTO, Meal> {

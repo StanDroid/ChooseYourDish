@@ -2,7 +2,7 @@ package com.cyd.data.meal.mapper
 
 import com.cyd.base.mapper.Mapper
 import com.cyd.base.mealdb.RandomMeal
-import com.cyd.core.network.model.RandomMealDTO
+import com.cyd.data.network.model.RandomMealDTO
 import javax.inject.Inject
 
 class RandomMealMapper @Inject constructor() : Mapper<RandomMealDTO, RandomMeal> {

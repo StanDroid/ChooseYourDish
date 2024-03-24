@@ -1,4 +1,4 @@
-package com.cyd.core.network.model
+package com.cyd.data.network.model
 
 data class MealListResponse(
     val meals: List<MealListItemDTO>?

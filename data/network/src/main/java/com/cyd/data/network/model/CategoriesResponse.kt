@@ -1,4 +1,4 @@
-package com.cyd.core.network.model
+package com.cyd.data.network.model
 
 import com.google.gson.annotations.SerializedName
 

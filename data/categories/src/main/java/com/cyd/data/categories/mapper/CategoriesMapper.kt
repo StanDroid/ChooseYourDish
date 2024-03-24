@@ -2,7 +2,7 @@ package com.cyd.data.categories.mapper
 
 import com.cyd.base.mapper.Mapper
 import com.cyd.base.mealdb.Category
-import com.cyd.core.network.model.CategoryDTO
+import com.cyd.data.network.model.CategoryDTO
 import javax.inject.Inject
 
 class CategoriesMapper @Inject constructor() : Mapper<CategoryDTO, Category> {

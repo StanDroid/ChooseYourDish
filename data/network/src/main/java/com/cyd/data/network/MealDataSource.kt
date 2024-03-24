@@ -1,9 +1,9 @@
-package com.cyd.core.network
+package com.cyd.data.network
 
-import com.cyd.core.network.model.CategoryDTO
-import com.cyd.core.network.model.MealDetailsDTO
-import com.cyd.core.network.model.MealListItemDTO
-import com.cyd.core.network.model.RandomMealDTO
+import com.cyd.data.network.model.CategoryDTO
+import com.cyd.data.network.model.MealDetailsDTO
+import com.cyd.data.network.model.MealListItemDTO
+import com.cyd.data.network.model.RandomMealDTO
 
 interface MealDataSource {
 

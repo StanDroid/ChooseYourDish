@@ -6,7 +6,7 @@ plugins {
 apply from: "$project.rootDir/jacoco/jacoco.gradle"
 
 android {
-    namespace 'com.cyd.core.network'
+    namespace 'com.cyd.data.network'
     compileSdk 34
     defaultConfig {
         minSdk 24

@@ -1,6 +1,7 @@
 package com.cyd.benchmark
 
-import androidx.benchmark.macro.ExperimentalBaselineProfilesApi
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.benchmark.macro.MacrobenchmarkScope
 import androidx.benchmark.macro.junit4.BaselineProfileRule
 import androidx.test.uiautomator.By
@@ -10,15 +11,15 @@ import com.cyd.ui.view.base.CategoryListScreenConstants
 import org.junit.Rule
 import org.junit.Test
 
-@OptIn(ExperimentalBaselineProfilesApi::class)
+@RequiresApi(Build.VERSION_CODES.P)
 class BaselineProfileGenerator {
-
+    @RequiresApi(Build.VERSION_CODES.P)
     @get:Rule
     val rule = BaselineProfileRule()
 
     @Test
     fun generate() {
-        rule.collectBaselineProfile(packageName = "com.cyd") {
+        rule.collect(packageName = "com.cyd") {
             startApplicationJourney()
             goToCategoriesJourney()
         }
