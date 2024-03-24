@@ -1,4 +1,4 @@
-package com.cyd.feature.meals_by_category.viewmodel
+package com.cyd.feature.category_meals.viewmodel
 
 import android.util.Log
 import androidx.compose.runtime.MutableState
@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.cyd.base.mealdb.MealItem
 import com.cyd.base.utils.ErrorMessage
 import com.cyd.base.viewmodel.BaseViewModel
-import com.cyd.feature.meals_by_category.usecase.GetMealListUseCase
+import com.cyd.feature.category_meals.usecase.GetMealListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

@@ -1,4 +1,4 @@
-package com.cyd.feature.meals_by_category.usecase
+package com.cyd.feature.category_meals.usecase
 
 import com.cyd.base.mealdb.MealItem
 import com.cyd.base.usecase.UseCaseSuspend

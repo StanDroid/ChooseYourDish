@@ -1,4 +1,4 @@
-package com.cyd.feature.meals_by_category
+package com.cyd.feature.category_meals
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -11,9 +11,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.cyd.R
 import com.cyd.base.mealdb.MealItem
-import com.cyd.feature.meals_by_category.viewmodel.MealListUiState
+import com.cyd.feature.category_meals.viewmodel.MealListUiState
 import com.cyd.ui.view.meal.MealItemView
 import com.cyd.ui.view.meal.ProgressLoadingView
 

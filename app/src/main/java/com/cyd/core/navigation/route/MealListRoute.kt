@@ -8,8 +8,8 @@ import androidx.compose.runtime.remember
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.cyd.core.navigation.NavScreen
-import com.cyd.feature.meals_by_category.MealListScreen
-import com.cyd.feature.meals_by_category.viewmodel.MealListViewModel
+import com.cyd.feature.category_meals.MealListScreen
+import com.cyd.feature.category_meals.viewmodel.MealListViewModel
 import com.cyd.ui.view.base.MealScaffold
 
 @Composable
