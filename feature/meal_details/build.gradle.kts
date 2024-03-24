@@ -1,12 +1,13 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id ("kotlin-kapt")
 }
 
-apply(from ="${project.rootDir}/jacoco/jacoco.gradle")
+apply(from = "${project.rootDir}/jacoco/jacoco.gradle")
 
 android {
-    namespace = "com.cyd.meal_details"
+    namespace = "com.cyd.feature.meal_details"
     compileSdk = 34
 
     defaultConfig {
@@ -31,7 +32,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.compile.version.toString()
+        kotlinCompilerExtensionVersion = "1.5.10"
     }
 
     kotlinOptions {
@@ -41,10 +42,16 @@ android {
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.11.0")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    implementation(project(":data:meal"))
+    implementation(project(":core:ui"))
+    implementation(project(":core:base"))
+
+    implementation("androidx.compose.ui:ui:1.6.3")
+    implementation("androidx.compose.ui:ui-tooling-preview:1.6.3")
+    implementation("androidx.compose.material3:material3:1.2.1")
+    implementation("androidx.compose.material3:material3-window-size-class:1.2.1")
+
+    implementation ("com.google.dagger:hilt-android:2.49")
+    implementation( "androidx.hilt:hilt-navigation-compose:1.2.0")
+    kapt("com.google.dagger:hilt-compiler:2.49")
 }

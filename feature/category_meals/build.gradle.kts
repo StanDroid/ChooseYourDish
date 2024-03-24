@@ -30,7 +30,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.compile.version.toString()
+        kotlinCompilerExtensionVersion = "1.5.10"
     }
 
     kotlinOptions {
