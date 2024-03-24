@@ -24,6 +24,7 @@
             <option value="$PROJECT_DIR$/feature/category_meals" />
             <option value="$PROJECT_DIR$/feature/meal_details" />
             <option value="$PROJECT_DIR$/feature/random_meal" />
+            <option value="$PROJECT_DIR$/feature/search" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />
