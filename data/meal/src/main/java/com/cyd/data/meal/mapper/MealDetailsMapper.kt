@@ -1,7 +1,7 @@
 package com.cyd.data.meal.mapper
 
 import com.cyd.base.mapper.Mapper
-import com.cyd.base.mealdb.Meal
+import com.cyd.base.model.Meal
 import com.cyd.data.network.model.MealDetailsDTO
 import javax.inject.Inject
 

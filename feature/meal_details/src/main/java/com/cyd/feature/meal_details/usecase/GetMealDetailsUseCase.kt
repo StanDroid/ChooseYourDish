@@ -1,6 +1,6 @@
 package com.cyd.feature.meal_details.usecase
 
-import com.cyd.base.mealdb.Meal
+import com.cyd.base.model.Meal
 import com.cyd.base.usecase.UseCaseSuspend
 import com.cyd.data.meal.MealRepository
 import javax.inject.Inject

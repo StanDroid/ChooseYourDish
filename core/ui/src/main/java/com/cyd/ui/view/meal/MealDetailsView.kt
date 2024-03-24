@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.size.Size
-import com.cyd.base.mealdb.Meal
+import com.cyd.base.model.Meal
 import com.cyd.ui.R
 
 @Composable

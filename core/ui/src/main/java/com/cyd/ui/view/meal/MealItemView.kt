@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.transform.CircleCropTransformation
-import com.cyd.base.mealdb.MealItem
+import com.cyd.base.model.MealItem
 import com.cyd.ui.view.base.ProgressAsyncImage
 
 @Composable

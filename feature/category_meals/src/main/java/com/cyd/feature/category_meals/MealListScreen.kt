@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.cyd.base.mealdb.MealItem
+import com.cyd.base.model.MealItem
 import com.cyd.feature.category_meals.viewmodel.MealListUiState
 import com.cyd.ui.view.meal.MealItemView
 import com.cyd.ui.view.meal.ProgressLoadingView

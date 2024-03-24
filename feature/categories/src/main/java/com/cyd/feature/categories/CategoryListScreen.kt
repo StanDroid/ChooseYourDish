@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
-import com.cyd.base.mealdb.Category
+import com.cyd.base.model.Category
 import com.cyd.feature.categories.viewmodel.CategoriesUiState
 import com.cyd.ui.view.base.CategoryListScreenConstants.CATEGORY_LIST
 import com.cyd.ui.view.meal.CategoryItemView

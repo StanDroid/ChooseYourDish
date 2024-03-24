@@ -1,4 +1,4 @@
-package com.cyd.base.mealdb
+package com.cyd.base.model
 
 data class RandomMeal(
     val idMeal: String,

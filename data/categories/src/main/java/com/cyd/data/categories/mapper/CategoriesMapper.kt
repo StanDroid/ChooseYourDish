@@ -1,7 +1,7 @@
 package com.cyd.data.categories.mapper
 
 import com.cyd.base.mapper.Mapper
-import com.cyd.base.mealdb.Category
+import com.cyd.base.model.Category
 import com.cyd.data.network.model.CategoryDTO
 import javax.inject.Inject
 

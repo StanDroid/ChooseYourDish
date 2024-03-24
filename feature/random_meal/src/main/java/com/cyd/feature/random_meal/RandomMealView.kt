@@ -21,7 +21,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.transform.RoundedCornersTransformation
-import com.cyd.base.mealdb.RandomMeal
+import com.cyd.base.model.RandomMeal
 import com.cyd.ui.view.base.AnnotatedClickableText
 import com.cyd.ui.view.base.ProgressAsyncImage
 import com.cyd.ui.view.base.RandomMealScreenConstants
