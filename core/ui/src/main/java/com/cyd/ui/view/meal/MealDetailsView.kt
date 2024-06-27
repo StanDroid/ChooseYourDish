@@ -105,7 +105,7 @@ fun DetailsScreenPreview() {
                     " instructions",
             source = "source",
             tags = "tags",
-            youtube = "youtube",
+            youtube = "youtube"
 
             )
     )

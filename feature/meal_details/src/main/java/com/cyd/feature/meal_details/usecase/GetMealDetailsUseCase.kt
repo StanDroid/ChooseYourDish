@@ -7,7 +7,9 @@ import javax.inject.Inject
 
 class GetMealDetailsUseCase @Inject constructor(
     private val repository: MealRepository
-) : UseCaseSuspend<String, Meal?> {
+) : UseCaseSuspend<String, Meal> {
 
-    override suspend fun execute(params: String): Meal? = repository.getMealDetails(params)
+    override suspend fun execute(params: String): Meal {
+        return repository.getMealDetails(params) ?: throw NoSuchElementException()
+    }
 }

@@ -58,4 +58,14 @@ data class MealDetailsDTO(
     val strSource: String?,
     val strTags: String?,
     val strYoutube: String?
-)
+) {
+    fun getIngredient(index: Int): String? {
+        val fieldName = "strIngredient$index"
+        return javaClass.getDeclaredField(fieldName).get(this) as? String
+    }
+
+    fun getMeasure(index: Int): String? {
+        val fieldName = "strMeasure$index"
+        return javaClass.getDeclaredField(fieldName).get(this) as? String
+    }
+}
