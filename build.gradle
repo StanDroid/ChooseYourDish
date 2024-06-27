@@ -33,8 +33,9 @@ buildscript {
         espresso_core_version = "3.5.1"
         uiautomator_version = "2.3.0"
 
-        retrofit_version = "2.9.0"
-        urlconnection_version = "4.8.1"
+        ktor_version = "2.3.12"
+        urlconnection_version = "4.12.0"
+        logging_interceptor = "4.12.0"
 
         kotlin_plugin_version = "1.9.22"
         gradle_plugin_version = "8.3.0"
@@ -53,7 +54,7 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_plugin_version"
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
         classpath "org.jacoco:org.jacoco.core:$jacoco_version"
-        classpath "org.jlleitschuh.gradle:ktlint-gradle:12.1.0"
+        classpath libs.ktlint.gradle
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }

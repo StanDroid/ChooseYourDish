@@ -21,6 +21,6 @@ dependencies {
     implementation project(":data:network")
     implementation project(":core:base")
 
-    implementation "com.google.dagger:hilt-android:$hilt_version"
+    implementation libs.hilt.android
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
 }
