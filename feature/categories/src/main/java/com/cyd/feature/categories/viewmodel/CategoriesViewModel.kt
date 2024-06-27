@@ -89,12 +89,10 @@ class CategoriesViewModel @Inject constructor(
     }
 
     private fun loadCategories() {
-        Log.e("TAG", "loadCategories started")
         viewModelState.value = CategoriesViewModelState(isLoading = true)
         viewModelScope.launch {
             try {
                 val categories = useCase.execute()
-                Log.e("TAG", "loadCategories success: $categories")
                 viewModelState.value =
                     CategoriesViewModelState(list = categories, isLoading = false)
             } catch (ex: Exception) {

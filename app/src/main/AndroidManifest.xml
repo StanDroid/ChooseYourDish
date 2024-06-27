@@ -20,7 +20,7 @@
             tools:targetApi="34" />
 
         <activity
-            android:name="com.cyd.feature.MainActivity"
+            android:name="com.cyd.core.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.ChooseYourDish.NoActionBar">
             <intent-filter>

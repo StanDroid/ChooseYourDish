@@ -4,25 +4,34 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.size.Size
+import com.cyd.base.model.Ingredient
 import com.cyd.base.model.Meal
 import com.cyd.ui.R
+import com.cyd.ui.view.base.AnnotatedClickableText
+import com.cyd.ui.view.base.ProgressAsyncImage
 
 @Composable
 fun MealDetailsView(meal: Meal) {
@@ -46,34 +55,68 @@ fun MealDetailsView(meal: Meal) {
             Modifier.padding(16.dp),
         ) {
             RowTitleText(stringResource(R.string.area), meal.area.orEmpty())
-            RowTitleText(stringResource(R.string.tags), meal.tags.orEmpty())
 
+            LazyVerticalGrid(
+                modifier = Modifier.heightIn(max = 2000.dp),
+                columns = GridCells.Fixed(2),
+                userScrollEnabled = false
+            ) {
+                items(meal.ingredients) { item ->
+                    IngredientRow(item)
+                }
+            }
             Text(
                 modifier = Modifier.padding(top = 16.dp),
                 text = meal.instructions.orEmpty(),
                 style = MaterialTheme.typography.bodySmall,
                 lineHeight = 19.sp
             )
-
-            Text(
-                modifier = Modifier.padding(top = 16.dp),
-                text = stringResource(R.string.source),
-                fontWeight = FontWeight.W600
-            )
-            Text(
-                text = meal.source.orEmpty(),
+            RowTitleText(stringResource(R.string.tags), meal.tags.orEmpty())
+            AnnotatedClickableText(
+                modifier = Modifier.padding(top = 8.dp),
+                str = stringResource(R.string.original_post),
+                link = meal.source.orEmpty(),
                 style = MaterialTheme.typography.bodyMedium
             )
-
-            Text(
-                modifier = Modifier.padding(top = 16.dp),
-                text = stringResource(R.string.youtube),
-                fontWeight = FontWeight.W600
-            )
-            Text(
-                text = meal.youtube.orEmpty(),
+            AnnotatedClickableText(
+                str = stringResource(R.string.see_on_youtube),
+                link = meal.youtube.orEmpty(),
                 style = MaterialTheme.typography.bodyMedium
             )
+        }
+    }
+}
+
+@Composable
+private fun IngredientRow(
+    ingredient: Ingredient,
+    modifier: Modifier = Modifier
+) {
+    Row(modifier = modifier.padding(8.dp)) {
+        ProgressAsyncImage(
+            model = ingredient.imageUrl,
+            modifier = Modifier
+                .height(50.dp)
+                .width(50.dp)
+
+        )
+        Column(
+            modifier = Modifier
+                .align(Alignment.CenterVertically)
+                .padding(start = 8.dp)
+        ) {
+            Text(
+                modifier = Modifier,
+                text = ingredient.name,
+                style = MaterialTheme.typography.bodyMedium,
+            )
+            ingredient.measure?.let {
+                Text(
+                    modifier = Modifier,
+                    text = it,
+                    style = MaterialTheme.typography.bodySmall,
+                )
+            }
         }
     }
 }
@@ -81,32 +124,37 @@ fun MealDetailsView(meal: Meal) {
 @Composable
 private fun RowTitleText(title: String, text: String) {
     if (text.isNotEmpty()) {
-        Row(modifier = Modifier.padding(top = 16.dp)) {
+        Row(modifier = Modifier.padding(top = 8.dp)) {
             Text(
-                text = "$title: ",
-                style = MaterialTheme.typography.bodyLarge
+                text = "$title:",
+                style = MaterialTheme.typography.bodyMedium
             )
             Text(
+                modifier = Modifier
+                    .align(Alignment.Bottom)
+                    .padding(start = 4.dp),
                 text = text,
-                style = MaterialTheme.typography.bodyMedium
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onTertiaryContainer
             )
         }
     }
 }
 
 @Composable
-@Preview
+@Preview(showBackground = true)
 fun DetailsScreenPreview() {
     MealDetailsView(
         Meal(
             category = "Category",
             area = "area",
-            instructions = "instructions \n instructions\n" +
-                    " instructions",
+            instructions = "instructions\ninstructions\n" +
+                    "instructions",
             source = "source",
             tags = "tags",
-            youtube = "youtube"
+            youtube = "youtube",
+            ingredients = listOf(Ingredient(name = "Lemon", measure = "2psc"))
 
-            )
+        )
     )
 }
