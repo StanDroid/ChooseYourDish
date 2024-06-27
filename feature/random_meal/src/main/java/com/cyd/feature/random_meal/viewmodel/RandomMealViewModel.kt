@@ -3,7 +3,7 @@ package com.cyd.feature.random_meal.viewmodel
 import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.cyd.base.extension.map
-import com.cyd.base.mealdb.RandomMeal
+import com.cyd.base.model.RandomMeal
 import com.cyd.base.usecase.execute
 import com.cyd.base.utils.ErrorMessage
 import com.cyd.base.viewmodel.BaseViewModel

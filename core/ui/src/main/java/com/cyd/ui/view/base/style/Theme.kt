@@ -26,7 +26,6 @@ fun BasicTheme(
 
     MaterialTheme(
         colorScheme = colors,
-//        typography = MealsTypography,
         shapes = MealsShapes,
         content = content
     )

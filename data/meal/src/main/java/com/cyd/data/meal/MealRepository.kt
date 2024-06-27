@@ -1,8 +1,8 @@
 package com.cyd.data.meal
 
-import com.cyd.base.mealdb.Meal
-import com.cyd.base.mealdb.MealItem
-import com.cyd.base.mealdb.RandomMeal
+import com.cyd.base.model.Meal
+import com.cyd.base.model.MealItem
+import com.cyd.base.model.RandomMeal
 
 interface MealRepository {
   suspend fun getRandomMeal(): RandomMeal?

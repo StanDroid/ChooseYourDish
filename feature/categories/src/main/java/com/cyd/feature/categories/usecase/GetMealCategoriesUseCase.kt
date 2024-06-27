@@ -1,6 +1,6 @@
 package com.cyd.feature.categories.usecase
 
-import com.cyd.base.mealdb.Category
+import com.cyd.base.model.Category
 import com.cyd.base.usecase.UseCaseSuspend
 import com.cyd.data.categories.CategoriesRepository
 import javax.inject.Inject
