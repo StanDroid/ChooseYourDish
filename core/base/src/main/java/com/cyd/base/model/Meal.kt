@@ -1,5 +1,8 @@
 package com.cyd.base.model
 
+import com.cyd.base.utils.BASE_INGREDIENT_IMAGE_EXTENSION
+import com.cyd.base.utils.BASE_INGREDIENT_IMAGE_URL
+
 data class Meal(
     val id: String? = null,
     val dateModified: String? = null,
@@ -20,4 +23,6 @@ data class Meal(
 data class Ingredient(
     val name: String,
     val measure: String?
-)
+) {
+    val imageUrl: String = BASE_INGREDIENT_IMAGE_URL + name + BASE_INGREDIENT_IMAGE_EXTENSION
+}

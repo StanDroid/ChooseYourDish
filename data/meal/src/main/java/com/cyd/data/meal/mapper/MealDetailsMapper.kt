@@ -14,7 +14,12 @@ class MealDetailsMapper @Inject constructor() : Mapper<MealDetailsDTO, Meal> {
             val ingredientName = param.getIngredient(i)
             val measureName = param.getMeasure(i)
             if (!ingredientName.isNullOrEmpty()) {
-                ingredients.add(Ingredient(ingredientName, measureName))
+                ingredients.add(
+                    Ingredient(
+                        name = ingredientName,
+                        measure = measureName
+                    )
+                )
             }
         }
         return Meal(

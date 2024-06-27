@@ -91,7 +91,6 @@ class RandomMealViewModel @Inject constructor(
     }
 
     private fun loadRandomMeal() {
-        Log.e("TAG", "loadRandomMeal started")
         viewModelState.update { RandomMealViewModelState(isLoading = true) }
         viewModelScope.launch {
             try {
@@ -99,7 +98,6 @@ class RandomMealViewModel @Inject constructor(
                 viewModelState.update {
                     RandomMealViewModelState(randomMeal = randomMeal, isLoading = false)
                 }
-                Log.e("TAG", "loadRandomMeal success: $randomMeal")
             } catch (it: Exception) {
                 it.printStackTrace()
                 Log.e("TAG", "loadRandomMeal failure")

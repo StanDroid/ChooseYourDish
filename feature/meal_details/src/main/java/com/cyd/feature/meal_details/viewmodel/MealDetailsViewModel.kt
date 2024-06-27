@@ -84,7 +84,6 @@ class MealDetailsViewModel @Inject constructor(
     val uiState: State<MealDetailsViewModelState> = viewModelState
 
     fun loadMealDetails(id: String) {
-        Log.e("TAG", "loadMealDetails started $id")
         viewModelState.value = MealDetailsViewModelState(isLoading = true)
         viewModelScope.launch {
             try {

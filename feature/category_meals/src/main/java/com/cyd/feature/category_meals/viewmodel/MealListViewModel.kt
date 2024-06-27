@@ -74,12 +74,10 @@ class MealListViewModel @Inject constructor(
     val uiState: State<MealListViewModelState> = viewModelState
 
     fun loadMealsByCategory(name: String) {
-        Log.e("TAG", "loadMealsByCategory started")
         viewModelState.value = MealListViewModelState(isLoading = true)
         viewModelScope.launch {
             try {
                 val list = useCase.execute(name)
-                Log.e("TAG", "loadMealsByCategory success: $list")
                 viewModelState.value =
                     MealListViewModelState(list = list, isLoading = false)
             } catch (ex: Exception) {

@@ -39,7 +39,6 @@ fun CategoryItemView(
 ) {
     var expanded by remember { mutableStateOf(false) }
     Card(
-//        backgroundColor = Color.White,
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
     ) {
         Column(
@@ -68,7 +67,7 @@ fun CategoryItemView(
                         .align(CenterVertically)
                         .padding(16.dp)
                         .weight(1f),
-                    style = MaterialTheme.typography.titleSmall
+                    style = MaterialTheme.typography.titleMedium
                 )
                 Icon(
                     modifier = Modifier
