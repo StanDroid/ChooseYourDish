@@ -9,13 +9,19 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun AnnotatedClickableText(str: String, link: String) {
+fun AnnotatedClickableText(
+    modifier: Modifier = Modifier,
+    str: String,
+    link: String,
+    style: TextStyle = TextStyle.Default,
+) {
     if (str.isEmpty()) return
     val annotatedLinkString: AnnotatedString = buildAnnotatedString {
         append(str)
@@ -37,7 +43,7 @@ fun AnnotatedClickableText(str: String, link: String) {
     }
     val uriHandler = LocalUriHandler.current
     ClickableText(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(bottom = 8.dp),
         text = annotatedLinkString,
@@ -47,6 +53,7 @@ fun AnnotatedClickableText(str: String, link: String) {
                 .firstOrNull()?.let { string ->
                     uriHandler.openUri(string.item)
                 }
-        }
+        },
+        style = style
     )
 }

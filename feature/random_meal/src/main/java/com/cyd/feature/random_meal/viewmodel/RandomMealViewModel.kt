@@ -3,7 +3,7 @@ package com.cyd.feature.random_meal.viewmodel
 import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.cyd.base.extension.map
-import com.cyd.base.mealdb.RandomMeal
+import com.cyd.base.model.RandomMeal
 import com.cyd.base.usecase.execute
 import com.cyd.base.utils.ErrorMessage
 import com.cyd.base.viewmodel.BaseViewModel
@@ -91,7 +91,6 @@ class RandomMealViewModel @Inject constructor(
     }
 
     private fun loadRandomMeal() {
-        Log.e("TAG", "loadRandomMeal started")
         viewModelState.update { RandomMealViewModelState(isLoading = true) }
         viewModelScope.launch {
             try {
@@ -99,7 +98,6 @@ class RandomMealViewModel @Inject constructor(
                 viewModelState.update {
                     RandomMealViewModelState(randomMeal = randomMeal, isLoading = false)
                 }
-                Log.e("TAG", "loadRandomMeal success: $randomMeal")
             } catch (it: Exception) {
                 it.printStackTrace()
                 Log.e("TAG", "loadRandomMeal failure")

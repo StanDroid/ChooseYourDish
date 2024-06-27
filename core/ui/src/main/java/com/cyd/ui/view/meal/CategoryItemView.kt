@@ -28,7 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.cyd.base.mealdb.Category
+import com.cyd.base.model.Category
 import com.cyd.ui.view.base.CategoryListScreenConstants.CATEGORY_ITEM
 import com.cyd.ui.view.base.ProgressAsyncImage
 
@@ -39,7 +39,6 @@ fun CategoryItemView(
 ) {
     var expanded by remember { mutableStateOf(false) }
     Card(
-//        backgroundColor = Color.White,
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
     ) {
         Column(
@@ -68,7 +67,7 @@ fun CategoryItemView(
                         .align(CenterVertically)
                         .padding(16.dp)
                         .weight(1f),
-                    style = MaterialTheme.typography.titleSmall
+                    style = MaterialTheme.typography.titleMedium
                 )
                 Icon(
                     modifier = Modifier

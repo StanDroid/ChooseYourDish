@@ -3,7 +3,7 @@ project.afterEvaluate { project ->
 }
 
 def setupAndroidReporting() {
-    tasks.withType(Test) {
+    tasks.withType(Test).configureEach {
         // Whether or not classes without source location should be instrumented
         jacoco.includeNoLocationClasses = true
         jacoco.excludes = ['jdk.internal.*']
@@ -85,13 +85,12 @@ def setupAndroidReporting() {
                 sourceDirectories.setFrom(files(coverageSourceDirs))
                 additionalSourceDirs.setFrom(files(coverageSourceDirs))
 
+
                 reports {
-                    csv.enabled false // change if needed
-                    xml.enabled false // change if needed
-                    html {
-                        enabled true
-                        destination file("${buildDir}/coverage-report")
-                    }
+                    xml.required = false
+                    csv.required = false
+                    html.required = true
+                    html.destination file("${buildDir}/coverage-report")
                 }
             }
         }

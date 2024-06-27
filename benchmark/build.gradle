@@ -1,3 +1,5 @@
+import com.android.build.api.dsl.ManagedVirtualDevice
+
 plugins {
     id 'com.android.test'
     id 'org.jetbrains.kotlin.android'
@@ -6,15 +8,15 @@ apply from: "$project.rootDir/jacoco/jacoco.gradle"
 
 android {
     namespace 'com.cyd.benchmark'
-    compileSdk 33
+    compileSdk 34
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
 
     defaultConfig {
@@ -42,7 +44,7 @@ android {
     testOptions {
         managedDevices {
             devices {
-                pixel2Api31(com.android.build.api.dsl.ManagedVirtualDevice) {
+                pixel2Api31(ManagedVirtualDevice) {
                     device = "Pixel 2"
                     apiLevel = 31
                     systemImageSource = "aosp"
@@ -53,13 +55,13 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.test.ext:junit:1.1.5'
-    implementation 'androidx.test.espresso:espresso-core:3.5.1'
-    implementation 'androidx.test.uiautomator:uiautomator:2.2.0'
+    implementation project(path: ':core:ui')
+
+    implementation "androidx.test.ext:junit:$junit_version"
+    implementation "androidx.test.espresso:espresso-core:$espresso_core_version"
+    implementation "androidx.test.uiautomator:uiautomator:$uiautomator_version"
     implementation "androidx.benchmark:benchmark-macro-junit4:$macro_benchmark_version"
     implementation "androidx.profileinstaller:profileinstaller:$profile_installer_version"
-
-    implementation project(path: ':core:ui')
 }
 
 androidComponents {

@@ -5,7 +5,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.viewModelScope
-import com.cyd.base.mealdb.Category
+import com.cyd.base.model.Category
 import com.cyd.base.usecase.execute
 import com.cyd.base.utils.ErrorMessage
 import com.cyd.base.viewmodel.BaseViewModel
@@ -89,12 +89,10 @@ class CategoriesViewModel @Inject constructor(
     }
 
     private fun loadCategories() {
-        Log.e("TAG", "loadCategories started")
         viewModelState.value = CategoriesViewModelState(isLoading = true)
         viewModelScope.launch {
             try {
                 val categories = useCase.execute()
-                Log.e("TAG", "loadCategories success: $categories")
                 viewModelState.value =
                     CategoriesViewModelState(list = categories, isLoading = false)
             } catch (ex: Exception) {

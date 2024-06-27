@@ -1,6 +1,6 @@
 package com.cyd.data.meal
 
-import com.cyd.core.network.MealDataSource
+import com.cyd.data.network.MealDataSource
 import com.cyd.data.meal.mapper.MealDetailsMapper
 import com.cyd.data.meal.mapper.MealListItemMapper
 import com.cyd.data.meal.mapper.RandomMealMapper
