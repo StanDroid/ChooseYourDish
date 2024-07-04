@@ -7,10 +7,10 @@ buildscript {
     }
 
     dependencies {
-        classpath("com.android.tools.build:gradle:8.5.0")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.22")
-        classpath("com.google.dagger:hilt-android-gradle-plugin:2.49")
-        classpath("org.jacoco:org.jacoco.core:0.8.8")
+        classpath(libs.gradle)
+        classpath(libs.kotlin.gradle.plugin)
+        classpath(libs.hilt.android.gradle.plugin)
+        classpath(libs.jacoco.gradle)
         classpath(libs.ktlint.gradle)
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
