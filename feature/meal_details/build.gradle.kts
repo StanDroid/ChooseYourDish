@@ -46,12 +46,12 @@ dependencies {
     implementation(project(":core:ui"))
     implementation(project(":core:base"))
 
-    implementation("androidx.compose.ui:ui:1.6.3")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.6.3")
-    implementation("androidx.compose.material3:material3:1.2.1")
-    implementation("androidx.compose.material3:material3-window-size-class:1.2.1")
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.androidx.material3)
+    implementation(libs.androidx.material3.window.size)
 
-    implementation ("com.google.dagger:hilt-android:2.49")
-    implementation( "androidx.hilt:hilt-navigation-compose:1.2.0")
-    kapt("com.google.dagger:hilt-compiler:2.49")
+    implementation(libs.hilt.android)
+    implementation(libs.androidx.hilt.navigation.compose)
+    kapt(libs.hilt.compiler)
 }
