@@ -81,7 +81,11 @@ fun CategoryItemView(
                 )
             }
             if (expanded) {
-                Text(text = category.description)
+                Text(
+                    modifier = Modifier.padding(top = 8.dp, bottom = 16.dp),
+                    text = category.description,
+                    style = MaterialTheme.typography.titleSmall
+                )
             }
         }
     }

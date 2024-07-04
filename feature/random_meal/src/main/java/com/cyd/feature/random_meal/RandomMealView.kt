@@ -42,9 +42,10 @@ fun RandomMealView(
     onClickGoToCategories: () -> Unit = {}
 ) {
     var expanded by remember { mutableStateOf(false) }
-    Box(modifier = Modifier
-        .fillMaxSize()
-        .padding(16.dp)
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
     ) {
         Button(
             onClick = { onClickGoToCategories.invoke() },
@@ -52,7 +53,10 @@ fun RandomMealView(
                 .align(Alignment.TopEnd)
                 .testTag(RandomMealScreenConstants.GO_TO_CATEGORIES)
         ) {
-            Text(text = stringResource(R.string.go_to_categories))
+            Text(
+                text = stringResource(R.string.go_to_categories),
+                style = MaterialTheme.typography.labelLarge
+            )
         }
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -66,7 +70,7 @@ fun RandomMealView(
                     .animateContentSize(animationSpec = tween(100))
                     .clickable { onLoadNextRandomMeal.invoke() },
                 shape = RoundedCornerShape(16.dp)
-            )   {
+            ) {
                 Column(
                     modifier = Modifier.fillMaxSize()
                 ) {
@@ -74,7 +78,8 @@ fun RandomMealView(
                         modifier = Modifier
                             .padding(8.dp)
                             .align(Alignment.CenterHorizontally),
-                        text = stringResource(R.string.tap_on_card_title)
+                        text = stringResource(R.string.tap_on_card_title),
+                        style = MaterialTheme.typography.titleMedium
                     )
                     ProgressAsyncImage(
                         model = model.strMealThumb,
@@ -100,25 +105,25 @@ fun RandomMealView(
                         Text(
                             modifier = Modifier.padding(bottom = 8.dp),
                             text = stringResource(id = R.string.area_s, model.strArea),
-                            style = MaterialTheme.typography.labelMedium
+                            style = MaterialTheme.typography.bodyMedium
                         )
                         Text(
                             modifier = Modifier.padding(bottom = 8.dp),
                             text = stringResource(id = R.string.category_s, model.strCategory),
-                            style = MaterialTheme.typography.labelMedium
+                            style = MaterialTheme.typography.bodyMedium
                         )
                         if (expanded) {
                             Text(
                                 modifier = Modifier.clickable { expanded = !expanded },
                                 text = stringResource(R.string.instructions),
-                                style = MaterialTheme.typography.labelSmall
+                                style = MaterialTheme.typography.bodySmall
                             )
                             Text(
                                 modifier = Modifier
                                     .clickable { expanded = !expanded }
                                     .padding(bottom = 8.dp),
                                 text = model.strInstructions,
-                                style = MaterialTheme.typography.labelSmall
+                                style = MaterialTheme.typography.bodyMedium
                             )
                         } else {
                             Text(
@@ -127,17 +132,19 @@ fun RandomMealView(
                                     .padding(bottom = 8.dp)
                                     .clickable { expanded = !expanded },
                                 text = stringResource(R.string.click_to_see_instructions),
-                                style = MaterialTheme.typography.labelSmall,
+                                style = MaterialTheme.typography.bodySmall,
 
-                            )
+                                )
                         }
                         AnnotatedClickableText(
                             str = stringResource(R.string.see_on_youtube),
-                            link = model.strYoutube
+                            link = model.strYoutube,
+                            style = MaterialTheme.typography.titleSmall
                         )
                         AnnotatedClickableText(
                             str = stringResource(R.string.original_post),
-                            link = model.strSource
+                            link = model.strSource,
+                            style = MaterialTheme.typography.titleSmall
                         )
                     }
                 }
