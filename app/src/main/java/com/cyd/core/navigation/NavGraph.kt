@@ -14,6 +14,7 @@ import com.cyd.core.navigation.route.CategoryListRoute
 import com.cyd.core.navigation.route.MealDetailsRoute
 import com.cyd.core.navigation.route.MealListRoute
 import com.cyd.core.navigation.route.RandomMealRoute
+import com.cyd.core.navigation.route.SplashScreenRoute
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -21,11 +22,14 @@ fun NavigationSystem() {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = NavScreen.RandomMeal.route,
+        startDestination = NavScreen.Splash.route,
         modifier = Modifier.semantics {
             testTagsAsResourceId = true
         }
     ) {
+        composable(route = NavScreen.Splash.route) {
+            SplashScreenRoute(navController)
+        }
         composable(NavScreen.RandomMeal.route) {
             RandomMealRoute(navController)
         }

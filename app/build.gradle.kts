@@ -81,6 +81,7 @@ dependencies {
 
     implementation(libs.androidx.ktx)
     implementation(libs.material)
+    implementation(libs.airbnb.lottie.compose)
 
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.tooling.preview)
