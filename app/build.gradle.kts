@@ -3,6 +3,7 @@ plugins {
     id("kotlin-android")
     id("dagger.hilt.android.plugin")
     id("kotlin-kapt")
+    id("com.google.gms.google-services")
 }
 apply(from = "${project.rootDir}/jacoco/jacoco.gradle")
 
@@ -13,7 +14,7 @@ android {
         applicationId = "com.cyd"
         minSdk = 24
         targetSdk = 34
-        versionCode = 1
+        versionCode = 2
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -113,6 +114,8 @@ dependencies {
 
     debugImplementation(libs.androidx.customview)
     debugImplementation(libs.androidx.customview.poolingcontainer)
+
+    implementation(platform(libs.firebase.bom))
 }
 
 allprojects {
