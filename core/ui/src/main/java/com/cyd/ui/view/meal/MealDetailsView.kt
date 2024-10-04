@@ -68,7 +68,7 @@ fun MealDetailsView(meal: Meal) {
             Text(
                 modifier = Modifier.padding(top = 16.dp),
                 text = meal.instructions.orEmpty(),
-                style = MaterialTheme.typography.bodySmall,
+                style = MaterialTheme.typography.bodyMedium,
                 lineHeight = 19.sp
             )
             RowTitleText(stringResource(R.string.tags), meal.tags.orEmpty())
@@ -108,7 +108,7 @@ private fun IngredientRow(
             Text(
                 modifier = Modifier,
                 text = ingredient.name,
-                style = MaterialTheme.typography.bodyMedium,
+                style = MaterialTheme.typography.titleSmall,
             )
             ingredient.measure?.let {
                 Text(
@@ -127,14 +127,14 @@ private fun RowTitleText(title: String, text: String) {
         Row(modifier = Modifier.padding(top = 8.dp)) {
             Text(
                 text = "$title:",
-                style = MaterialTheme.typography.bodyMedium
+                style = MaterialTheme.typography.bodySmall
             )
             Text(
                 modifier = Modifier
                     .align(Alignment.Bottom)
                     .padding(start = 4.dp),
                 text = text,
-                style = MaterialTheme.typography.bodyMedium,
+                style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onTertiaryContainer
             )
         }

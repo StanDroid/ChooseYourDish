@@ -1,13 +1,12 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
-    id ("kotlin-kapt")
+    id("kotlin-kapt")
 }
-
 apply(from = "${project.rootDir}/jacoco/jacoco.gradle")
 
 android {
-    namespace = "com.cyd.feature.category_meals"
+    namespace = "com.cyd.feature.random_meal"
     compileSdk = 34
 
     defaultConfig {
@@ -27,6 +26,7 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+
     buildFeatures {
         compose = true
     }
@@ -39,19 +39,31 @@ android {
     }
 }
 
-dependencies {
 
+dependencies {
     implementation(project(":data:meal"))
     implementation(project(":core:ui"))
     implementation(project(":core:base"))
 
+    implementation(libs.androidx.ktx)
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.material3.window.size)
 
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+
     implementation(libs.hilt.android)
     implementation(libs.androidx.hilt.navigation.compose)
     kapt(libs.hilt.compiler)
 
+    //coil lib for image download
+    implementation(libs.coil.compose)
+    implementation(libs.coil.gif)
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.coroutines.android)
+
+    androidTestImplementation(libs.androidx.ui.test.junit4)
+    debugImplementation(libs.androidx.ui.test.manifest)
 }

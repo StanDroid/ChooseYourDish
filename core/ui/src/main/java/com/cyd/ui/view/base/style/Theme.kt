@@ -1,7 +1,6 @@
 package com.cyd.ui.view.base.style
 
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Shapes
@@ -98,7 +97,7 @@ private val DarkColors = darkColorScheme(
 )
 
 private val MealsShapes = Shapes(
-    small = CutCornerShape(topStart = 8.dp),
-    medium = CutCornerShape(topStart = 24.dp),
-    large = RoundedCornerShape(8.dp)
+    small = RoundedCornerShape(8.dp),
+    medium = RoundedCornerShape(16.dp),
+    large = RoundedCornerShape(24.dp)
 )
