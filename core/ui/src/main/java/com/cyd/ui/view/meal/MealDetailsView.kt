@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.size.Size
+import com.cyd.base.extension.ifNotNullOrEmpty
 import com.cyd.base.model.Ingredient
 import com.cyd.base.model.Meal
 import com.cyd.ui.R
@@ -72,17 +73,21 @@ fun MealDetailsView(meal: Meal) {
                 lineHeight = 19.sp
             )
             RowTitleText(stringResource(R.string.tags), meal.tags.orEmpty())
-            AnnotatedClickableText(
-                modifier = Modifier.padding(top = 8.dp),
-                str = stringResource(R.string.original_post),
-                link = meal.source.orEmpty(),
-                style = MaterialTheme.typography.bodyMedium
-            )
-            AnnotatedClickableText(
-                str = stringResource(R.string.see_on_youtube),
-                link = meal.youtube.orEmpty(),
-                style = MaterialTheme.typography.bodyMedium
-            )
+            meal.source.ifNotNullOrEmpty {
+                AnnotatedClickableText(
+                    modifier = Modifier.padding(top = 8.dp),
+                    str = stringResource(R.string.original_post),
+                    link = it,
+                    style = MaterialTheme.typography.bodyMedium
+                )
+            }
+            meal.youtube.ifNotNullOrEmpty {
+                AnnotatedClickableText(
+                    str = stringResource(R.string.see_on_youtube),
+                    link = it,
+                    style = MaterialTheme.typography.bodyMedium
+                )
+            }
         }
     }
 }

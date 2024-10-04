@@ -30,6 +30,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.transform.RoundedCornersTransformation
+import com.cyd.base.extension.ifNotNullOrEmpty
 import com.cyd.base.model.RandomMeal
 import com.cyd.ui.view.base.AnnotatedClickableText
 import com.cyd.ui.view.base.ProgressAsyncImage
@@ -136,16 +137,20 @@ fun RandomMealView(
 
                                 )
                         }
-                        AnnotatedClickableText(
-                            str = stringResource(R.string.see_on_youtube),
-                            link = model.strYoutube,
-                            style = MaterialTheme.typography.titleSmall
-                        )
-                        AnnotatedClickableText(
-                            str = stringResource(R.string.original_post),
-                            link = model.strSource,
-                            style = MaterialTheme.typography.titleSmall
-                        )
+                        model.strYoutube.ifNotNullOrEmpty {
+                            AnnotatedClickableText(
+                                str = stringResource(R.string.see_on_youtube),
+                                link = it,
+                                style = MaterialTheme.typography.titleSmall
+                            )
+                        }
+                        model.strSource.ifNotNullOrEmpty {
+                            AnnotatedClickableText(
+                                str = stringResource(R.string.original_post),
+                                link = it,
+                                style = MaterialTheme.typography.titleSmall
+                            )
+                        }
                     }
                 }
             }
