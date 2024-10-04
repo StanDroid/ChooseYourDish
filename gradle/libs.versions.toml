@@ -1,5 +1,6 @@
 [versions]
 accompanistSystemuicontroller = "0.28.0"
+airbnbLottieCompose = "6.3.0"
 archLifecycleVersion = "2.7.0"
 benchmarkMacroJunit4 = "1.2.4"
 coilCompose = "2.2.2"
@@ -29,6 +30,7 @@ jacoco = "0.8.8"
 kotlin-plugin = "1.9.22"
 
 [libraries]
+airbnb-lottie-compose = { module = "com.airbnb.android:lottie-compose", version.ref = "airbnbLottieCompose" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 androidx-benchmark-macro-junit4 = { module = "androidx.benchmark:benchmark-macro-junit4", version.ref = "benchmarkMacroJunit4" }
 androidx-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "ktx" }

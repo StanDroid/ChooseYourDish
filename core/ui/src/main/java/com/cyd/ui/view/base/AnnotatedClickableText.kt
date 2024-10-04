@@ -13,7 +13,6 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 
 @Composable
 fun AnnotatedClickableText(
@@ -28,7 +27,7 @@ fun AnnotatedClickableText(
         addStyle(
             style = SpanStyle(
                 color = Color(0xff64B5F6),
-                fontSize = 14.sp,
+                fontSize = style.fontSize,
                 textDecoration = TextDecoration.Underline
             ), start = 0, end = str.length
         )

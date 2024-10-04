@@ -30,7 +30,6 @@ fun MealItemView(
         Modifier
             .fillMaxWidth()
             .clickable { onMealClick.invoke(mealItem) }
-            .padding(start = 16.dp, end = 16.dp)
             .animateContentSize(
                 animationSpec = spring(
                     dampingRatio = Spring.DampingRatioMediumBouncy,
@@ -42,8 +41,8 @@ fun MealItemView(
             ProgressAsyncImage(
                 model = mealItem.thumb,
                 modifier = Modifier
-                    .height(70.dp)
-                    .width(70.dp),
+                    .height(120.dp)
+                    .width(120.dp),
                 transformation = CircleCropTransformation()
             )
             Text(
@@ -52,7 +51,7 @@ fun MealItemView(
                     .align(CenterVertically)
                     .padding(16.dp)
                     .weight(1f),
-                style = MaterialTheme.typography.labelMedium
+                style = MaterialTheme.typography.titleMedium
             )
         }
     }
