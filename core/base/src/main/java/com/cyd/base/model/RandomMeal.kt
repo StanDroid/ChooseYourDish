@@ -1,5 +1,8 @@
 package com.cyd.base.model
 
+import androidx.annotation.Keep
+
+@Keep
 data class RandomMeal(
     val idMeal: String,
     val strMeal: String,

@@ -1,9 +1,13 @@
 package com.cyd.data.network.model
 
+import androidx.annotation.Keep
+
+@Keep
 data class MealDetailsResponse(
     val meals: List<MealDetailsDTO>?
 )
 
+@Keep
 data class MealDetailsDTO(
     val dateModified: String?,
     val idMeal: String?,
