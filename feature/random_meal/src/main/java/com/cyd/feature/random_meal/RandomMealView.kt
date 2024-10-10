@@ -40,7 +40,8 @@ import com.cyd.ui.view.base.RandomMealScreenConstants
 fun RandomMealView(
     model: RandomMeal,
     onLoadNextRandomMeal: () -> Unit = {},
-    onClickGoToCategories: () -> Unit = {}
+    onClickGoToCategories: () -> Unit = {},
+    onClickGoToIngredients: () -> Unit = {},
 ) {
     var expanded by remember { mutableStateOf(false) }
     Box(
@@ -48,6 +49,18 @@ fun RandomMealView(
             .fillMaxSize()
             .padding(16.dp)
     ) {
+        Button(
+            onClick = { onClickGoToIngredients.invoke() },
+            modifier = Modifier
+                .align(Alignment.TopStart)
+                .testTag(RandomMealScreenConstants.GO_TO_INGREDIENTS)
+        ) {
+            Text(
+                text = stringResource(R.string.go_to_ingredients),
+                style = MaterialTheme.typography.labelLarge
+            )
+        }
+
         Button(
             onClick = { onClickGoToCategories.invoke() },
             modifier = Modifier

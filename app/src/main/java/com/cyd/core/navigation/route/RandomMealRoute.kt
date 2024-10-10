@@ -22,7 +22,9 @@ fun RandomMealRoute(
     MealScaffold(stringResource(R.string.dish_of_the_day)) {
         RandomMealScreen(
             state,
-            viewModel::onLoadNextRandomMealClick
-        ) { navController.navigate(NavScreen.CategoryList.route) }
+            viewModel::onLoadNextRandomMealClick,
+            { navController.navigate(NavScreen.CategoryList.route) },
+            { navController.navigate(NavScreen.Search.route) },
+        )
     }
 }

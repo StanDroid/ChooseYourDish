@@ -1,5 +1,8 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package com.cyd.core.navigation
 
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -14,6 +17,7 @@ import com.cyd.core.navigation.route.CategoryListRoute
 import com.cyd.core.navigation.route.MealDetailsRoute
 import com.cyd.core.navigation.route.MealListRoute
 import com.cyd.core.navigation.route.RandomMealRoute
+import com.cyd.core.navigation.route.SearchRoute
 import com.cyd.core.navigation.route.SplashScreenRoute
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -65,6 +69,9 @@ fun NavigationSystem() {
                     navController,
                 )
             }
+        }
+        composable(NavScreen.Search.route) {
+            SearchRoute(navController)
         }
     }
 }

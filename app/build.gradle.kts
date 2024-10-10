@@ -25,6 +25,8 @@ android {
 
     buildTypes {
         debug {
+//            resValue("string", "app_name", "Choose Your Dish Debug")
+//            applicationIdSuffix = ".debug"
             enableUnitTestCoverage = true
             enableAndroidTestCoverage = true
         }
@@ -80,6 +82,7 @@ dependencies {
     implementation(project(":feature:random_meal"))
     implementation(project(":feature:category_meals"))
     implementation(project(":feature:meal_details"))
+    implementation(project(":feature:search"))
 
     implementation(libs.androidx.ktx)
     implementation(libs.material)
