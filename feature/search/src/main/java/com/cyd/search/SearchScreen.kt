@@ -6,11 +6,15 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.SearchBar
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.cyd.base.model.Ingredient
 
@@ -20,14 +24,25 @@ fun SearchScreen(
     state: SearchViewModel.SearchViewModelState,
     onSearchTextChange: (String) -> Unit,
     onToggleSearch: () -> Unit,
-    onItemClick: (Ingredient) -> Unit
+    onItemClick: (Ingredient) -> Unit,
 ) {
-    Column() {
+    Column {
         SearchBar(
             query = state.searchText,
             onQueryChange = onSearchTextChange::invoke,
             onSearch = onSearchTextChange::invoke,
             active = state.isSearching,
+            placeholder = { Text(stringResource(R.string.search_some_ingredient)) },
+            trailingIcon = {
+                if (state.searchText.isNotEmpty()) {
+                    Icon(
+                        Icons.Default.Clear,
+                        contentDescription = null,
+                        modifier = Modifier.clickable {
+                            onSearchTextChange.invoke("")
+                        })
+                }
+            },
             onActiveChange = { onToggleSearch.invoke() },
             modifier = Modifier
                 .fillMaxWidth()

@@ -10,8 +10,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.cyd.R
 import com.cyd.core.navigation.NavScreen
 import com.cyd.feature.category_meals.MealListScreen
 import com.cyd.feature.category_meals.viewmodel.MealListViewModel
@@ -26,36 +28,34 @@ import com.cyd.ui.view.base.MealScaffold
 fun SearchRoute(
     navController: NavHostController
 ) {
-    val viewModel = hiltViewModel<SearchViewModel>()
-    val state by viewModel.searchViewModelState.collectAsState()
+    val searchViewModel = hiltViewModel<SearchViewModel>()
+    val searchState by searchViewModel.searchViewModelState.collectAsState()
 
     val mealsViewModel = hiltViewModel<MealListViewModel>()
     val mealsState by remember { mealsViewModel.uiState }
 
     MealScaffold(
-        "Ingredients",
+        stringResource(R.string.ingredients),
         icon = Icons.AutoMirrored.Filled.ArrowBack,
         onIconClick = { navController.navigateUp() }) {
         Column {
             SearchScreen(
-                state,
-                onSearchTextChange = viewModel::onSearchTextChange,
-                onToggleSearch = viewModel::onToggleSearch,
-                onItemClick = viewModel::onItemClick
+                searchState,
+                onSearchTextChange = searchViewModel::onSearchTextChange,
+                onToggleSearch = searchViewModel::onToggleSearch,
+                onItemClick = {
+                    searchViewModel.onItemClick(it)
+                    mealsViewModel.loadMeals(MealType.Ingredient(it.name))
+                }
             )
-//            val state by derivedStateOf {
-//                state.searchText.isNotEmpty() && !state.isSearching
-//            }
 
             val isMealsEnabled by remember {
                 derivedStateOf {
-                    state.searchText.isNotEmpty() && !state.isSearching
+                    searchState.searchText.isNotEmpty() && !searchState.isSearching
                 }
             }
             if (isMealsEnabled) {
                 MealListScreen(
-                    "id",
-                    "name",
                     mealsState.toUiState(),
                     onMealClick = {
                         navController.navigate(
@@ -65,7 +65,7 @@ fun SearchRoute(
                             )
                         )
                     },
-                    initLoading = { mealsViewModel.loadMeals(MealType.Ingredient(state.searchText)) }
+                    initLoading = { mealsViewModel.loadMeals(MealType.Ingredient(searchState.searchText)) }
                 )
             }
         }

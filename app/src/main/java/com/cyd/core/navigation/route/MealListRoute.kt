@@ -25,8 +25,6 @@ fun MealListRoute(
         icon = Icons.Default.ArrowBack,
         onIconClick = { navController.navigateUp() }) {
         MealListScreen(
-            id,
-            name,
             state.toUiState(),
             onMealClick = {
                 navController.navigate(

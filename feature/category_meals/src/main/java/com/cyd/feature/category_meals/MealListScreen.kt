@@ -18,8 +18,6 @@ import com.cyd.ui.view.meal.ProgressLoadingView
 
 @Composable
 fun MealListScreen(
-    id: String,
-    name: String,
     uiState: MealListUiState,
     onMealClick: (MealItem) -> Unit,
     initLoading: () -> Unit
