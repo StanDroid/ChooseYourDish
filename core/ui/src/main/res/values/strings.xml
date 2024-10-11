@@ -17,4 +17,6 @@
     <string name="no_random_meal">There is no random meal</string>
     <string name="instructions">Instructions:</string>
     <string name="categories">Categories</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="options">Options</string>
 </resources>
