@@ -72,6 +72,7 @@ android {
 
 dependencies {
     implementation(project(":data:categories"))
+    implementation(project(":data:ingredients"))
     implementation(project(":data:meal"))
 
     implementation(project(":data:network"))

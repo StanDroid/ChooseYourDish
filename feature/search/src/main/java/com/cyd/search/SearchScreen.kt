@@ -13,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.cyd.base.model.Ingredient
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -20,26 +21,26 @@ fun SearchScreen(
     state: SearchViewModel.SearchViewModelState,
     onSearchTextChange: (String) -> Unit,
     onToggleSearch: () -> Unit,
-    onCountryClick: (String) -> Unit
+    onItemClick: (Ingredient) -> Unit
 ) {
     Column(Modifier.fillMaxSize()) {
         SearchBar(
-            query = state.searchText,//text showed on SearchBar
-            onQueryChange = onSearchTextChange::invoke, //update the value of searchText
-            onSearch = onSearchTextChange::invoke, //the callback to be invoked when the input service triggers the ImeAction.Search action
-            active = state.isSearching, //whether the user is searching or not
-            onActiveChange = { onToggleSearch.invoke() }, //the callback to be invoked when this search bar's active state is changed
+            query = state.searchText,
+            onQueryChange = onSearchTextChange::invoke,
+            onSearch = onSearchTextChange::invoke,
+            active = state.isSearching,
+            onActiveChange = { onToggleSearch.invoke() },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp)
         ) {
             LazyColumn {
-                items(state.countriesList) { country ->
+                items(state.list) { item ->
                     Text(
-                        text = country,
+                        text = item.name,
                         modifier = Modifier
                             .padding(8.dp)
-                            .clickable { onCountryClick(country) },
+                            .clickable { onItemClick(item) },
                     )
                 }
             }

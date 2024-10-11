@@ -28,8 +28,8 @@ import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.size.Size
 import com.cyd.base.extension.ifNotNullOrEmpty
-import com.cyd.base.model.Ingredient
 import com.cyd.base.model.Meal
+import com.cyd.base.model.MealIngredient
 import com.cyd.ui.R
 import com.cyd.ui.view.base.AnnotatedClickableText
 import com.cyd.ui.view.base.ProgressAsyncImage
@@ -62,7 +62,7 @@ fun MealDetailsView(meal: Meal) {
                 columns = GridCells.Fixed(2),
                 userScrollEnabled = false
             ) {
-                items(meal.ingredients) { item ->
+                items(meal.mealIngredients) { item ->
                     IngredientRow(item)
                 }
             }
@@ -94,12 +94,12 @@ fun MealDetailsView(meal: Meal) {
 
 @Composable
 private fun IngredientRow(
-    ingredient: Ingredient,
+    mealIngredient: MealIngredient,
     modifier: Modifier = Modifier
 ) {
     Row(modifier = modifier.padding(8.dp)) {
         ProgressAsyncImage(
-            model = ingredient.imageUrl,
+            model = mealIngredient.imageUrl,
             modifier = Modifier
                 .height(50.dp)
                 .width(50.dp)
@@ -112,10 +112,10 @@ private fun IngredientRow(
         ) {
             Text(
                 modifier = Modifier,
-                text = ingredient.name,
+                text = mealIngredient.name,
                 style = MaterialTheme.typography.titleSmall,
             )
-            ingredient.measure?.let {
+            mealIngredient.measure?.let {
                 Text(
                     modifier = Modifier,
                     text = it,
@@ -158,7 +158,7 @@ fun DetailsScreenPreview() {
             source = "source",
             tags = "tags",
             youtube = "youtube",
-            ingredients = listOf(Ingredient(name = "Lemon", measure = "2psc"))
+            mealIngredients = listOf(MealIngredient(name = "Lemon", measure = "2psc"))
 
         )
     )

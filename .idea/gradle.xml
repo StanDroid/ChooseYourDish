@@ -17,6 +17,7 @@
             <option value="$PROJECT_DIR$/core/ui" />
             <option value="$PROJECT_DIR$/data" />
             <option value="$PROJECT_DIR$/data/categories" />
+            <option value="$PROJECT_DIR$/data/ingredients" />
             <option value="$PROJECT_DIR$/data/meal" />
             <option value="$PROJECT_DIR$/data/network" />
             <option value="$PROJECT_DIR$/feature" />

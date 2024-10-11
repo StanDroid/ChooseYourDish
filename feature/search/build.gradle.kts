@@ -39,7 +39,7 @@ android {
 dependencies {
     implementation(project(":core:base"))
     implementation(project(":core:ui"))
-    implementation(project(":data:categories"))
+    implementation(project(":data:ingredients"))
 
     implementation(libs.androidx.ktx)
     implementation(libs.androidx.ui)

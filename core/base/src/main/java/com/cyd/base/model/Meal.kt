@@ -11,7 +11,7 @@ data class Meal(
     val creativeCommonsConfirmed: String? = null,
     val drinkAlternate: String? = null,
     val imageSource: String? = null,
-    val ingredients: List<Ingredient> = emptyList(),
+    val mealIngredients: List<MealIngredient> = emptyList(),
     val instructions: String? = null,
     val meal: String? = null,
     val mealThumb: String? = null,
@@ -20,7 +20,7 @@ data class Meal(
     val youtube: String? = null
 )
 
-data class Ingredient(
+data class MealIngredient(
     val name: String,
     val measure: String?
 ) {

@@ -11,6 +11,7 @@ rootProject.name = "ChooseYourDish"
 include(":app")
 
 include(":data:categories")
+include(":data:ingredients")
 include(":data:meal")
 include(":data:network")
 

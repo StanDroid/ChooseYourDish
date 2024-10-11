@@ -2,6 +2,8 @@ package com.cyd.data.network
 
 import com.cyd.data.network.model.CategoriesResponse
 import com.cyd.data.network.model.CategoryDTO
+import com.cyd.data.network.model.IngredientDTO
+import com.cyd.data.network.model.IngredientsResponse
 import com.cyd.data.network.model.MealDetailsDTO
 import com.cyd.data.network.model.MealDetailsResponse
 import com.cyd.data.network.model.MealListItemDTO
@@ -43,6 +45,12 @@ class KtorMealDataSourceImpl @Inject constructor(
         return ktor.httpClient.get("lookup.php") {
             parameter("i", idMeal)
         }.body<MealDetailsResponse>().meals?.firstOrNull()
+    }
+
+    override suspend fun getIngredients(): List<IngredientDTO>? {
+        return ktor.httpClient.get("list.php") {
+            parameter("i", "list")
+        }.body<IngredientsResponse>().ingredients
     }
 
     suspend inline fun <reified R> HttpClient.getResult(

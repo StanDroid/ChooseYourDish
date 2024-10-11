@@ -29,8 +29,8 @@ fun SearchRoute(
         SearchScreen(
             state,
             onSearchTextChange = viewModel::onSearchTextChange,
-            onToggleSearch = viewModel::onToogleSearch,
-            onCountryClick = viewModel::onCountryClick
+            onToggleSearch = viewModel::onToggleSearch,
+            onItemClick = viewModel::onItemClick
         )
     }
 }
