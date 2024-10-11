@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.cyd.base.model.MealItem
 import com.cyd.base.utils.ErrorMessage
 import com.cyd.base.viewmodel.BaseViewModel
+import com.cyd.feature.category_meals.usecase.GetMealListByIngredientUseCase
 import com.cyd.feature.category_meals.usecase.GetMealListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -65,7 +66,8 @@ data class MealListViewModelState(
 
 @HiltViewModel
 class MealListViewModel @Inject constructor(
-    private val useCase: GetMealListUseCase
+    private val useCase: GetMealListUseCase,
+    private val useCaseByIngredientUseCase: GetMealListByIngredientUseCase
 ) : BaseViewModel() {
 
     private val viewModelState: MutableState<MealListViewModelState> =
@@ -73,11 +75,14 @@ class MealListViewModel @Inject constructor(
 
     val uiState: State<MealListViewModelState> = viewModelState
 
-    fun loadMealsByCategory(name: String) {
+    fun loadMeals(mealType: MealType) {
         viewModelState.value = MealListViewModelState(isLoading = true)
         viewModelScope.launch {
             try {
-                val list = useCase.execute(name)
+                val list = when (mealType) {
+                    is MealType.Category -> useCase.execute(mealType.name)
+                    is MealType.Ingredient -> useCaseByIngredientUseCase.execute(mealType.name)
+                }
                 viewModelState.value =
                     MealListViewModelState(list = list, isLoading = false)
             } catch (ex: Exception) {
@@ -90,4 +95,10 @@ class MealListViewModel @Inject constructor(
             }
         }
     }
+
+}
+
+sealed class MealType {
+    data class Category(val name: String) : MealType()
+    data class Ingredient(val name: String) : MealType()
 }

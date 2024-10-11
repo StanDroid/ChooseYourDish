@@ -2,7 +2,6 @@ package com.cyd.search
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -23,7 +22,7 @@ fun SearchScreen(
     onToggleSearch: () -> Unit,
     onItemClick: (Ingredient) -> Unit
 ) {
-    Column(Modifier.fillMaxSize()) {
+    Column() {
         SearchBar(
             query = state.searchText,
             onQueryChange = onSearchTextChange::invoke,
@@ -45,6 +44,5 @@ fun SearchScreen(
                 }
             }
         }
-        Text("Selected Country: ${state.searchText}")
     }
 }

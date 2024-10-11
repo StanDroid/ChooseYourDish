@@ -1,9 +1,9 @@
 package com.cyd.data.meal
 
-import com.cyd.data.network.MealDataSource
 import com.cyd.data.meal.mapper.MealDetailsMapper
 import com.cyd.data.meal.mapper.MealListItemMapper
 import com.cyd.data.meal.mapper.RandomMealMapper
+import com.cyd.data.network.MealDataSource
 import javax.inject.Inject
 
 class MealRepositoryImpl @Inject constructor(
@@ -23,4 +23,9 @@ class MealRepositoryImpl @Inject constructor(
 
     override suspend fun getMealDetails(id: String) =
         mealDataSource.getMealDetails(id)?.let { mealDetailsMapper.map(it) }
+
+    override suspend fun getMealsByMainIngredient(name: String) =
+        mealDataSource.getMealsByMainIngredient(name)?.map {
+            mealListItemMapper.map(it)
+        }.orEmpty()
 }

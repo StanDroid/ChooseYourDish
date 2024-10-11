@@ -9,5 +9,7 @@ interface MealRepository {
 
   suspend fun getMealsByCategory(name: String): List<MealItem>
 
+    suspend fun getMealsByMainIngredient(name: String): List<MealItem>
+
   suspend fun getMealDetails(id: String): Meal?
 }

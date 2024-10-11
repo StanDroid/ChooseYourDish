@@ -16,5 +16,7 @@ interface MealDataSource {
 
     suspend fun getMealsByCategory(name: String): List<MealListItemDTO>?
 
+    suspend fun getMealsByMainIngredient(name: String): List<MealListItemDTO>?
+
     suspend fun getMealDetails(idMeal: String): MealDetailsDTO?
 }

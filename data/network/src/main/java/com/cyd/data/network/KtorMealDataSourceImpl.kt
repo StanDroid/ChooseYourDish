@@ -41,6 +41,12 @@ class KtorMealDataSourceImpl @Inject constructor(
         }.body<MealListResponse>().meals
     }
 
+    override suspend fun getMealsByMainIngredient(name: String): List<MealListItemDTO>? {
+        return ktor.httpClient.get("filter.php") {
+            parameter("i", name)
+        }.body<MealListResponse>().meals
+    }
+
     override suspend fun getMealDetails(idMeal: String): MealDetailsDTO? {
         return ktor.httpClient.get("lookup.php") {
             parameter("i", idMeal)
