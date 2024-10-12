@@ -51,7 +51,7 @@ fun SearchRoute(
 
             val isMealsEnabled by remember {
                 derivedStateOf {
-                    searchState.searchText.isNotEmpty() && !searchState.isSearching
+                    searchState.hasSelectedIngredient()
                 }
             }
             if (isMealsEnabled) {

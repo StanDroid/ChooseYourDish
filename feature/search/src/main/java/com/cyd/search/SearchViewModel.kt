@@ -89,6 +89,8 @@ class SearchViewModel @Inject constructor(
         val isLoading: Boolean = false,
         val isSearching: Boolean = false,
         val errorMessages: List<ErrorMessage> = emptyList(),
-    )
+    ) {
+        fun hasSelectedIngredient() = searchText.isNotEmpty() && !isSearching
+    }
 }
 

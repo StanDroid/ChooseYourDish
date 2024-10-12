@@ -20,10 +20,7 @@ fun RandomMealScreen(
             )
         }
         is RandomMealUiState.NoRandomMeal -> {
-            NoRandomMealView(
-                uiState,
-                    onClickGoToCategories
-                )
+            NoRandomMealView(uiState)
             }
         }
 }

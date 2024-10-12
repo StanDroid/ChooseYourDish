@@ -6,6 +6,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -49,28 +50,32 @@ fun RandomMealView(
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        Button(
-            onClick = { onClickGoToIngredients.invoke() },
-            modifier = Modifier
-                .align(Alignment.TopStart)
-                .testTag(RandomMealScreenConstants.GO_TO_INGREDIENTS)
-        ) {
-            Text(
-                text = stringResource(R.string.go_to_ingredients),
-                style = MaterialTheme.typography.labelLarge
-            )
-        }
+        Row {
+            Button(
+                onClick = { onClickGoToIngredients.invoke() },
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(end = 8.dp)
+                    .testTag(RandomMealScreenConstants.GO_TO_INGREDIENTS)
+            ) {
+                Text(
+                    text = stringResource(R.string.go_to_ingredients),
+                    style = MaterialTheme.typography.labelLarge
+                )
+            }
 
-        Button(
-            onClick = { onClickGoToCategories.invoke() },
-            modifier = Modifier
-                .align(Alignment.TopEnd)
-                .testTag(RandomMealScreenConstants.GO_TO_CATEGORIES)
-        ) {
-            Text(
-                text = stringResource(R.string.go_to_categories),
-                style = MaterialTheme.typography.labelLarge
-            )
+            Button(
+                onClick = { onClickGoToCategories.invoke() },
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(start = 8.dp)
+                    .testTag(RandomMealScreenConstants.GO_TO_CATEGORIES)
+            ) {
+                Text(
+                    text = stringResource(R.string.go_to_categories),
+                    style = MaterialTheme.typography.labelLarge
+                )
+            }
         }
         Column(
             modifier = Modifier.fillMaxSize(),
