@@ -3,6 +3,7 @@ package com.cyd.data.db
 import android.app.Application
 import android.content.Context
 import androidx.room.Room
+import com.cyd.base.utils.DATABASE_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,7 +22,7 @@ object CydDatabaseModule {
     @Provides
     @Singleton
     fun provideDatabaseModule(context: Context) = Room.databaseBuilder(
-        context.applicationContext, CydDatabase::class.java, "cyd_database"
+        context.applicationContext, CydDatabase::class.java, DATABASE_NAME
     ).build()
 
     @Provides

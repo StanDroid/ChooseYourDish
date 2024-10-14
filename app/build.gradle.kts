@@ -25,8 +25,6 @@ android {
 
     buildTypes {
         debug {
-//            resValue("string", "app_name", "Choose Your Dish Debug")
-//            applicationIdSuffix = ".debug"
             enableUnitTestCoverage = true
             enableAndroidTestCoverage = true
         }
