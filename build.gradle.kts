@@ -18,6 +18,9 @@ buildscript {
         // in the individual module build.gradle files
     }
 }
+plugins {
+    id("com.google.devtools.ksp") version "1.8.20-1.0.11"
+}
 
 tasks.register<Delete>("clean") {
     delete(rootProject.layout.buildDirectory)
@@ -25,4 +28,5 @@ tasks.register<Delete>("clean") {
 
 allprojects {
     apply(plugin = "org.jlleitschuh.gradle.ktlint")
+    apply(plugin = "com.google.devtools.ksp")
 }
