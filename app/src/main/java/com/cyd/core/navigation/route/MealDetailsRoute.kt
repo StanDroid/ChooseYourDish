@@ -28,7 +28,7 @@ fun MealDetailsRoute(
             name,
             state.toUiState(),
             loadMealDetailsAction = { viewModel.loadMealDetails(id) },
-            makeAsFavoriteAction = { viewModel.makeMealAsFavorite() },
+            tapOnFavoritesAction = { viewModel.tapOnFavorite() },
         )
     }
 }

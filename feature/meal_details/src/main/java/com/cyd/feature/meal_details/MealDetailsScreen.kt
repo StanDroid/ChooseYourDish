@@ -15,7 +15,7 @@ fun MealDetailsScreen(
     name: String,
     uiState: MealDetailsUiState,
     loadMealDetailsAction: () -> Unit,
-    makeAsFavoriteAction: () -> Unit,
+    tapOnFavoritesAction: () -> Unit,
 ) {
         when (uiState) {
             is MealDetailsUiState.NoData -> {
@@ -31,7 +31,7 @@ fun MealDetailsScreen(
             }
             is MealDetailsUiState.HasData -> {
                 val meal = uiState.data
-                MealDetailsView(meal, makeAsFavoriteAction)
+                MealDetailsView(meal, tapOnFavoritesAction)
             }
         }
 }

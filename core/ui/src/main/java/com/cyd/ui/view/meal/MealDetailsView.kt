@@ -1,24 +1,32 @@
 package com.cyd.ui.view.meal
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -38,7 +46,7 @@ import com.cyd.ui.view.base.ProgressAsyncImage
 @Composable
 fun MealDetailsView(
     meal: Meal,
-    makeAsFavoriteAction: () -> Unit
+    tapOnFavoritesAction: () -> Unit
 ) {
     Column(
         Modifier
@@ -50,14 +58,32 @@ fun MealDetailsView(
             .crossfade(true)
             .build()
         val painter = rememberAsyncImagePainter(model)
-        Image(
-            painter = painter,
-            contentScale = ContentScale.FillWidth,
-            contentDescription = "",
-            modifier = Modifier
-                .fillMaxWidth()
-                .clickable { makeAsFavoriteAction.invoke() }
-        )
+        Box(
+            Modifier
+                .size(500.dp)
+                .background(Color.DarkGray)
+                .clickable { tapOnFavoritesAction.invoke() }) {
+            Image(
+                painter = painter,
+                contentScale = ContentScale.FillWidth,
+                contentDescription = "",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { tapOnFavoritesAction.invoke() }
+            )
+            Icon(
+                imageVector = if (meal.isFavorite)
+                    Icons.Default.Favorite
+                else
+                    Icons.Default.FavoriteBorder,
+                tint = if (meal.isFavorite) Color.Red else Color.White,
+                contentDescription = "",
+                modifier = Modifier
+                    .align(Alignment.TopEnd)
+                    .padding(16.dp)
+                    .size(32.dp)
+            )
+        }
         Column(
             Modifier.padding(16.dp),
         ) {
@@ -164,9 +190,10 @@ fun DetailsScreenPreview() {
             source = "source",
             tags = "tags",
             youtube = "youtube",
+            isFavorite = true,
             mealIngredients = listOf(MealIngredient(name = "Lemon", measure = "2psc"))
 
         ),
-        makeAsFavoriteAction = {}
+        tapOnFavoritesAction = {}
     )
 }

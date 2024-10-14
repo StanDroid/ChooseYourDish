@@ -10,6 +10,7 @@ import com.cyd.base.utils.ErrorMessage
 import com.cyd.base.viewmodel.BaseViewModel
 import com.cyd.feature.meal_details.usecase.GetMealDetailsUseCase
 import com.cyd.feature.meal_details.usecase.MakeMealAsFavoriteUseCase
+import com.cyd.feature.meal_details.usecase.RemoveMealFromFavoritesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -78,6 +79,7 @@ data class MealDetailsViewModelState(
 class MealDetailsViewModel @Inject constructor(
     private val useCase: GetMealDetailsUseCase,
     private val makeMealAsFavoriteUseCase: MakeMealAsFavoriteUseCase,
+    private val removeMealFromFavoritesUseCase: RemoveMealFromFavoritesUseCase,
 ) : BaseViewModel() {
 
     private val viewModelState: MutableState<MealDetailsViewModelState> =
@@ -104,10 +106,17 @@ class MealDetailsViewModel @Inject constructor(
         }
     }
 
-    fun makeMealAsFavorite() {
+    fun tapOnFavorite() {
         viewModelScope.launch {
             viewModelState.value.data?.let {
-                makeMealAsFavoriteUseCase.execute(it)
+                if (it.isFavorite) {
+                    removeMealFromFavoritesUseCase.execute(it)
+                } else {
+                    makeMealAsFavoriteUseCase.execute(it)
+                }
+                viewModelState.value = MealDetailsViewModelState(
+                    data = it.copy(isFavorite = !it.isFavorite),
+                )
             }
         }
     }
