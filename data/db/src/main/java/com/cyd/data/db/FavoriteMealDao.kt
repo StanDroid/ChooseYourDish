@@ -16,6 +16,9 @@ interface FavoriteMealDao {
     @Query("SELECT * FROM favorite_meals")
     suspend fun getFavoriteMeals(): List<FavoriteMealEntity>?
 
+    @Query("SELECT id FROM favorite_meals")
+    suspend fun getFavoriteMealIds(): List<String>?
+
     @Delete
     suspend fun removeFavoriteMeal(meal: FavoriteMealEntity)
 }

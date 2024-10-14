@@ -42,6 +42,10 @@ class MealRepositoryImpl @Inject constructor(
         return favoriteMealToMealItemMapper.map((favoriteMeals ?: emptyList()))
     }
 
+    override suspend fun getFavoritesMealIds(): List<String> {
+        return favoriteMealDao.getFavoriteMealIds() ?: emptyList()
+    }
+
     override suspend fun insertFavoriteMeal(meal: Meal) {
         val favoriteMeal: FavoriteMealEntity = mealItemToFavoriteMealMapper.map(meal)
         favoriteMealDao.insertFavoriteMeal(favoriteMeal)

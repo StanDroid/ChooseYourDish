@@ -18,4 +18,5 @@ interface MealRepository {
     suspend fun insertFavoriteMeal(meal: Meal)
 
     suspend fun removeFavoriteMeal(meal: Meal)
+    suspend fun getFavoritesMealIds(): List<String>
 }
