@@ -10,6 +10,11 @@ class GetMealDetailsUseCase @Inject constructor(
 ) : UseCaseSuspend<String, Meal> {
 
     override suspend fun execute(params: String): Meal {
-        return repository.getMealDetails(params) ?: throw NoSuchElementException()
+        val isFavorite = repository.getFavoritesMeals().any { it.id == params }
+        val mealDetails = repository.getMealDetails(params)
+        if (isFavorite) {
+            mealDetails?.isFavorite = true
+        }
+        return mealDetails ?: throw NoSuchElementException()
     }
 }

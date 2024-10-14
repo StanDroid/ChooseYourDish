@@ -17,7 +17,8 @@ data class Meal(
     val mealThumb: String? = null,
     val source: String? = null,
     val tags: String? = null,
-    val youtube: String? = null
+    val youtube: String? = null,
+    var isFavorite: Boolean = false
 )
 
 data class MealIngredient(

@@ -9,6 +9,7 @@ import com.cyd.base.model.Meal
 import com.cyd.base.utils.ErrorMessage
 import com.cyd.base.viewmodel.BaseViewModel
 import com.cyd.feature.meal_details.usecase.GetMealDetailsUseCase
+import com.cyd.feature.meal_details.usecase.MakeMealAsFavoriteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -48,7 +49,7 @@ sealed interface MealDetailsUiState {
 /**
  * A representation of the route state, in a raw form
  */
- data class MealDetailsViewModelState(
+data class MealDetailsViewModelState(
     val data: Meal? = null,
     val isLoading: Boolean = false,
     val errorMessages: List<ErrorMessage> = emptyList(),
@@ -75,7 +76,8 @@ sealed interface MealDetailsUiState {
 
 @HiltViewModel
 class MealDetailsViewModel @Inject constructor(
-    private val useCase: GetMealDetailsUseCase
+    private val useCase: GetMealDetailsUseCase,
+    private val makeMealAsFavoriteUseCase: MakeMealAsFavoriteUseCase,
 ) : BaseViewModel() {
 
     private val viewModelState: MutableState<MealDetailsViewModelState> =
@@ -98,6 +100,14 @@ class MealDetailsViewModel @Inject constructor(
                     isLoading = false, errorMessages =
                     listOf(ErrorMessage(ex.hashCode(), ex.stackTrace.toString()))
                 )
+            }
+        }
+    }
+
+    fun makeMealAsFavorite() {
+        viewModelScope.launch {
+            viewModelState.value.data?.let {
+                makeMealAsFavoriteUseCase.execute(it)
             }
         }
     }

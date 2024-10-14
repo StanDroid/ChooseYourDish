@@ -1,6 +1,7 @@
 package com.cyd.ui.view.meal
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -35,7 +36,10 @@ import com.cyd.ui.view.base.AnnotatedClickableText
 import com.cyd.ui.view.base.ProgressAsyncImage
 
 @Composable
-fun MealDetailsView(meal: Meal) {
+fun MealDetailsView(
+    meal: Meal,
+    makeAsFavoriteAction: () -> Unit
+) {
     Column(
         Modifier
             .verticalScroll(rememberScrollState(0))
@@ -50,7 +54,9 @@ fun MealDetailsView(meal: Meal) {
             painter = painter,
             contentScale = ContentScale.FillWidth,
             contentDescription = "",
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable { makeAsFavoriteAction.invoke() }
         )
         Column(
             Modifier.padding(16.dp),
@@ -160,6 +166,7 @@ fun DetailsScreenPreview() {
             youtube = "youtube",
             mealIngredients = listOf(MealIngredient(name = "Lemon", measure = "2psc"))
 
-        )
+        ),
+        makeAsFavoriteAction = {}
     )
 }

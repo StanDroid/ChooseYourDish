@@ -5,11 +5,17 @@ import com.cyd.base.model.MealItem
 import com.cyd.base.model.RandomMeal
 
 interface MealRepository {
-  suspend fun getRandomMeal(): RandomMeal?
+    suspend fun getRandomMeal(): RandomMeal?
 
-  suspend fun getMealsByCategory(name: String): List<MealItem>
+    suspend fun getMealsByCategory(name: String): List<MealItem>
 
     suspend fun getMealsByMainIngredient(name: String): List<MealItem>
 
-  suspend fun getMealDetails(id: String): Meal?
+    suspend fun getMealDetails(id: String): Meal?
+
+    suspend fun getFavoritesMeals(): List<Meal>
+
+    suspend fun insertFavoriteMeal(meal: Meal)
+
+    suspend fun removeFavoriteMeal(meal: Meal)
 }
