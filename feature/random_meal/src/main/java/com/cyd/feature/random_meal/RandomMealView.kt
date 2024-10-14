@@ -43,6 +43,7 @@ fun RandomMealView(
     onLoadNextRandomMeal: () -> Unit = {},
     onClickGoToCategories: () -> Unit = {},
     onClickGoToIngredients: () -> Unit = {},
+    onClickGoToFavorites: () -> Unit = {},
 ) {
     var expanded by remember { mutableStateOf(false) }
     Box(
@@ -50,31 +51,46 @@ fun RandomMealView(
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        Row {
-            Button(
-                onClick = { onClickGoToIngredients.invoke() },
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(end = 8.dp)
-                    .testTag(RandomMealScreenConstants.GO_TO_INGREDIENTS)
-            ) {
-                Text(
-                    text = stringResource(R.string.go_to_ingredients),
-                    style = MaterialTheme.typography.labelLarge
-                )
-            }
+        Column {
+            Row {
+                Button(
+                    onClick = { onClickGoToIngredients.invoke() },
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(end = 8.dp)
+                        .testTag(RandomMealScreenConstants.GO_TO_INGREDIENTS)
+                ) {
+                    Text(
+                        text = stringResource(R.string.go_to_ingredients),
+                        style = MaterialTheme.typography.labelLarge
+                    )
+                }
 
-            Button(
-                onClick = { onClickGoToCategories.invoke() },
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(start = 8.dp)
-                    .testTag(RandomMealScreenConstants.GO_TO_CATEGORIES)
-            ) {
-                Text(
-                    text = stringResource(R.string.go_to_categories),
-                    style = MaterialTheme.typography.labelLarge
-                )
+                Button(
+                    onClick = { onClickGoToCategories.invoke() },
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(start = 8.dp)
+                        .testTag(RandomMealScreenConstants.GO_TO_CATEGORIES)
+                ) {
+                    Text(
+                        text = stringResource(R.string.go_to_categories),
+                        style = MaterialTheme.typography.labelLarge
+                    )
+                }
+            }
+            Row {
+                Button(
+                    onClick = { onClickGoToFavorites.invoke() },
+                    modifier = Modifier
+                        .weight(1f)
+                        .testTag(RandomMealScreenConstants.GO_TO_FAVORITES)
+                ) {
+                    Text(
+                        text = stringResource(R.string.favorites),
+                        style = MaterialTheme.typography.labelLarge
+                    )
+                }
             }
         }
         Column(

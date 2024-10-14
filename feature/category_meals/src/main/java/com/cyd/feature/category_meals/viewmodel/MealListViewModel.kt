@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.cyd.base.model.MealItem
 import com.cyd.base.utils.ErrorMessage
 import com.cyd.base.viewmodel.BaseViewModel
+import com.cyd.feature.category_meals.usecase.GetFavoriteMealListUseCase
 import com.cyd.feature.category_meals.usecase.GetMealListByIngredientUseCase
 import com.cyd.feature.category_meals.usecase.GetMealListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -67,7 +68,8 @@ data class MealListViewModelState(
 @HiltViewModel
 class MealListViewModel @Inject constructor(
     private val useCase: GetMealListUseCase,
-    private val useCaseByIngredientUseCase: GetMealListByIngredientUseCase
+    private val useCaseByIngredientUseCase: GetMealListByIngredientUseCase,
+    private val getFavoriteMealListUseCase: GetFavoriteMealListUseCase
 ) : BaseViewModel() {
 
     private val viewModelState: MutableState<MealListViewModelState> =
@@ -82,6 +84,7 @@ class MealListViewModel @Inject constructor(
                 val list = when (mealType) {
                     is MealType.Category -> useCase.execute(mealType.name)
                     is MealType.Ingredient -> useCaseByIngredientUseCase.execute(mealType.name)
+                    is MealType.Favorites -> getFavoriteMealListUseCase.execute(null)
                 }
                 viewModelState.value =
                     MealListViewModelState(list = list, isLoading = false)
@@ -101,4 +104,5 @@ class MealListViewModel @Inject constructor(
 sealed class MealType {
     data class Category(val name: String) : MealType()
     data class Ingredient(val name: String) : MealType()
+    data object Favorites : MealType()
 }

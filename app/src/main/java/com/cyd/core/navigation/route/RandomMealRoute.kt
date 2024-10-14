@@ -25,6 +25,7 @@ fun RandomMealRoute(
             viewModel::onLoadNextRandomMealClick,
             { navController.navigate(NavScreen.CategoryList.route) },
             { navController.navigate(NavScreen.Search.route) },
+            { navController.navigate(NavScreen.Favorites.route) },
         )
     }
 }

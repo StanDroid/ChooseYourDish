@@ -9,6 +9,7 @@ fun RandomMealScreen(
     onLoadNextRandomMeal: () -> Unit = {},
     onClickGoToCategories: () -> Unit = {},
     onClickGoToIngredients: () -> Unit = {},
+    onClickGoToFavorites: () -> Unit = {},
 ) {
     when (uiState) {
         is RandomMealUiState.HasRandomMeal -> {
@@ -16,7 +17,8 @@ fun RandomMealScreen(
                 uiState.randomMeal,
                 onLoadNextRandomMeal,
                 onClickGoToCategories,
-                onClickGoToIngredients
+                onClickGoToIngredients,
+                onClickGoToFavorites
             )
         }
         is RandomMealUiState.NoRandomMeal -> {

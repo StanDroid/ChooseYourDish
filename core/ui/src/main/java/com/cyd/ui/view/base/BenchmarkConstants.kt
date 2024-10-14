@@ -1,6 +1,7 @@
 package com.cyd.ui.view.base
 
 object RandomMealScreenConstants {
+    const val GO_TO_FAVORITES = "go_to_favorites"
     const val GO_TO_CATEGORIES = "go_to_categories"
     const val GO_TO_INGREDIENTS = "go_to_ingredients"
 }
