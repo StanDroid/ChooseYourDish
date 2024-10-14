@@ -36,6 +36,7 @@ import com.cyd.base.model.RandomMeal
 import com.cyd.ui.view.base.AnnotatedClickableText
 import com.cyd.ui.view.base.ProgressAsyncImage
 import com.cyd.ui.view.base.RandomMealScreenConstants
+import com.cyd.ui.view.base.style.BasicTheme
 
 @Composable
 fun RandomMealView(
@@ -167,8 +168,8 @@ fun RandomMealView(
                                     .padding(bottom = 8.dp)
                                     .clickable { expanded = !expanded },
                                 text = stringResource(R.string.click_to_see_instructions),
-                                style = MaterialTheme.typography.bodySmall,
-
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = MaterialTheme.colorScheme.tertiary
                                 )
                         }
                         model.strYoutube.ifNotNullOrEmpty {
@@ -196,16 +197,18 @@ fun RandomMealView(
 @Preview(showBackground = true)
 @Composable
 fun RandomMealViewPreview() {
-    RandomMealView(
-        model = RandomMeal(
-            idMeal = "1",
-            strMealThumb = "strMealThumb",
-            strYoutube = "strYoutube",
-            strSource = "strSource",
-            strMeal = "name very long",
-            strInstructions = "strInstructions",
-            strCategory = "category",
-            strArea = "strArea",
+    BasicTheme {
+        RandomMealView(
+            model = RandomMeal(
+                idMeal = "1",
+                strMealThumb = "strMealThumb",
+                strYoutube = "strYoutube",
+                strSource = "strSource",
+                strMeal = "name very long",
+                strInstructions = "strInstructions",
+                strCategory = "category",
+                strArea = "strArea",
+            )
         )
-    )
+    }
 }
