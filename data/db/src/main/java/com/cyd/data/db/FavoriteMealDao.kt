@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.cyd.data.db.entity.FavoriteMealEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface FavoriteMealDao {
@@ -14,7 +15,7 @@ interface FavoriteMealDao {
     suspend fun insertFavoriteMeal(meal: FavoriteMealEntity)
 
     @Query("SELECT * FROM favorite_meals")
-    suspend fun getFavoriteMeals(): List<FavoriteMealEntity>?
+    fun getFavoriteMeals(): Flow<List<FavoriteMealEntity>>
 
     @Query("SELECT id FROM favorite_meals")
     suspend fun getFavoriteMealIds(): List<String>?

@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.viewModelScope
 import com.cyd.base.model.MealItem
 import com.cyd.base.utils.ErrorMessage
 import com.cyd.base.viewmodel.BaseViewModel
@@ -12,6 +11,7 @@ import com.cyd.feature.category_meals.usecase.GetFavoriteMealListUseCase
 import com.cyd.feature.category_meals.usecase.GetMealListByIngredientUseCase
 import com.cyd.feature.category_meals.usecase.GetMealListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -79,26 +79,29 @@ class MealListViewModel @Inject constructor(
 
     fun loadMeals(mealType: MealType) {
         viewModelState.value = MealListViewModelState(isLoading = true)
-        viewModelScope.launch {
-            try {
-                val list = when (mealType) {
-                    is MealType.Category -> useCase.execute(mealType.name)
-                    is MealType.Ingredient -> useCaseByIngredientUseCase.execute(mealType.name)
-                    is MealType.Favorites -> getFavoriteMealListUseCase.execute(null)
-                }
+        launch {
+            val list = when (mealType) {
+                is MealType.Category -> flowOf(useCase.execute(mealType.name))
+                is MealType.Ingredient -> flowOf(useCaseByIngredientUseCase.execute(mealType.name))
+                is MealType.Favorites -> getFavoriteMealListUseCase.execute(null)
+            }
+            list.collect { result ->
                 viewModelState.value =
-                    MealListViewModelState(list = list, isLoading = false)
-            } catch (ex: Exception) {
-                ex.printStackTrace()
-                Log.e("TAG", "loadMealsByCategory failure")
-                viewModelState.value = MealListViewModelState(
-                    isLoading = false, errorMessages =
-                    listOf(ErrorMessage(ex.hashCode(), ex.stackTrace.toString()))
-                )
+                    MealListViewModelState(list = result, isLoading = false)
             }
         }
     }
 
+    override fun handleException(throwable: Throwable?) {
+        super.handleException(throwable)
+        Log.e("CYD", "loadMealsByCategory failure: ${throwable?.message}")
+        viewModelState.value = MealListViewModelState(
+            isLoading = false, errorMessages =
+            listOf(
+                ErrorMessage(throwable.hashCode(), throwable?.message.orEmpty())
+            )
+        )
+    }
 }
 
 sealed class MealType {

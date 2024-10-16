@@ -10,6 +10,6 @@ class RemoveMealFromFavoritesUseCase @Inject constructor(
 ) : UseCaseSuspend<Meal, Unit> {
 
     override suspend fun execute(params: Meal) {
-        repository.removeFavoriteMeal(params)
+        repository.removeFavoriteMeal(params.toMealItem())
     }
 }

@@ -3,6 +3,7 @@ package com.cyd.data.meal
 import com.cyd.base.model.Meal
 import com.cyd.base.model.MealItem
 import com.cyd.base.model.RandomMeal
+import kotlinx.coroutines.flow.Flow
 
 interface MealRepository {
     suspend fun getRandomMeal(): RandomMeal?
@@ -13,10 +14,11 @@ interface MealRepository {
 
     suspend fun getMealDetails(id: String): Meal?
 
-    suspend fun getFavoritesMeals(): List<Meal>
+    suspend fun getFavoritesMeals(): Flow<List<MealItem>>
 
-    suspend fun insertFavoriteMeal(meal: Meal)
+    suspend fun insertFavoriteMeal(meal: MealItem)
 
-    suspend fun removeFavoriteMeal(meal: Meal)
+    suspend fun removeFavoriteMeal(meal: MealItem)
+
     suspend fun getFavoritesMealIds(): List<String>
 }

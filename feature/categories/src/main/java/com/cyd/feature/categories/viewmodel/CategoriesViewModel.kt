@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.viewModelScope
 import com.cyd.base.model.Category
 import com.cyd.base.usecase.execute
 import com.cyd.base.utils.ErrorMessage
@@ -90,14 +89,14 @@ class CategoriesViewModel @Inject constructor(
 
     private fun loadCategories() {
         viewModelState.value = CategoriesViewModelState(isLoading = true)
-        viewModelScope.launch {
+        launch {
             try {
                 val categories = useCase.execute()
                 viewModelState.value =
                     CategoriesViewModelState(list = categories, isLoading = false)
             } catch (ex: Exception) {
                 ex.printStackTrace()
-                Log.e("TAG", "loadCategories failure")
+                Log.e("CYD", "loadCategories failure")
                 viewModelState.value = CategoriesViewModelState(
                     isLoading = false, errorMessages =
                     listOf(ErrorMessage(ex.hashCode(), ex.stackTrace.toString()))

@@ -10,6 +10,6 @@ class MakeMealAsFavoriteUseCase @Inject constructor(
 ) : UseCaseSuspend<Meal, Unit> {
 
     override suspend fun execute(params: Meal) {
-        repository.insertFavoriteMeal(params)
+        repository.insertFavoriteMeal(params.toMealItem())
     }
 }

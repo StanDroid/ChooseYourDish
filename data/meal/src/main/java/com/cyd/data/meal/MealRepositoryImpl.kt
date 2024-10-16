@@ -1,6 +1,6 @@
 package com.cyd.data.meal
 
-import com.cyd.base.model.Meal
+import com.cyd.base.model.MealItem
 import com.cyd.data.db.FavoriteMealDao
 import com.cyd.data.db.entity.FavoriteMealEntity
 import com.cyd.data.meal.mapper.FavoriteMealToMealItemMapper
@@ -9,6 +9,8 @@ import com.cyd.data.meal.mapper.MealItemToFavoriteMealMapper
 import com.cyd.data.meal.mapper.MealListItemMapper
 import com.cyd.data.meal.mapper.RandomMealMapper
 import com.cyd.data.network.MealDataSource
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class MealRepositoryImpl @Inject constructor(
@@ -37,21 +39,22 @@ class MealRepositoryImpl @Inject constructor(
             mealListItemMapper.map(it)
         }.orEmpty()
 
-    override suspend fun getFavoritesMeals(): List<Meal> {
-        val favoriteMeals = favoriteMealDao.getFavoriteMeals()
-        return favoriteMealToMealItemMapper.map((favoriteMeals ?: emptyList()))
+    override suspend fun getFavoritesMeals(): Flow<List<MealItem>> {
+        return favoriteMealDao.getFavoriteMeals().map {
+            favoriteMealToMealItemMapper.map(it)
+        }
     }
 
     override suspend fun getFavoritesMealIds(): List<String> {
         return favoriteMealDao.getFavoriteMealIds() ?: emptyList()
     }
 
-    override suspend fun insertFavoriteMeal(meal: Meal) {
+    override suspend fun insertFavoriteMeal(meal: MealItem) {
         val favoriteMeal: FavoriteMealEntity = mealItemToFavoriteMealMapper.map(meal)
         favoriteMealDao.insertFavoriteMeal(favoriteMeal)
     }
 
-    override suspend fun removeFavoriteMeal(meal: Meal) {
+    override suspend fun removeFavoriteMeal(meal: MealItem) {
         favoriteMealDao.removeFavoriteMeal(mealItemToFavoriteMealMapper.map(meal))
     }
 }

@@ -31,7 +31,7 @@ class SearchViewModel @Inject constructor(
     }
 
     private fun subscribeToSearch() {
-        viewModelScope.launch {
+        launch {
             searchViewModelState
                 .filter { state -> state.isSearching }
                 .map { state ->
@@ -53,7 +53,7 @@ class SearchViewModel @Inject constructor(
     }
 
     private fun loadIngredients() {
-        viewModelScope.launch {
+        launch {
             val ingredientList = useCase.execute()
             _viewModelState.value = _viewModelState.value.copy(
                 initialList = ingredientList

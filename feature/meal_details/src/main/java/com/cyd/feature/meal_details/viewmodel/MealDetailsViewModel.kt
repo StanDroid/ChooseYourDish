@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.viewModelScope
 import com.cyd.base.model.Meal
 import com.cyd.base.utils.ErrorMessage
 import com.cyd.base.viewmodel.BaseViewModel
@@ -89,7 +88,7 @@ class MealDetailsViewModel @Inject constructor(
 
     fun loadMealDetails(id: String) {
         viewModelState.value = MealDetailsViewModelState(isLoading = true)
-        viewModelScope.launch {
+        launch {
             try {
                 viewModelState.value = MealDetailsViewModelState(
                     data = useCase.execute(id),
@@ -97,7 +96,7 @@ class MealDetailsViewModel @Inject constructor(
                 )
             } catch (ex: Exception) {
                 ex.printStackTrace()
-                Log.e("TAG", "loadCategories failure $id")
+                Log.e("CYD", "loadCategories failure $id")
                 viewModelState.value = MealDetailsViewModelState(
                     isLoading = false, errorMessages =
                     listOf(ErrorMessage(ex.hashCode(), ex.stackTrace.toString()))
@@ -107,7 +106,7 @@ class MealDetailsViewModel @Inject constructor(
     }
 
     fun tapOnFavorite() {
-        viewModelScope.launch {
+        launch {
             viewModelState.value.data?.let {
                 if (it.isFavorite) {
                     removeMealFromFavoritesUseCase.execute(it)
