@@ -2,7 +2,6 @@ package com.cyd.ui.view.meal
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
@@ -65,17 +64,12 @@ fun MealDetailsView(
             .crossfade(true)
             .build()
         val painter = rememberAsyncImagePainter(model)
-        Box(
-            Modifier
-                .size(500.dp)
-                .background(Color.DarkGray)
-        ) {
+        Box {
             Image(
                 painter = painter,
                 contentScale = ContentScale.FillWidth,
                 contentDescription = "",
-                modifier = Modifier
-                    .fillMaxWidth()
+                modifier = Modifier.fillMaxWidth()
             )
             var isFavorite by remember { mutableStateOf(meal.isFavorite) }
             Icon(
