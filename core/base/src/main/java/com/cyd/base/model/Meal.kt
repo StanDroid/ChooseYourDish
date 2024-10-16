@@ -11,16 +11,21 @@ data class Meal(
     val creativeCommonsConfirmed: String? = null,
     val drinkAlternate: String? = null,
     val imageSource: String? = null,
-    val ingredients: List<Ingredient> = emptyList(),
+    val mealIngredients: List<MealIngredient> = emptyList(),
     val instructions: String? = null,
     val meal: String? = null,
     val mealThumb: String? = null,
     val source: String? = null,
     val tags: String? = null,
-    val youtube: String? = null
-)
+    val youtube: String? = null,
+    var isFavorite: Boolean = false
+) {
+    fun toMealItem(): MealItem {
+        return MealItem(id.orEmpty(), meal.orEmpty(), mealThumb.orEmpty())
+    }
+}
 
-data class Ingredient(
+data class MealIngredient(
     val name: String,
     val measure: String?
 ) {

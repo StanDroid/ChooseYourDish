@@ -23,9 +23,12 @@ fun MealDetailsRoute(
         name,
         icon = Icons.Default.ArrowBack,
         onIconClick = { navController.navigateUp() }) {
-        MealDetailsScreen(id,
+        MealDetailsScreen(
+            id,
             name,
             state.toUiState(),
-            loadMealDetailsAction = { viewModel.loadMealDetails(id) })
+            loadMealDetailsAction = { viewModel.loadMealDetails(id) },
+            tapOnFavoritesAction = { viewModel.tapOnFavorite() },
+        )
     }
 }

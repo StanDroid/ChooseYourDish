@@ -4,11 +4,12 @@ import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.viewModelScope
 import com.cyd.base.model.Meal
 import com.cyd.base.utils.ErrorMessage
 import com.cyd.base.viewmodel.BaseViewModel
 import com.cyd.feature.meal_details.usecase.GetMealDetailsUseCase
+import com.cyd.feature.meal_details.usecase.MakeMealAsFavoriteUseCase
+import com.cyd.feature.meal_details.usecase.RemoveMealFromFavoritesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -48,7 +49,7 @@ sealed interface MealDetailsUiState {
 /**
  * A representation of the route state, in a raw form
  */
- data class MealDetailsViewModelState(
+data class MealDetailsViewModelState(
     val data: Meal? = null,
     val isLoading: Boolean = false,
     val errorMessages: List<ErrorMessage> = emptyList(),
@@ -75,7 +76,9 @@ sealed interface MealDetailsUiState {
 
 @HiltViewModel
 class MealDetailsViewModel @Inject constructor(
-    private val useCase: GetMealDetailsUseCase
+    private val useCase: GetMealDetailsUseCase,
+    private val makeMealAsFavoriteUseCase: MakeMealAsFavoriteUseCase,
+    private val removeMealFromFavoritesUseCase: RemoveMealFromFavoritesUseCase,
 ) : BaseViewModel() {
 
     private val viewModelState: MutableState<MealDetailsViewModelState> =
@@ -85,18 +88,34 @@ class MealDetailsViewModel @Inject constructor(
 
     fun loadMealDetails(id: String) {
         viewModelState.value = MealDetailsViewModelState(isLoading = true)
-        viewModelScope.launch {
-            try {
+        launch {
+            viewModelState.value = MealDetailsViewModelState(
+                data = useCase.execute(id),
+                isLoading = false
+            )
+        }
+    }
+
+    override fun handleException(throwable: Throwable?) {
+        super.handleException(throwable)
+        throwable?.printStackTrace()
+        Log.e("CYD", "loadCategories failure")
+        viewModelState.value = MealDetailsViewModelState(
+            isLoading = false, errorMessages =
+            listOf(ErrorMessage(throwable.hashCode(), throwable?.message.orEmpty()))
+        )
+    }
+
+    fun tapOnFavorite() {
+        launch {
+            viewModelState.value.data?.let {
+                if (it.isFavorite) {
+                    removeMealFromFavoritesUseCase.execute(it)
+                } else {
+                    makeMealAsFavoriteUseCase.execute(it)
+                }
                 viewModelState.value = MealDetailsViewModelState(
-                    data = useCase.execute(id),
-                    isLoading = false
-                )
-            } catch (ex: Exception) {
-                ex.printStackTrace()
-                Log.e("TAG", "loadCategories failure $id")
-                viewModelState.value = MealDetailsViewModelState(
-                    isLoading = false, errorMessages =
-                    listOf(ErrorMessage(ex.hashCode(), ex.stackTrace.toString()))
+                    data = it.copy(isFavorite = !it.isFavorite),
                 )
             }
         }

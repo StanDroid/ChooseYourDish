@@ -70,6 +70,7 @@ android {
 
 dependencies {
     implementation(project(":data:categories"))
+    implementation(project(":data:ingredients"))
     implementation(project(":data:meal"))
 
     implementation(project(":data:network"))
@@ -80,6 +81,7 @@ dependencies {
     implementation(project(":feature:random_meal"))
     implementation(project(":feature:category_meals"))
     implementation(project(":feature:meal_details"))
+    implementation(project(":feature:search"))
 
     implementation(libs.androidx.ktx)
     implementation(libs.material)

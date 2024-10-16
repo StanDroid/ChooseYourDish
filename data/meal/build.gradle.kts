@@ -21,6 +21,7 @@ android {
 
 dependencies {
     implementation(project(":data:network"))
+    implementation(project(":data:db"))
     implementation(project(":core:base"))
 
     implementation(libs.hilt.android)
