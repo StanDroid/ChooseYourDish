@@ -89,20 +89,21 @@ class MealDetailsViewModel @Inject constructor(
     fun loadMealDetails(id: String) {
         viewModelState.value = MealDetailsViewModelState(isLoading = true)
         launch {
-            try {
-                viewModelState.value = MealDetailsViewModelState(
-                    data = useCase.execute(id),
-                    isLoading = false
-                )
-            } catch (ex: Exception) {
-                ex.printStackTrace()
-                Log.e("CYD", "loadCategories failure $id")
-                viewModelState.value = MealDetailsViewModelState(
-                    isLoading = false, errorMessages =
-                    listOf(ErrorMessage(ex.hashCode(), ex.stackTrace.toString()))
-                )
-            }
+            viewModelState.value = MealDetailsViewModelState(
+                data = useCase.execute(id),
+                isLoading = false
+            )
         }
+    }
+
+    override fun handleException(throwable: Throwable?) {
+        super.handleException(throwable)
+        throwable?.printStackTrace()
+        Log.e("CYD", "loadCategories failure")
+        viewModelState.value = MealDetailsViewModelState(
+            isLoading = false, errorMessages =
+            listOf(ErrorMessage(throwable.hashCode(), throwable?.message.orEmpty()))
+        )
     }
 
     fun tapOnFavorite() {

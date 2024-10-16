@@ -93,25 +93,28 @@ class RandomMealViewModel @Inject constructor(
     private fun loadRandomMeal() {
         viewModelState.update { RandomMealViewModelState(isLoading = true) }
         launch {
-            try {
-                val randomMeal = useCase.execute()
-                viewModelState.update {
-                    RandomMealViewModelState(randomMeal = randomMeal, isLoading = false)
-                }
-            } catch (it: Exception) {
-                it.printStackTrace()
-                Log.e("CYD", "loadRandomMeal failure")
-                viewModelState.update { _ ->
-                    RandomMealViewModelState(
-                        isLoading = false, errorMessages =
-                        listOf(
-                            ErrorMessage(
-                                it.hashCode(),
-                                it.stackTrace.toString()
-                            )
+            val randomMeal = useCase.execute()
+            viewModelState.update {
+                RandomMealViewModelState(randomMeal = randomMeal, isLoading = false)
+            }
+        }
+    }
+
+    override fun handleException(throwable: Throwable?) {
+        super.handleException(throwable)
+        throwable?.let {
+            it.printStackTrace()
+            Log.e("CYD", "loadRandomMeal failure")
+            viewModelState.update { _ ->
+                RandomMealViewModelState(
+                    isLoading = false, errorMessages =
+                    listOf(
+                        ErrorMessage(
+                            it.hashCode(),
+                            it.stackTrace.toString()
                         )
                     )
-                }
+                )
             }
         }
     }
