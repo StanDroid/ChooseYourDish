@@ -1,6 +1,9 @@
 package com.cyd.ui.view.base
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -13,33 +16,37 @@ import coil.size.Size
 import coil.transform.Transformation
 import com.cyd.ui.R
 
+private const val LOADING_INDICATOR_SIZE_DP = 32
+
 @Composable
 fun ProgressAsyncImage(
     model: String,
     modifier: Modifier = Modifier,
     withLoadingIndicator: Boolean = true,
-    transformation: Transformation? = null
+    transformation: Transformation? = null,
+    contentDescription: String? = null
 ) {
-    val density = LocalDensity.current
-    val size = (32 * density.density).toInt()
-    val gif = getGitPainter(
-        Size(
-            Dimension.Pixels(size),
-            Dimension.Pixels(size)
-        )
-    )
-    val builder = ImageRequest.Builder(LocalContext.current)
-        .data(model)
-        .crossfade(true)
-    transformation?.let {
-        builder.transformations(it)
+    val des = LocalDensity.current
+    val loadingIndicatorSize by remember {
+        mutableIntStateOf(LOADING_INDICATOR_SIZE_DP * des.density.toInt())
     }
     AsyncImage(
-        model = builder.build(),
-        placeholder = if (withLoadingIndicator) gif else null,
+        model = ImageRequest.Builder(LocalContext.current)
+            .data(model)
+            .crossfade(true)
+            .apply {
+                transformation?.let { transformations(it) }
+            }
+            .build(),
+        placeholder = if (withLoadingIndicator) getGitPainter(
+            Size(
+                Dimension.Pixels(loadingIndicatorSize),
+                Dimension.Pixels(loadingIndicatorSize)
+            )
+        ) else null,
         error = painterResource(id = R.drawable.no_data_found),
         contentScale = ContentScale.Inside,
-        contentDescription = "",
+        contentDescription = contentDescription ?: "Image: $model",
         modifier = modifier
     )
 }
