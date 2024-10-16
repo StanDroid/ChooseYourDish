@@ -10,11 +10,13 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SearchBar
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.cyd.base.model.Ingredient
 
@@ -52,12 +54,35 @@ fun SearchScreen(
                 items(state.list) { item ->
                     Text(
                         text = item.name,
+                        style = MaterialTheme.typography.bodyMedium,
                         modifier = Modifier
-                            .padding(8.dp)
-                            .clickable { onItemClick(item) },
+                            .clickable { onItemClick(item) }
+                            .fillMaxWidth()
+                            .padding(16.dp),
                     )
                 }
             }
         }
     }
+}
+
+
+@Preview(showBackground = true)
+@Composable
+fun SearchScreenPreview() {
+    SearchScreen(state = SearchViewModel.SearchViewModelState(
+        searchText = "RET",
+        isSearching = true,
+        list = listOf(
+            Ingredient("RET", "RET", "RET"),
+            Ingredient("RET", "RET", "RET"),
+            Ingredient("RET", "RET", "RET"),
+            Ingredient("RET", "RET", "RET"),
+            Ingredient("RET", "RET", "RET"),
+        )
+    ),
+        {},
+        {},
+        {}
+    )
 }

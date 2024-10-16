@@ -20,12 +20,12 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.cyd.ui.view.base.style.BasicTheme
+import com.cyd.ui.view.base.style.CydTheme
 
 @Preview(showBackground = true)
 @Composable
 fun ShimmerButtonPreview() {
-    BasicTheme {
+    CydTheme {
         Row {
             ShimmerButton(
                 modifier = Modifier
