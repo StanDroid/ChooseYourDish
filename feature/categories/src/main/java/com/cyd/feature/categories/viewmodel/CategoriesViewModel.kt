@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.viewModelScope
 import com.cyd.base.model.Category
 import com.cyd.base.usecase.execute
 import com.cyd.base.utils.ErrorMessage
@@ -31,8 +30,7 @@ sealed interface CategoriesUiState {
      * waiting to reload them.
      */
     data class NoCategories(
-        override val isLoading: Boolean,
-        override val errorMessages: List<ErrorMessage>
+        override val isLoading: Boolean, override val errorMessages: List<ErrorMessage>
     ) : CategoriesUiState
 
     /**
@@ -49,7 +47,7 @@ sealed interface CategoriesUiState {
 /**
  * A representation of the route state, in a raw form
  */
- data class CategoriesViewModelState(
+data class CategoriesViewModelState(
     val list: List<Category>? = null,
     val isLoading: Boolean = false,
     val errorMessages: List<ErrorMessage> = emptyList(),
@@ -59,19 +57,17 @@ sealed interface CategoriesUiState {
      * Converts this [CategoriesViewModelState] into a more strongly typed [CategoriesUiState] for driving
      * the ui.
      */
-    fun toUiState(): CategoriesUiState =
-        if (list == null) {
-            CategoriesUiState.NoCategories(
-                isLoading = isLoading,
-                errorMessages = errorMessages
-            )
-        } else {
-            CategoriesUiState.HasCategories(
-                list = list,
-                isLoading = isLoading,
-                errorMessages = errorMessages,
-            )
-        }
+    fun toUiState(): CategoriesUiState = if (list == null) {
+        CategoriesUiState.NoCategories(
+            isLoading = isLoading, errorMessages = errorMessages
+        )
+    } else {
+        CategoriesUiState.HasCategories(
+            list = list,
+            isLoading = isLoading,
+            errorMessages = errorMessages,
+        )
+    }
 }
 
 @HiltViewModel
@@ -90,19 +86,21 @@ class CategoriesViewModel @Inject constructor(
 
     private fun loadCategories() {
         viewModelState.value = CategoriesViewModelState(isLoading = true)
-        viewModelScope.launch {
-            try {
-                val categories = useCase.execute()
-                viewModelState.value =
-                    CategoriesViewModelState(list = categories, isLoading = false)
-            } catch (ex: Exception) {
-                ex.printStackTrace()
-                Log.e("TAG", "loadCategories failure")
-                viewModelState.value = CategoriesViewModelState(
-                    isLoading = false, errorMessages =
-                    listOf(ErrorMessage(ex.hashCode(), ex.stackTrace.toString()))
-                )
-            }
+        launch {
+            val categories = useCase.execute()
+            viewModelState.value = CategoriesViewModelState(list = categories, isLoading = false)
+        }
+    }
+
+    override fun handleException(throwable: Throwable?) {
+        super.handleException(throwable)
+        Log.e("CYD", "loadCategories failure")
+        throwable?.let {
+            it.printStackTrace()
+            viewModelState.value = CategoriesViewModelState(
+                isLoading = false,
+                errorMessages = listOf(ErrorMessage(it.hashCode(), it.stackTrace.toString()))
+            )
         }
     }
 }

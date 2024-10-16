@@ -1,6 +1,7 @@
 package com.cyd.data.network
 
 import com.cyd.data.network.model.CategoryDTO
+import com.cyd.data.network.model.IngredientDTO
 import com.cyd.data.network.model.MealDetailsDTO
 import com.cyd.data.network.model.MealListItemDTO
 import com.cyd.data.network.model.RandomMealDTO
@@ -11,7 +12,11 @@ interface MealDataSource {
 
     suspend fun getMealCategories(): List<CategoryDTO>?
 
+    suspend fun getIngredients(): List<IngredientDTO>?
+
     suspend fun getMealsByCategory(name: String): List<MealListItemDTO>?
+
+    suspend fun getMealsByMainIngredient(name: String): List<MealListItemDTO>?
 
     suspend fun getMealDetails(idMeal: String): MealDetailsDTO?
 }

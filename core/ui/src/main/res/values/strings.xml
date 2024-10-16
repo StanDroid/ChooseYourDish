@@ -3,8 +3,9 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="no_data">No data</string>
     <string name="go_to_categories">Go to Categories</string>
-    <string name="tap_on_card_title">Tap on Card to get a new one</string>
-    <string name="click_to_see_instructions">Click here to see instructions</string>
+    <string name="go_to_ingredients">Go to Ingredients</string>
+    <string name="tap_on_card_title">Surprise Me!</string>
+    <string name="click_to_see_instructions">Expand to see instructions</string>
     <string name="see_on_youtube">See on Youtube</string>
     <string name="original_post">Original post</string>
     <string name="area">Area</string>
@@ -16,4 +17,9 @@
     <string name="no_random_meal">There is no random meal</string>
     <string name="instructions">Instructions:</string>
     <string name="categories">Categories</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="options">Options</string>
+    <string name="favorites">Favorites</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="dish_of_the_day">Dish Of The Day</string>
 </resources>

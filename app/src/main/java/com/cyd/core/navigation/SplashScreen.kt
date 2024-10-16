@@ -22,7 +22,7 @@ fun SplashScreen(onEndAction: () -> Unit) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.primary)
+            .background(MaterialTheme.colorScheme.primaryContainer)
     ) {
         val number by remember { mutableIntStateOf(Random.nextInt(0, 3)) }
         val composition by rememberLottieComposition(
