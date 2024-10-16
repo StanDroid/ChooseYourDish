@@ -9,7 +9,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.cyd.R
-import com.cyd.core.navigation.NavScreen
+import com.cyd.core.navigation.Screen
 import com.cyd.feature.category_meals.MealListScreen
 import com.cyd.feature.category_meals.viewmodel.MealListViewModel
 import com.cyd.feature.category_meals.viewmodel.MealType
@@ -30,7 +30,7 @@ fun FavouritesRoute(
             mealsState.toUiState(),
             onMealClick = {
                 navController.navigate(
-                    NavScreen.MealDetails.withStringArgs(
+                    Screen.MealDetails.withStringArgs(
                         it.id,
                         it.name
                     )

@@ -7,7 +7,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.cyd.R
-import com.cyd.core.navigation.NavScreen
+import com.cyd.core.navigation.Screen
 import com.cyd.feature.random_meal.RandomMealScreen
 import com.cyd.feature.random_meal.viewmodel.RandomMealUiState
 import com.cyd.feature.random_meal.viewmodel.RandomMealViewModel
@@ -25,7 +25,7 @@ fun RandomMealRoute(
             viewModel::onLoadNextRandomMealClick,
         ) {
             navController.navigate(
-                NavScreen.MealDetails.withStringArgs(
+                Screen.MealDetails.withStringArgs(
                     it.first,
                     it.second
                 )

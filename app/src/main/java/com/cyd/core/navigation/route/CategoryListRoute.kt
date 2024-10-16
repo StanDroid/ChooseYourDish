@@ -9,7 +9,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.cyd.R
-import com.cyd.core.navigation.NavScreen
+import com.cyd.core.navigation.Screen
 import com.cyd.feature.categories.CategoryListScreen
 import com.cyd.feature.categories.viewmodel.CategoriesViewModel
 import com.cyd.ui.view.base.MealScaffold
@@ -29,7 +29,7 @@ fun CategoryListRoute(
             state.toUiState()
         ) {
             navController.navigate(
-                NavScreen.MealList.withStringArgs(
+                Screen.MealList.withStringArgs(
                     it.id,
                     it.name
                 )
