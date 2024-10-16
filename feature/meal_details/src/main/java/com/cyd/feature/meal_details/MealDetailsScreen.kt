@@ -11,27 +11,32 @@ import com.cyd.ui.view.meal.ProgressLoadingView
 
 @Composable
 fun MealDetailsScreen(
-    id: String,
-    name: String,
     uiState: MealDetailsUiState,
     loadMealDetailsAction: () -> Unit,
     tapOnFavoritesAction: () -> Unit,
 ) {
-        when (uiState) {
-            is MealDetailsUiState.NoData -> {
-                when {
-                    uiState.isLoading -> { ProgressLoadingView() }
-                    uiState.errorMessages.isNotEmpty() -> {
-                        Box(Modifier.fillMaxSize()) {
-                            Text(text = "No data")
-                        }
+    when (uiState) {
+        is MealDetailsUiState.NoData -> {
+            when {
+                uiState.isLoading -> {
+                    ProgressLoadingView()
+                }
+
+                uiState.errorMessages.isNotEmpty() -> {
+                    Box(Modifier.fillMaxSize()) {
+                        Text(text = "No data")
                     }
-                    else -> { loadMealDetailsAction.invoke() }
+                }
+
+                else -> {
+                    loadMealDetailsAction.invoke()
                 }
             }
-            is MealDetailsUiState.HasData -> {
-                val meal = uiState.data
-                MealDetailsView(meal, tapOnFavoritesAction)
-            }
         }
+
+        is MealDetailsUiState.HasData -> {
+            val meal = uiState.data
+            MealDetailsView(meal, tapOnFavoritesAction)
+        }
+    }
 }

@@ -48,7 +48,8 @@ fun SearchScreen(
             onActiveChange = { onToggleSearch.invoke() },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp)
+                .padding(horizontal = 16.dp)
+                .padding(top = 16.dp)
         ) {
             LazyColumn {
                 items(state.list) { item ->

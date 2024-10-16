@@ -1,7 +1,6 @@
 package com.cyd.ui.view.base
 
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -12,7 +11,6 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.unit.dp
 
 @Composable
 fun AnnotatedClickableText(
@@ -42,9 +40,7 @@ fun AnnotatedClickableText(
     }
     val uriHandler = LocalUriHandler.current
     ClickableText(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(bottom = 8.dp),
+        modifier = modifier.fillMaxWidth(),
         text = annotatedLinkString,
         onClick = {
             annotatedLinkString
