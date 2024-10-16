@@ -23,17 +23,13 @@ fun RandomMealRoute(
         RandomMealScreen(
             state,
             viewModel::onLoadNextRandomMealClick,
-            { navController.navigate(NavScreen.CategoryList.route) },
-            { navController.navigate(NavScreen.Search.route) },
-            { navController.navigate(NavScreen.Favorites.route) },
-            {
-                navController.navigate(
-                    NavScreen.MealDetails.withStringArgs(
-                        it.first,
-                        it.second
-                    )
+        ) {
+            navController.navigate(
+                NavScreen.MealDetails.withStringArgs(
+                    it.first,
+                    it.second
                 )
-            },
-        )
+            )
+        }
     }
 }

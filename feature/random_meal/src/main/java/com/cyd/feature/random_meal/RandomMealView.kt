@@ -22,7 +22,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Refresh
-import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -35,7 +34,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -45,16 +43,12 @@ import com.cyd.base.extension.ifNotNullOrEmpty
 import com.cyd.base.model.RandomMeal
 import com.cyd.ui.view.base.AnnotatedClickableText
 import com.cyd.ui.view.base.ProgressAsyncImage
-import com.cyd.ui.view.base.RandomMealScreenConstants
 import com.cyd.ui.view.base.style.CydTheme
 
 @Composable
 fun RandomMealView(
     model: RandomMeal,
     onLoadNextRandomMeal: () -> Unit = {},
-    onClickGoToCategories: () -> Unit = {},
-    onClickGoToIngredients: () -> Unit = {},
-    onClickGoToFavorites: () -> Unit = {},
     onClickGoToMealDetails: (Pair<String, String>) -> Unit = {},
 ) {
     var expanded by remember { mutableStateOf(false) }
@@ -63,7 +57,6 @@ fun RandomMealView(
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        NavigateButtonsView(onClickGoToIngredients, onClickGoToCategories, onClickGoToFavorites)
         Column(
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -161,61 +154,11 @@ fun RandomMealView(
 }
 
 @Composable
-private fun NavigateButtonsView(
-    onClickGoToIngredients: () -> Unit,
-    onClickGoToCategories: () -> Unit,
-    onClickGoToFavorites: () -> Unit
-) {
-    Column {
-        Row {
-            Button(
-                onClick = { onClickGoToIngredients.invoke() },
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(end = 8.dp)
-                    .testTag(RandomMealScreenConstants.GO_TO_INGREDIENTS)
-            ) {
-                Text(
-                    text = stringResource(R.string.go_to_ingredients),
-                    style = MaterialTheme.typography.labelLarge
-                )
-            }
-
-            Button(
-                onClick = { onClickGoToCategories.invoke() },
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(start = 8.dp)
-                    .testTag(RandomMealScreenConstants.GO_TO_CATEGORIES)
-            ) {
-                Text(
-                    text = stringResource(R.string.go_to_categories),
-                    style = MaterialTheme.typography.labelLarge
-                )
-            }
-        }
-        Row {
-            Button(
-                onClick = { onClickGoToFavorites.invoke() },
-                modifier = Modifier
-                    .weight(1f)
-                    .testTag(RandomMealScreenConstants.GO_TO_FAVORITES)
-            ) {
-                Text(
-                    text = stringResource(R.string.favorites),
-                    style = MaterialTheme.typography.labelLarge
-                )
-            }
-        }
-    }
-}
-
-@Composable
 private fun SurpriseMeView(modifier: Modifier, onLoadNextRandomMeal: () -> Unit) {
     Row(
         modifier = modifier
             .clickable { onLoadNextRandomMeal.invoke() }
-            .padding(16.dp),
+            .padding(8.dp),
     ) {
         RotateIcon()
         Text(

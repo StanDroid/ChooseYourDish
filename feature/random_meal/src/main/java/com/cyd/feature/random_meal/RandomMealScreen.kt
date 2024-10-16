@@ -7,9 +7,6 @@ import com.cyd.feature.random_meal.viewmodel.RandomMealUiState
 fun RandomMealScreen(
     uiState: RandomMealUiState,
     onLoadNextRandomMeal: () -> Unit = {},
-    onClickGoToCategories: () -> Unit = {},
-    onClickGoToIngredients: () -> Unit = {},
-    onClickGoToFavorites: () -> Unit = {},
     onClickGoToMealDetails: (Pair<String, String>) -> Unit = {},
 ) {
     when (uiState) {
@@ -17,9 +14,6 @@ fun RandomMealScreen(
             RandomMealView(
                 uiState.randomMeal,
                 onLoadNextRandomMeal,
-                onClickGoToCategories,
-                onClickGoToIngredients,
-                onClickGoToFavorites,
                 onClickGoToMealDetails,
             )
         }
