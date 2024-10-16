@@ -2,6 +2,9 @@
 
 package com.cyd.core.navigation
 
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -30,7 +33,19 @@ fun NavigationSystem() {
         startDestination = NavScreen.Splash.route,
         modifier = Modifier.semantics {
             testTagsAsResourceId = true
-        }
+        },
+        enterTransition = {
+            fadeIn(
+                animationSpec = tween(durationMillis = 500),
+                initialAlpha = 0.5f
+            )
+        },
+        exitTransition = {
+            fadeOut(
+                animationSpec = tween(durationMillis = 500),
+                targetAlpha = 0.5f
+            )
+        },
     ) {
         composable(route = NavScreen.Splash.route) {
             SplashScreenRoute(navController)

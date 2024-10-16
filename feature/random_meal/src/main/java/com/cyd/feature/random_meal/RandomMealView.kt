@@ -46,7 +46,7 @@ import com.cyd.base.model.RandomMeal
 import com.cyd.ui.view.base.AnnotatedClickableText
 import com.cyd.ui.view.base.ProgressAsyncImage
 import com.cyd.ui.view.base.RandomMealScreenConstants
-import com.cyd.ui.view.base.style.BasicTheme
+import com.cyd.ui.view.base.style.CydTheme
 
 @Composable
 fun RandomMealView(
@@ -254,7 +254,7 @@ private fun RotateIcon() {
 @Preview(showBackground = true)
 @Composable
 fun RandomMealViewPreview() {
-    BasicTheme {
+    CydTheme {
         RandomMealView(
             model = RandomMeal(
                 idMeal = "1",
