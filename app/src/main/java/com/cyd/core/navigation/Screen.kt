@@ -74,6 +74,6 @@ data class AppTab(
 val mainTabs = listOf(
     AppTab(Graph.HomeGraph.route, "Home", Icons.Filled.Home),
     AppTab(Graph.CategoriesGraph.route, "Categories", Icons.AutoMirrored.Filled.List),
-    AppTab(Graph.SearchGraph.route, "By Ingredient", Icons.Filled.Search),
+    AppTab(Graph.SearchGraph.route, "Search", Icons.Filled.Search),
     AppTab(Graph.FavoritesGraph.route, "Favorites", Icons.Filled.Favorite),
 )

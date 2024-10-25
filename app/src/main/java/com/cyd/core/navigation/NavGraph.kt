@@ -2,6 +2,7 @@
 
 package com.cyd.core.navigation
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -50,13 +51,13 @@ fun NavigationSystem() {
     val currentBackStackEntry by navController.currentBackStackEntryAsState()
     Scaffold(
         bottomBar = {
-            if (isBottomNavBarVisible(currentBackStackEntry)) {
+            AnimatedVisibility(isBottomNavBarVisible(currentBackStackEntry)) {
                 BottomNavBar(items, navController)
             }
         }) { innerPadding ->
         NavHost(
             navController = navController,
-            startDestination = Graph.HomeGraph.route,
+            startDestination = Graph.SplashGraph.route,
             modifier = Modifier
                 .padding(innerPadding)
                 .semantics {
@@ -73,8 +74,11 @@ fun NavigationSystem() {
                 )
             },
         ) {
-            navigation<Graph.SplashGraph>(startDestination = Graph.SplashGraph.SplashScreen) {
-                composable<Graph.SplashGraph.SplashScreen> {
+            navigation(
+                route = Graph.SplashGraph.route,
+                startDestination = Graph.SplashGraph.SplashScreen.route
+            ) {
+                composable(Graph.SplashGraph.SplashScreen.route) {
                     SplashScreenRoute(navController)
                 }
             }
@@ -230,7 +234,10 @@ private fun NavHostController.navigateToRootScreen(
 }
 
 private fun isBottomNavBarVisible(currentBackStackEntry: NavBackStackEntry?) =
-    getSimpleRoute(currentBackStackEntry) != Graph.MealDetailsScreen.route
+    currentBackStackEntry != null && getSimpleRoute(currentBackStackEntry) !in setOf(
+        Graph.MealDetailsScreen.route,
+        Graph.SplashGraph.SplashScreen.route
+    )
 
 private fun getSimpleRoute(currentBackStackEntry: NavBackStackEntry?) =
     currentBackStackEntry?.destination?.route?.split("/")?.first()
