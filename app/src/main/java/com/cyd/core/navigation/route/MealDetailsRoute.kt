@@ -1,7 +1,7 @@
 package com.cyd.core.navigation.route
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -21,11 +21,9 @@ fun MealDetailsRoute(
     val state by remember { viewModel.uiState }
     MealScaffold(
         name,
-        icon = Icons.Default.ArrowBack,
+        icon = Icons.AutoMirrored.Filled.ArrowBack,
         onIconClick = { navController.navigateUp() }) {
         MealDetailsScreen(
-            id,
-            name,
             state.toUiState(),
             loadMealDetailsAction = { viewModel.loadMealDetails(id) },
             tapOnFavoritesAction = { viewModel.tapOnFavorite() },

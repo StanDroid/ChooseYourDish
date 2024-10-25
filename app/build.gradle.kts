@@ -109,6 +109,7 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android)
 
     implementation(libs.androidx.profileinstaller)
+    implementation(libs.kotlinx.serialization.json)
 
     debugImplementation(libs.androidx.ui.tooling)
     androidTestImplementation(libs.androidx.ui.test.junit4)

@@ -1,5 +1,10 @@
+@file:OptIn(ExperimentalSharedTransitionApi::class)
+
 package com.cyd.ui.view.base
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionLayout
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -18,6 +23,12 @@ import com.cyd.ui.R
 
 private const val LOADING_INDICATOR_SIZE_DP = 32
 
+/**
+ * TODO optimize with memory cache
+ * .placeholderMemoryCacheKey(model)
+ * .memoryCacheKey(model)
+ *
+ */
 @Composable
 fun ProgressAsyncImage(
     model: String,
@@ -30,23 +41,31 @@ fun ProgressAsyncImage(
     val loadingIndicatorSize by remember {
         mutableIntStateOf(LOADING_INDICATOR_SIZE_DP * des.density.toInt())
     }
-    AsyncImage(
-        model = ImageRequest.Builder(LocalContext.current)
-            .data(model)
-            .crossfade(true)
-            .apply {
-                transformation?.let { transformations(it) }
-            }
-            .build(),
-        placeholder = if (withLoadingIndicator) getGitPainter(
-            Size(
-                Dimension.Pixels(loadingIndicatorSize),
-                Dimension.Pixels(loadingIndicatorSize)
+    SharedTransitionLayout {
+        AnimatedVisibility(visible = true) {
+            AsyncImage(
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(model)
+                    .crossfade(true)
+                    .apply {
+                        transformation?.let { transformations(it) }
+                    }
+                    .build(),
+                placeholder = if (withLoadingIndicator) getGitPainter(
+                    Size(
+                        Dimension.Pixels(loadingIndicatorSize),
+                        Dimension.Pixels(loadingIndicatorSize)
+                    )
+                ) else null,
+                error = painterResource(id = R.drawable.no_data_found),
+                contentScale = ContentScale.Inside,
+                contentDescription = contentDescription ?: "Image: $model",
+                modifier = modifier
+                    .sharedBounds(
+                        rememberSharedContentState(key = model),
+                        animatedVisibilityScope = this
+                    )
             )
-        ) else null,
-        error = painterResource(id = R.drawable.no_data_found),
-        contentScale = ContentScale.Inside,
-        contentDescription = contentDescription ?: "Image: $model",
-        modifier = modifier
-    )
+        }
+    }
 }

@@ -32,7 +32,7 @@ dependencies {
     implementation(libs.accompanist.systemuicontroller)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.material3.window.size)
-
+    implementation(libs.androidx.animation)
     debugImplementation(libs.androidx.customview)
     debugImplementation(libs.androidx.customview.poolingcontainer)
 

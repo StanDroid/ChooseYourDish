@@ -2,8 +2,8 @@
     <string name="app_name">Choose Your Dish</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="no_data">No data</string>
-    <string name="go_to_categories">Go to Categories</string>
-    <string name="go_to_ingredients">Go to Ingredients</string>
+    <string name="go_to_categories">Categories</string>
+    <string name="go_to_ingredients">Ingredients</string>
     <string name="tap_on_card_title">Surprise Me!</string>
     <string name="click_to_see_instructions">Expand to see instructions</string>
     <string name="see_on_youtube">See on Youtube</string>

@@ -20,6 +20,7 @@ buildscript {
 }
 plugins {
     id("com.google.devtools.ksp") version "1.8.20-1.0.11"
+    kotlin("plugin.serialization") version "1.8.22"
 }
 
 tasks.register<Delete>("clean") {
@@ -29,4 +30,5 @@ tasks.register<Delete>("clean") {
 allprojects {
     apply(plugin = "org.jlleitschuh.gradle.ktlint")
     apply(plugin = "com.google.devtools.ksp")
+    apply(plugin = "org.jetbrains.kotlin.plugin.serialization")
 }

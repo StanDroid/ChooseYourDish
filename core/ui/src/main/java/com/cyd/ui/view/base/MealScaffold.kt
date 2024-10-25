@@ -16,7 +16,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -24,16 +24,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.cyd.base.utils.PRIVACY_POLICY
 import com.cyd.ui.R
+import com.cyd.ui.view.base.style.CydTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MealScaffold(
     topBarText: String,
-    icon: ImageVector = Icons.Default.Home,
+    icon: ImageVector? = null,
     onIconClick: () -> Unit = { },
     content: @Composable () -> Unit
 ) {
@@ -43,19 +45,29 @@ fun MealScaffold(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(topBarText) },
-                navigationIcon = {
-                    Icon(
-                        imageVector = icon,
-                        contentDescription = null,
-                        modifier = Modifier
-                            .clickable { onIconClick.invoke() }
-                            .padding(16.dp)
+                title = {
+                    Text(
+                        text = topBarText,
+                        maxLines = 2,
+                        overflow = TextOverflow.Ellipsis
                     )
                 },
-                colors = TopAppBarDefaults.smallTopAppBarColors(
+                navigationIcon = {
+                    if (icon != null) {
+                        Icon(
+                            imageVector = icon,
+                            contentDescription = null,
+                            modifier = Modifier
+                                .clickable { onIconClick.invoke() }
+                                .padding(16.dp)
+                        )
+                    }
+                },
+                colors = topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
                     titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                    navigationIconContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                    actionIconContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
                 ),
                 actions = {
                     IconButton(onClick = { expanded.value = true }) {
@@ -88,14 +100,16 @@ fun MealScaffold(
 @Preview(showBackground = true)
 @Composable
 fun MealScaffoldPreview() {
-    MealScaffold(topBarText = "Test Topbar") {
-        Column() {
-            Text(text = "test")
-            Text(text = "test")
-            Text(text = "test")
-            Text(text = "test")
-            Text(text = "test")
-            Text(text = "test")
+    CydTheme {
+        MealScaffold(topBarText = "Test Topbar", icon = Icons.Default.Home) {
+            Column {
+                Text(text = "test")
+                Text(text = "test")
+                Text(text = "test")
+                Text(text = "test")
+                Text(text = "test")
+                Text(text = "test")
+            }
         }
     }
 }

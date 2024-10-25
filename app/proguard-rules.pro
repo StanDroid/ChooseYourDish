@@ -21,3 +21,13 @@
 #-renamesourcefileattribute SourceFile
 -keep class org.slf4j.** { *; }
 -dontwarn org.slf4j.**
+-keep,allowobfuscation @interface kotlinx.serialization.Serializable
+    -keepclassmembers,allowobfuscation class * {
+        @kotlinx.serialization.SerialName <fields>;
+    }
+    -keepclasseswithmembers class * {
+        @kotlinx.serialization.* <methods>;
+    }
+
+    -dontnote kotlinx.serialization.internal.Platform_commonKt
+    -dontnote kotlinx.serialization.json.internal.StreamingJsonEncoderKt
