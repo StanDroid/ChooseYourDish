@@ -10,8 +10,8 @@ fun SplashScreenRoute(
     navController: NavHostController
 ) {
     SplashScreen {
-        navController.navigate(Graph.HomeGraph) {
-            popUpTo(Graph.SplashGraph.SplashScreen) {
+        navController.navigate(Graph.HomeGraph.route) {
+            popUpTo(Graph.SplashGraph.SplashScreen.route) {
                 inclusive = true
             }
         }
