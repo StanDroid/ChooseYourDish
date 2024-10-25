@@ -2,8 +2,6 @@ package com.cyd.core.navigation.route
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -14,7 +12,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.cyd.R
-import com.cyd.core.navigation.NavScreen
+import com.cyd.core.navigation.CydBackHandler
+import com.cyd.core.navigation.Graph
 import com.cyd.feature.category_meals.MealListScreen
 import com.cyd.feature.category_meals.viewmodel.MealListViewModel
 import com.cyd.feature.category_meals.viewmodel.MealType
@@ -34,10 +33,10 @@ fun SearchRoute(
     val mealsViewModel = hiltViewModel<MealListViewModel>()
     val mealsState by remember { mealsViewModel.uiState }
 
+    CydBackHandler(navController)
     MealScaffold(
         stringResource(R.string.ingredients),
-        icon = Icons.AutoMirrored.Filled.ArrowBack,
-        onIconClick = { navController.navigateUp() }) {
+    ) {
         Column {
             SearchScreen(
                 searchState,
@@ -59,7 +58,7 @@ fun SearchRoute(
                     mealsState.toUiState(),
                     onMealClick = {
                         navController.navigate(
-                            NavScreen.MealDetails.withStringArgs(
+                            Graph.MealDetailsScreen.withStringArgs(
                                 it.id,
                                 it.name
                             )

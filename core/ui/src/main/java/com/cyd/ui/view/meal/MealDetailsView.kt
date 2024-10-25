@@ -1,7 +1,12 @@
+@file:OptIn(ExperimentalSharedTransitionApi::class)
+
 package com.cyd.ui.view.meal
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionLayout
+import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
@@ -39,9 +44,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.rememberAsyncImagePainter
+import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import coil.size.Size
 import com.cyd.base.extension.ifNotNullOrEmpty
 import com.cyd.base.model.Meal
 import com.cyd.base.model.MealIngredient
@@ -52,25 +56,33 @@ import com.cyd.ui.view.base.ProgressAsyncImage
 @Composable
 fun MealDetailsView(
     meal: Meal,
-    tapOnFavoritesAction: () -> Unit
+    tapOnFavoritesAction: () -> Unit,
 ) {
     Column(
         Modifier
             .verticalScroll(rememberScrollState(0))
     ) {
-        val model = ImageRequest.Builder(LocalContext.current)
-            .data(meal.mealThumb)
-            .size(Size.ORIGINAL)
-            .crossfade(true)
-            .build()
-        val painter = rememberAsyncImagePainter(model)
         Box {
-            Image(
-                painter = painter,
-                contentScale = ContentScale.FillWidth,
-                contentDescription = "",
-                modifier = Modifier.fillMaxWidth()
-            )
+            SharedTransitionLayout {
+                this@Column.AnimatedVisibility(visible = true) {
+                    AsyncImage(
+                        model = ImageRequest.Builder(LocalContext.current)
+                            .data(meal.mealThumb)
+                            .crossfade(true)
+                            .build(),
+                        placeholder = null,
+                        contentScale = ContentScale.FillWidth,
+                        contentDescription = null,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .sharedBounds(
+                                rememberSharedContentState(key = meal.mealThumb.orEmpty()),
+                                animatedVisibilityScope = this
+                            )
+                            .animateContentSize()
+                    )
+                }
+            }
             var isFavorite by remember { mutableStateOf(meal.isFavorite) }
             Icon(
                 imageVector = if (meal.isFavorite)
@@ -122,6 +134,7 @@ fun MealDetailsView(
             }
             meal.youtube.ifNotNullOrEmpty {
                 AnnotatedClickableText(
+                    modifier = Modifier.padding(top = 8.dp),
                     str = stringResource(R.string.see_on_youtube),
                     link = it,
                     style = MaterialTheme.typography.bodyMedium
@@ -201,6 +214,6 @@ fun DetailsScreenPreview() {
             mealIngredients = listOf(MealIngredient(name = "Lemon", measure = "2psc"))
 
         ),
-        tapOnFavoritesAction = {}
+        tapOnFavoritesAction = {},
     )
 }

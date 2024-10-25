@@ -7,6 +7,7 @@ import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -22,7 +23,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Refresh
-import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -35,7 +35,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.geometry.center
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RadialGradientShader
+import androidx.compose.ui.graphics.Shader
+import androidx.compose.ui.graphics.ShaderBrush
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -45,16 +50,12 @@ import com.cyd.base.extension.ifNotNullOrEmpty
 import com.cyd.base.model.RandomMeal
 import com.cyd.ui.view.base.AnnotatedClickableText
 import com.cyd.ui.view.base.ProgressAsyncImage
-import com.cyd.ui.view.base.RandomMealScreenConstants
 import com.cyd.ui.view.base.style.CydTheme
 
 @Composable
 fun RandomMealView(
     model: RandomMeal,
     onLoadNextRandomMeal: () -> Unit = {},
-    onClickGoToCategories: () -> Unit = {},
-    onClickGoToIngredients: () -> Unit = {},
-    onClickGoToFavorites: () -> Unit = {},
     onClickGoToMealDetails: (Pair<String, String>) -> Unit = {},
 ) {
     var expanded by remember { mutableStateOf(false) }
@@ -63,7 +64,6 @@ fun RandomMealView(
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        NavigateButtonsView(onClickGoToIngredients, onClickGoToCategories, onClickGoToFavorites)
         Column(
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -71,6 +71,7 @@ fun RandomMealView(
         ) {
             Card(
                 modifier = Modifier
+                    .clickable { onClickGoToMealDetails.invoke(model.idMeal to model.strMeal) }
                     .verticalScroll(rememberScrollState(0))
                     .fillMaxWidth()
                     .animateContentSize(animationSpec = tween(100)),
@@ -86,9 +87,8 @@ fun RandomMealView(
                     ProgressAsyncImage(
                         model = model.strMealThumb,
                         modifier = Modifier
-                            .clickable { onClickGoToMealDetails.invoke(model.idMeal to model.strMeal) }
-                            .height(200.dp)
-                            .fillMaxWidth(),
+                            .fillMaxWidth()
+                            .height(200.dp),
                         withLoadingIndicator = false,
                         transformation = RoundedCornersTransformation(8f)
                     )
@@ -135,12 +135,13 @@ fun RandomMealView(
                                     .padding(bottom = 8.dp)
                                     .clickable { expanded = !expanded },
                                 text = stringResource(R.string.click_to_see_instructions),
-                                style = MaterialTheme.typography.bodyMedium,
+                                style = MaterialTheme.typography.bodyLarge,
                                 color = MaterialTheme.colorScheme.tertiary
                             )
                         }
                         model.strYoutube.ifNotNullOrEmpty {
                             AnnotatedClickableText(
+                                modifier = Modifier.padding(bottom = 8.dp),
                                 str = stringResource(R.string.see_on_youtube),
                                 link = it,
                                 style = MaterialTheme.typography.titleSmall
@@ -148,6 +149,7 @@ fun RandomMealView(
                         }
                         model.strSource.ifNotNullOrEmpty {
                             AnnotatedClickableText(
+                                modifier = Modifier.padding(bottom = 8.dp),
                                 str = stringResource(R.string.original_post),
                                 link = it,
                                 style = MaterialTheme.typography.titleSmall
@@ -161,61 +163,24 @@ fun RandomMealView(
 }
 
 @Composable
-private fun NavigateButtonsView(
-    onClickGoToIngredients: () -> Unit,
-    onClickGoToCategories: () -> Unit,
-    onClickGoToFavorites: () -> Unit
-) {
-    Column {
-        Row {
-            Button(
-                onClick = { onClickGoToIngredients.invoke() },
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(end = 8.dp)
-                    .testTag(RandomMealScreenConstants.GO_TO_INGREDIENTS)
-            ) {
-                Text(
-                    text = stringResource(R.string.go_to_ingredients),
-                    style = MaterialTheme.typography.labelLarge
-                )
-            }
-
-            Button(
-                onClick = { onClickGoToCategories.invoke() },
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(start = 8.dp)
-                    .testTag(RandomMealScreenConstants.GO_TO_CATEGORIES)
-            ) {
-                Text(
-                    text = stringResource(R.string.go_to_categories),
-                    style = MaterialTheme.typography.labelLarge
-                )
-            }
-        }
-        Row {
-            Button(
-                onClick = { onClickGoToFavorites.invoke() },
-                modifier = Modifier
-                    .weight(1f)
-                    .testTag(RandomMealScreenConstants.GO_TO_FAVORITES)
-            ) {
-                Text(
-                    text = stringResource(R.string.favorites),
-                    style = MaterialTheme.typography.labelLarge
-                )
-            }
+private fun SurpriseMeView(modifier: Modifier, onLoadNextRandomMeal: () -> Unit) {
+    val color = MaterialTheme.colorScheme.tertiaryContainer
+    val largeRadialGradient = object : ShaderBrush() {
+        override fun createShader(size: Size): Shader {
+            val biggerDimension = maxOf(size.height, size.width)
+            return RadialGradientShader(
+                colors = listOf(color, Color.Transparent),
+                center = size.center,
+                radius = biggerDimension / 2f,
+                colorStops = listOf(0f, 0.95f)
+            )
         }
     }
-}
-
-@Composable
-private fun SurpriseMeView(modifier: Modifier, onLoadNextRandomMeal: () -> Unit) {
     Row(
         modifier = modifier
             .clickable { onLoadNextRandomMeal.invoke() }
-            .padding(16.dp),
+            .background(largeRadialGradient)
+            .padding(vertical = 16.dp, horizontal = 70.dp),
     ) {
         RotateIcon()
         Text(
