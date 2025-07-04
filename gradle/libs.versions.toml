@@ -8,8 +8,9 @@ coilCompose = "2.2.2"
 customview = "1.2.0-alpha02"
 customviewPoolingcontainer = "1.0.0"
 firebaseBom = "33.4.0"
+firebaseCrashlyticsGradle = "3.0.2"
 googleServices = "4.4.2"
-gradle = "8.5.0"
+gradle = "8.11.0"
 hilt-android = "2.49"
 hiltNavigationCompose = "1.2.0"
 kotlinxCoroutinesAndroid = "1.7.3"
@@ -63,7 +64,10 @@ androidx-customview-poolingcontainer = { module = "androidx.customview:customvie
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
 coil-gif = { module = "io.coil-kt:coil-gif", version.ref = "coilCompose" }
 
+firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
+firebase-crashlytics-gradle = { module = "com.google.firebase:firebase-crashlytics-gradle", version.ref = "firebaseCrashlyticsGradle" }
 google-services = { module = "com.google.gms:google-services", version.ref = "googleServices" }
 gradle = { module = "com.android.tools.build:gradle", version.ref = "gradle" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt-android" }
