@@ -6,15 +6,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.cyd.R
 import com.cyd.core.navigation.Graph
 import com.cyd.feature.random_meal.RandomMealScreen
 import com.cyd.feature.random_meal.viewmodel.RandomMealUiState
 import com.cyd.feature.random_meal.viewmodel.RandomMealViewModel
-import com.cyd.ui.view.base.MealScaffold
 
 @Composable
 fun RandomMealRoute(
@@ -30,18 +27,15 @@ fun RandomMealRoute(
             navController.popBackStack()
         }
     }
-
-    MealScaffold(stringResource(R.string.dish_of_the_day)) {
-        RandomMealScreen(
-            state,
-            viewModel::onLoadNextRandomMealClick,
-        ) {
-            navController.navigate(
-                Graph.MealDetailsScreen.withStringArgs(
-                    it.first,
-                    it.second
-                )
+    RandomMealScreen(
+        state,
+        viewModel::onLoadNextRandomMealClick,
+    ) {
+        navController.navigate(
+            Graph.MealDetailsScreen.withStringArgs(
+                it.first,
+                it.second
             )
-        }
+        )
     }
 }
