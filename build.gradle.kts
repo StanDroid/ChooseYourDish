@@ -14,13 +14,12 @@ buildscript {
         classpath(libs.jacoco.gradle)
         classpath(libs.ktlint.gradle)
         classpath(libs.google.services)
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        classpath(libs.firebase.crashlytics.gradle)
     }
 }
 plugins {
-    id("com.google.devtools.ksp") version "1.8.20-1.0.11"
-    kotlin("plugin.serialization") version "1.8.22"
+    id("com.google.devtools.ksp") version "1.9.25-1.0.20"
+    kotlin("plugin.serialization") version "1.9.25"
 }
 
 tasks.register<Delete>("clean") {
