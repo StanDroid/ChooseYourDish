@@ -8,14 +8,12 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Composable
 fun CydTheme(
     isDarkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
-    val systemUiController = rememberSystemUiController()
 
     val colors = if (!isDarkTheme) {
         LightColors
@@ -28,7 +26,6 @@ fun CydTheme(
         shapes = MealsShapes,
         content = content
     )
-    systemUiController.setSystemBarsColor(color = colors.primaryContainer)
 }
 
 private val LightColors = lightColorScheme(

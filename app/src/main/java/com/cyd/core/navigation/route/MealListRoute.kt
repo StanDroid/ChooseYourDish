@@ -9,7 +9,6 @@ import com.cyd.base.model.MealItem
 import com.cyd.feature.category_meals.MealListScreen
 import com.cyd.feature.category_meals.viewmodel.MealListViewModel
 import com.cyd.feature.category_meals.viewmodel.MealType
-import com.cyd.ui.view.base.MealScaffold
 
 @Composable
 fun MealListRoute(
@@ -19,11 +18,9 @@ fun MealListRoute(
 ) {
     val viewModel = hiltViewModel<MealListViewModel>()
     val state by remember { viewModel.uiState }
-    MealScaffold(name) {
-        MealListScreen(
-            state.toUiState(),
-            onMealClick = onMealClick,
-            initLoading = { viewModel.loadMeals(MealType.Category(name)) }
-        )
-    }
+    MealListScreen(
+        state.toUiState(),
+        onMealClick = onMealClick,
+        initLoading = { viewModel.loadMeals(MealType.Category(name)) }
+    )
 }
