@@ -4,7 +4,7 @@ import androidx.annotation.Keep
 
 @Keep
 data class RandomMealResponse(
-    val meals: List<RandomMealDTO>
+    val meals: List<RandomMealDTO>,
 )
 
 @Keep
@@ -61,5 +61,5 @@ data class RandomMealDTO(
     val strMeasure9: String?,
     val strSource: String?,
     val strTags: Any?,
-    val strYoutube: String?
+    val strYoutube: String?,
 )

@@ -7,7 +7,6 @@ import com.cyd.data.network.model.MealListItemDTO
 import com.cyd.data.network.model.RandomMealDTO
 
 interface MealDataSource {
-
     suspend fun getRandomMeal(): RandomMealDTO?
 
     suspend fun getMealCategories(): List<CategoryDTO>?

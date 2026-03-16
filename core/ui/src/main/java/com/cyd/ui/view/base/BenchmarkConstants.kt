@@ -10,4 +10,3 @@ object CategoryListScreenConstants {
     const val CATEGORY_ITEM = "category"
     const val CATEGORY_LIST = "category_list"
 }
-

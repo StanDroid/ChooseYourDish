@@ -10,8 +10,6 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 interface NetworkModule {
-
     @Binds
     fun bindKtorMealDataSource(mealDataSource: KtorMealDataSourceImpl): MealDataSource
-
 }

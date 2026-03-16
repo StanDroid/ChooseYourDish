@@ -5,14 +5,15 @@ import com.cyd.base.model.MealItem
 import com.cyd.data.network.model.MealListItemDTO
 import javax.inject.Inject
 
-class MealListItemMapper @Inject constructor() : Mapper<MealListItemDTO, MealItem> {
-
+class MealListItemMapper
+@Inject
+constructor() : Mapper<MealListItemDTO, MealItem> {
     override fun map(param: MealListItemDTO): MealItem {
         param.let {
             return MealItem(
                 id = it.idMeal.orEmpty(),
                 name = it.strMeal.orEmpty(),
-                thumb = it.strMealThumb.orEmpty()
+                thumb = it.strMealThumb.orEmpty(),
             )
         }
     }

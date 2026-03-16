@@ -60,48 +60,56 @@ fun MealDetailsView(
 ) {
     Column(
         Modifier
-            .verticalScroll(rememberScrollState(0))
+            .verticalScroll(rememberScrollState(0)),
     ) {
         Box {
             SharedTransitionLayout {
                 this@Column.AnimatedVisibility(visible = true) {
                     AsyncImage(
-                        model = ImageRequest.Builder(LocalContext.current)
-                            .data(meal.mealThumb)
-                            .crossfade(true)
-                            .build(),
+                        model =
+                            ImageRequest
+                                .Builder(LocalContext.current)
+                                .data(meal.mealThumb)
+                                .crossfade(true)
+                                .build(),
                         placeholder = null,
                         contentScale = ContentScale.FillWidth,
                         contentDescription = null,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .sharedBounds(
-                                rememberSharedContentState(key = meal.mealThumb.orEmpty()),
-                                animatedVisibilityScope = this
-                            )
-                            .animateContentSize()
+                        modifier =
+                            Modifier
+                                .fillMaxWidth()
+                                .sharedBounds(
+                                    rememberSharedContentState(key = meal.mealThumb.orEmpty()),
+                                    animatedVisibilityScope = this,
+                                )
+                                .animateContentSize(),
                     )
                 }
             }
             var isFavorite by remember { mutableStateOf(meal.isFavorite) }
             Icon(
-                imageVector = if (meal.isFavorite)
-                    Icons.Default.Favorite
-                else
-                    Icons.Default.FavoriteBorder,
+                imageVector =
+                    if (meal.isFavorite) {
+                        Icons.Default.Favorite
+                    } else {
+                        Icons.Default.FavoriteBorder
+                    },
                 tint = if (meal.isFavorite) Color.Red else Color.White,
                 contentDescription = "",
-                modifier = Modifier
-                    .align(Alignment.TopEnd)
-                    .padding(16.dp)
-                    .size(32.dp)
-                    .clickable(indication = null,
-                        interactionSource = remember { MutableInteractionSource() }
-                    ) {
-                        isFavorite = !isFavorite
-                        tapOnFavoritesAction.invoke()
-                    }
-                    .scale(animateFloatAsState(if (isFavorite) 1.2f else 1f, label = "").value))
+                modifier =
+                    Modifier
+                        .align(Alignment.TopEnd)
+                        .padding(16.dp)
+                        .size(32.dp)
+                        .clickable(
+                            indication = null,
+                            interactionSource = remember { MutableInteractionSource() },
+                        ) {
+                            isFavorite = !isFavorite
+                            tapOnFavoritesAction.invoke()
+                        }
+                        .scale(animateFloatAsState(if (isFavorite) 1.2f else 1f, label = "").value),
+            )
         }
         Column(
             Modifier.padding(16.dp),
@@ -111,7 +119,7 @@ fun MealDetailsView(
             LazyVerticalGrid(
                 modifier = Modifier.heightIn(max = 2000.dp),
                 columns = GridCells.Fixed(2),
-                userScrollEnabled = false
+                userScrollEnabled = false,
             ) {
                 items(meal.mealIngredients) { item ->
                     IngredientRow(item)
@@ -121,7 +129,7 @@ fun MealDetailsView(
                 modifier = Modifier.padding(top = 16.dp),
                 text = meal.instructions.orEmpty(),
                 style = MaterialTheme.typography.bodyMedium,
-                lineHeight = 19.sp
+                lineHeight = 19.sp,
             )
             RowTitleText(stringResource(R.string.tags), meal.tags.orEmpty())
             meal.source.ifNotNullOrEmpty {
@@ -129,7 +137,7 @@ fun MealDetailsView(
                     modifier = Modifier.padding(top = 8.dp),
                     str = stringResource(R.string.original_post),
                     link = it,
-                    style = MaterialTheme.typography.bodyMedium
+                    style = MaterialTheme.typography.bodyMedium,
                 )
             }
             meal.youtube.ifNotNullOrEmpty {
@@ -137,7 +145,7 @@ fun MealDetailsView(
                     modifier = Modifier.padding(top = 8.dp),
                     str = stringResource(R.string.see_on_youtube),
                     link = it,
-                    style = MaterialTheme.typography.bodyMedium
+                    style = MaterialTheme.typography.bodyMedium,
                 )
             }
         }
@@ -147,20 +155,21 @@ fun MealDetailsView(
 @Composable
 private fun IngredientRow(
     mealIngredient: MealIngredient,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Row(modifier = modifier.padding(8.dp)) {
         ProgressAsyncImage(
             model = mealIngredient.imageUrl,
-            modifier = Modifier
-                .height(50.dp)
-                .width(50.dp)
-
+            modifier =
+                Modifier
+                    .height(50.dp)
+                    .width(50.dp),
         )
         Column(
-            modifier = Modifier
-                .align(Alignment.CenterVertically)
-                .padding(start = 8.dp)
+            modifier =
+                Modifier
+                    .align(Alignment.CenterVertically)
+                    .padding(start = 8.dp),
         ) {
             Text(
                 modifier = Modifier,
@@ -179,20 +188,24 @@ private fun IngredientRow(
 }
 
 @Composable
-private fun RowTitleText(title: String, text: String) {
+private fun RowTitleText(
+    title: String,
+    text: String,
+) {
     if (text.isNotEmpty()) {
         Row(modifier = Modifier.padding(top = 8.dp)) {
             Text(
                 text = "$title:",
-                style = MaterialTheme.typography.bodySmall
+                style = MaterialTheme.typography.bodySmall,
             )
             Text(
-                modifier = Modifier
-                    .align(Alignment.Bottom)
-                    .padding(start = 4.dp),
+                modifier =
+                    Modifier
+                        .align(Alignment.Bottom)
+                        .padding(start = 4.dp),
                 text = text,
                 style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onTertiaryContainer
+                color = MaterialTheme.colorScheme.onTertiaryContainer,
             )
         }
     }
@@ -205,14 +218,14 @@ fun DetailsScreenPreview() {
         Meal(
             category = "Category",
             area = "area",
-            instructions = "instructions\ninstructions\n" +
+            instructions =
+                "instructions\ninstructions\n" +
                     "instructions",
             source = "source",
             tags = "tags",
             youtube = "youtube",
             isFavorite = true,
-            mealIngredients = listOf(MealIngredient(name = "Lemon", measure = "2psc"))
-
+            mealIngredients = listOf(MealIngredient(name = "Lemon", measure = "2psc")),
         ),
         tapOnFavoritesAction = {},
     )

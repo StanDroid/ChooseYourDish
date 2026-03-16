@@ -10,13 +10,13 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 object IngredientsRepositoryModule {
-
     @Provides
     fun provideIngredientsRepository(
         mealDataSource: MealDataSource,
         ingredientsMapper: IngredientsMapper,
-    ): IngredientsRepository = IngredientsRepositoryImpl(
-        mealDataSource,
-        ingredientsMapper
-    )
+    ): IngredientsRepository =
+        IngredientsRepositoryImpl(
+            mealDataSource,
+            ingredientsMapper,
+        )
 }

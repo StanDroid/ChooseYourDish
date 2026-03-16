@@ -18,16 +18,14 @@ data class Meal(
     val source: String? = null,
     val tags: String? = null,
     val youtube: String? = null,
-    var isFavorite: Boolean = false
+    var isFavorite: Boolean = false,
 ) {
-    fun toMealItem(): MealItem {
-        return MealItem(id.orEmpty(), meal.orEmpty(), mealThumb.orEmpty())
-    }
+    fun toMealItem(): MealItem = MealItem(id.orEmpty(), meal.orEmpty(), mealThumb.orEmpty())
 }
 
 data class MealIngredient(
     val name: String,
-    val measure: String?
+    val measure: String?,
 ) {
     val imageUrl: String = BASE_INGREDIENT_IMAGE_URL + name + BASE_INGREDIENT_IMAGE_EXTENSION
 }

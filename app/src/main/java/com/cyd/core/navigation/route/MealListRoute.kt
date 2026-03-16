@@ -1,14 +1,15 @@
 package com.cyd.core.navigation.route
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import com.cyd.base.model.MealItem
-import com.cyd.feature.category_meals.MealListScreen
-import com.cyd.feature.category_meals.viewmodel.MealListViewModel
-import com.cyd.feature.category_meals.viewmodel.MealType
+import com.cyd.feature.categorymeals.MealListScreen
+import com.cyd.feature.categorymeals.viewmodel.MealListViewModel
+import com.cyd.feature.categorymeals.viewmodel.MealType
 
 @Composable
 fun MealListRoute(
@@ -17,10 +18,14 @@ fun MealListRoute(
     onMealClick: (MealItem) -> Unit,
 ) {
     val viewModel = hiltViewModel<MealListViewModel>()
-    val state by remember { viewModel.uiState }
+    val state by viewModel.uiState.collectAsStateWithLifecycle()
+
+    LaunchedEffect(Unit) {
+        viewModel.loadMeals(MealType.Category(name))
+    }
+
     MealListScreen(
-        state.toUiState(),
+        state,
         onMealClick = onMealClick,
-        initLoading = { viewModel.loadMeals(MealType.Category(name)) }
     )
 }

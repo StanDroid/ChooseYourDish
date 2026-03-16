@@ -11,5 +11,5 @@ data class RandomMeal(
     val strInstructions: String,
     val strMealThumb: String,
     val strYoutube: String,
-    val strSource: String
+    val strSource: String,
 )

@@ -20,24 +20,28 @@ fun AnnotatedClickableText(
     style: TextStyle = TextStyle.Default,
 ) {
     if (str.isEmpty()) return
-    val annotatedLinkString: AnnotatedString = buildAnnotatedString {
-        append(str)
-        addStyle(
-            style = SpanStyle(
-                color = Color(0xff64B5F6),
-                fontSize = style.fontSize,
-                textDecoration = TextDecoration.Underline
-            ), start = 0, end = str.length
-        )
+    val annotatedLinkString: AnnotatedString =
+        buildAnnotatedString {
+            append(str)
+            addStyle(
+                style =
+                    SpanStyle(
+                        color = Color(0xff64B5F6),
+                        fontSize = style.fontSize,
+                        textDecoration = TextDecoration.Underline,
+                    ),
+                start = 0,
+                end = str.length,
+            )
 
-        // attach a string annotation that stores a URL to the text "link"
-        addStringAnnotation(
-            tag = "URL",
-            annotation = link,
-            start = 0,
-            end = str.length - 1
-        )
-    }
+            // attach a string annotation that stores a URL to the text "link"
+            addStringAnnotation(
+                tag = "URL",
+                annotation = link,
+                start = 0,
+                end = str.length - 1,
+            )
+        }
     val uriHandler = LocalUriHandler.current
     ClickableText(
         modifier = modifier.fillMaxWidth(),
@@ -45,10 +49,11 @@ fun AnnotatedClickableText(
         onClick = {
             annotatedLinkString
                 .getStringAnnotations("URL", it, it)
-                .firstOrNull()?.let { string ->
+                .firstOrNull()
+                ?.let { string ->
                     uriHandler.openUri(string.item)
                 }
         },
-        style = style
+        style = style,
     )
 }

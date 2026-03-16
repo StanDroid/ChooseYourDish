@@ -4,7 +4,7 @@ import androidx.annotation.Keep
 
 @Keep
 data class MealDetailsResponse(
-    val meals: List<MealDetailsDTO>?
+    val meals: List<MealDetailsDTO>?,
 )
 
 @Keep
@@ -61,7 +61,7 @@ data class MealDetailsDTO(
     val strMeasure9: String?,
     val strSource: String?,
     val strTags: String?,
-    val strYoutube: String?
+    val strYoutube: String?,
 ) {
     fun getIngredient(index: Int): String? {
         val fieldName = "strIngredient$index"

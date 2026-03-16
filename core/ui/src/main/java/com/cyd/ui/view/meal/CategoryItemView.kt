@@ -35,56 +35,64 @@ import com.cyd.ui.view.base.ProgressAsyncImage
 @Composable
 fun CategoryItemView(
     category: Category,
-    onCategoryClick: (Category) -> Unit
+    onCategoryClick: (Category) -> Unit,
 ) {
     var expanded by remember { mutableStateOf(false) }
     Card(
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
     ) {
         Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .clickable { onCategoryClick.invoke(category) }
-                .padding(start = 16.dp, end = 16.dp)
-                .animateContentSize(
-                    animationSpec = spring(
-                        dampingRatio = Spring.DampingRatioMediumBouncy,
-                        stiffness = Spring.StiffnessLow
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .clickable { onCategoryClick.invoke(category) }
+                    .padding(start = 16.dp, end = 16.dp)
+                    .animateContentSize(
+                        animationSpec =
+                            spring(
+                                dampingRatio = Spring.DampingRatioMediumBouncy,
+                                stiffness = Spring.StiffnessLow,
+                            ),
                     )
-                )
-                .testTag(CATEGORY_ITEM)
+                    .testTag(CATEGORY_ITEM),
         ) {
             Row(Modifier.fillMaxWidth()) {
                 ProgressAsyncImage(
                     model = category.thumb,
-                    modifier = Modifier
-                        .height(70.dp)
-                        .width(70.dp)
+                    modifier =
+                        Modifier
+                            .height(70.dp)
+                            .width(70.dp),
                 )
                 Text(
                     text = category.name,
-                    modifier = Modifier
-                        .align(CenterVertically)
-                        .padding(16.dp)
-                        .weight(1f),
-                    style = MaterialTheme.typography.titleMedium
+                    modifier =
+                        Modifier
+                            .align(CenterVertically)
+                            .padding(16.dp)
+                            .weight(1f),
+                    style = MaterialTheme.typography.titleMedium,
                 )
                 Icon(
-                    modifier = Modifier
-                        .clickable { expanded = !expanded }
-                        .padding(16.dp)
-                        .align(CenterVertically),
-                    imageVector = if (expanded)
-                        Icons.Filled.KeyboardArrowUp
-                    else Icons.Filled.KeyboardArrowDown,
-                    contentDescription = null
+                    modifier =
+                        Modifier
+                            .clickable { expanded = !expanded }
+                            .padding(16.dp)
+                            .align(CenterVertically),
+                    imageVector =
+                        if (expanded) {
+                            Icons.Filled.KeyboardArrowUp
+                        } else {
+                            Icons.Filled.KeyboardArrowDown
+                        },
+                    contentDescription = null,
                 )
             }
             if (expanded) {
                 Text(
                     modifier = Modifier.padding(top = 8.dp, bottom = 16.dp),
                     text = category.description,
-                    style = MaterialTheme.typography.titleSmall
+                    style = MaterialTheme.typography.titleSmall,
                 )
             }
         }
@@ -99,6 +107,8 @@ fun CategoryItemViewPreview() {
             id = "ID",
             name = "Name",
             "descr",
-            "thumb"
-        ), onCategoryClick = { })
+            "thumb",
+        ),
+        onCategoryClick = { },
+    )
 }
