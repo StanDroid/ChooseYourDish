@@ -6,7 +6,6 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
 class MealIngredientListConverter {
-
     @TypeConverter
     fun fromMealIngredientList(mealIngredients: List<MealIngredient>): String {
         val gson = Gson()

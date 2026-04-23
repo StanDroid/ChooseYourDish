@@ -90,10 +90,9 @@ def setupAndroidReporting() {
                     xml.required = false
                     csv.required = false
                     html.required = true
-                    html.destination file("${buildDir}/coverage-report")
+                    html.outputLocation = file("${buildDir}/coverage-report")
                 }
             }
         }
     }
 }
-

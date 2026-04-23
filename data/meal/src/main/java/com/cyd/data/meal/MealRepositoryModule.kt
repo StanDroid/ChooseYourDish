@@ -15,7 +15,6 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 object MealRepositoryModule {
-
     @Provides
     fun provideMealRepository(
         mealDataSource: MealDataSource,
@@ -24,7 +23,7 @@ object MealRepositoryModule {
         mealDetailsMapper: MealDetailsMapper,
         favoriteMealDao: FavoriteMealDao,
         mealItemToFavoriteMealMapper: MealItemToFavoriteMealMapper,
-        favoriteMealToMealItemMapper: FavoriteMealToMealItemMapper
+        favoriteMealToMealItemMapper: FavoriteMealToMealItemMapper,
     ): MealRepository =
         MealRepositoryImpl(
             mealDataSource,
@@ -33,6 +32,6 @@ object MealRepositoryModule {
             mealDetailsMapper,
             favoriteMealDao,
             favoriteMealToMealItemMapper,
-            mealItemToFavoriteMealMapper
+            mealItemToFavoriteMealMapper,
         )
 }

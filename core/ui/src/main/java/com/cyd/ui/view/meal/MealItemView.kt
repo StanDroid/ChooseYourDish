@@ -24,34 +24,37 @@ import com.cyd.ui.view.base.ProgressAsyncImage
 @Composable
 fun MealItemView(
     mealItem: MealItem,
-    onMealClick: (MealItem) -> Unit
+    onMealClick: (MealItem) -> Unit,
 ) {
     Column(
         Modifier
             .fillMaxWidth()
             .clickable { onMealClick.invoke(mealItem) }
             .animateContentSize(
-                animationSpec = spring(
-                    dampingRatio = Spring.DampingRatioMediumBouncy,
-                    stiffness = Spring.StiffnessLow
-                )
-            )
+                animationSpec =
+                    spring(
+                        dampingRatio = Spring.DampingRatioMediumBouncy,
+                        stiffness = Spring.StiffnessLow,
+                    ),
+            ),
     ) {
         Row(Modifier.fillMaxWidth()) {
             ProgressAsyncImage(
                 model = mealItem.thumb,
-                modifier = Modifier
-                    .height(120.dp)
-                    .width(120.dp),
-                transformation = CircleCropTransformation()
+                modifier =
+                    Modifier
+                        .height(120.dp)
+                        .width(120.dp),
+                transformation = CircleCropTransformation(),
             )
             Text(
                 text = mealItem.name,
-                modifier = Modifier
-                    .align(CenterVertically)
-                    .padding(16.dp)
-                    .weight(1f),
-                style = MaterialTheme.typography.titleMedium
+                modifier =
+                    Modifier
+                        .align(CenterVertically)
+                        .padding(16.dp)
+                        .weight(1f),
+                style = MaterialTheme.typography.titleMedium,
             )
         }
     }
@@ -60,10 +63,13 @@ fun MealItemView(
 @Preview(showBackground = true)
 @Composable
 private fun MealItemViewPreview() {
-    MealItemView(mealItem =
-        MealItem(
-            id = "ID",
-            name = "Name",
-            "thumb"
-        ), onMealClick = { })
+    MealItemView(
+        mealItem =
+            MealItem(
+                id = "ID",
+                name = "Name",
+                "thumb",
+            ),
+        onMealClick = { },
+    )
 }

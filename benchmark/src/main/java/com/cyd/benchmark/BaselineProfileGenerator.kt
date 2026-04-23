@@ -31,7 +31,8 @@ class BaselineProfileGenerator {
     }
 
     private fun MacrobenchmarkScope.goToCategoriesJourney() {
-        device.findObject(By.text("Go to Categories"))
+        device
+            .findObject(By.text("Go to Categories"))
             .clickAndWait(Until.newWindow(), 1_000)
 
         device.findObject(By.res(CategoryListScreenConstants.CATEGORY_LIST)).also {

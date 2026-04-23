@@ -6,9 +6,7 @@ import com.cyd.core.navigation.Graph
 import com.cyd.core.navigation.SplashScreen
 
 @Composable
-fun SplashScreenRoute(
-    navController: NavHostController
-) {
+fun SplashScreenRoute(navController: NavHostController) {
     SplashScreen {
         navController.navigate(Graph.HomeGraph.route) {
             popUpTo(Graph.SplashGraph.SplashScreen.route) {

@@ -6,8 +6,9 @@ import com.cyd.base.model.MealIngredient
 import com.cyd.data.network.model.MealDetailsDTO
 import javax.inject.Inject
 
-class MealDetailsMapper @Inject constructor() : Mapper<MealDetailsDTO, Meal> {
-
+class MealDetailsMapper
+@Inject
+constructor() : Mapper<MealDetailsDTO, Meal> {
     override fun map(param: MealDetailsDTO): Meal {
         val mealIngredients = mutableListOf<MealIngredient>()
         for (i in 1..20) {
@@ -17,8 +18,8 @@ class MealDetailsMapper @Inject constructor() : Mapper<MealDetailsDTO, Meal> {
                 mealIngredients.add(
                     MealIngredient(
                         name = ingredientName,
-                        measure = measureName
-                    )
+                        measure = measureName,
+                    ),
                 )
             }
         }
@@ -36,8 +37,7 @@ class MealDetailsMapper @Inject constructor() : Mapper<MealDetailsDTO, Meal> {
             mealThumb = param.strMealThumb,
             source = param.strSource,
             tags = param.strTags,
-            youtube = param.strYoutube
+            youtube = param.strYoutube,
         )
-
     }
 }

@@ -1,3 +1,6 @@
+plugins {
+    id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
+}
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -16,13 +19,13 @@ include(":data:meal")
 include(":data:network")
 include(":data:db")
 
-include(":core:data")
 include(":core:base")
-
 include(":core:ui")
-include(":feature:random_meal")
+
+include(":feature:randommeal")
 include(":feature:categories")
-include(":benchmark")
-include(":feature:category_meals")
-include(":feature:meal_details")
+include(":feature:categorymeals")
+include(":feature:mealdetails")
 include(":feature:search")
+
+include(":benchmark")

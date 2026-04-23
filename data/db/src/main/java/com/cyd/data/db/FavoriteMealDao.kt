@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface FavoriteMealDao {
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFavoriteMeal(meal: FavoriteMealEntity)
 

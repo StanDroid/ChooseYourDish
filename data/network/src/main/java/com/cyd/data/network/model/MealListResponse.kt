@@ -4,12 +4,12 @@ import androidx.annotation.Keep
 
 @Keep
 data class MealListResponse(
-    val meals: List<MealListItemDTO>?
+    val meals: List<MealListItemDTO>?,
 )
 
 @Keep
 data class MealListItemDTO(
     val idMeal: String?,
     val strMeal: String?,
-    val strMealThumb: String?
+    val strMealThumb: String?,
 )
