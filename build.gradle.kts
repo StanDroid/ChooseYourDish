@@ -10,7 +10,6 @@ buildscript {
     dependencies {
         classpath(libs.gradle)
         classpath(libs.kotlin.gradle.plugin)
-        classpath(libs.hilt.android.gradle.plugin)
         classpath(libs.jacoco.gradle)
         classpath(libs.ktlint.gradle)
         classpath(libs.google.services)
@@ -18,8 +17,10 @@ buildscript {
     }
 }
 plugins {
-    id("com.google.devtools.ksp") version "1.9.25-1.0.20"
-    kotlin("plugin.serialization") version "1.9.25"
+    id("com.google.devtools.ksp") version "2.2.0-2.0.2"
+    kotlin("plugin.serialization") version "2.2.0"
+    alias(libs.plugins.kotlin.compose) apply false
+    alias(libs.plugins.hilt) apply false
 }
 
 tasks.register<Delete>("clean") {

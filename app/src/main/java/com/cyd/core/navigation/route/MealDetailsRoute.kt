@@ -1,12 +1,13 @@
 package com.cyd.core.navigation.route
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
-import com.cyd.feature.meal_details.MealDetailsScreen
-import com.cyd.feature.meal_details.viewmodel.MealDetailsViewModel
+import com.cyd.feature.mealdetails.MealDetailsScreen
+import com.cyd.feature.mealdetails.viewmodel.MealDetailsViewModel
 
 @Composable
 fun MealDetailsRoute(
@@ -15,10 +16,15 @@ fun MealDetailsRoute(
     navController: NavHostController,
 ) {
     val viewModel = hiltViewModel<MealDetailsViewModel>()
-    val state by remember { viewModel.uiState }
-        MealDetailsScreen(
-            state.toUiState(),
-            loadMealDetailsAction = { viewModel.loadMealDetails(id) },
-            tapOnFavoritesAction = { viewModel.tapOnFavorite() },
-        )
+
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+
+    LaunchedEffect(Unit) {
+        viewModel.loadMealDetails(id)
+    }
+
+    MealDetailsScreen(
+        uiState,
+        tapOnFavoritesAction = { viewModel.tapOnFavorite() },
+    )
 }

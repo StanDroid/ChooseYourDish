@@ -3,10 +3,8 @@
 package com.cyd.core.navigation
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -59,7 +57,6 @@ import com.cyd.core.navigation.route.RandomMealRoute
 import com.cyd.core.navigation.route.SearchRoute
 import com.cyd.core.navigation.route.SplashScreenRoute
 
-
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun NavigationSystem() {
@@ -70,35 +67,41 @@ fun NavigationSystem() {
 
     val destination = currentDestination?.route?.split("/")?.first()
 
-    val topBarTitle = when (destination) {
-        Graph.HomeGraph.HomeScreen.route -> stringResource(R.string.dish_of_the_day)
-        Graph.CategoriesGraph.CategoryListScreen.route -> stringResource(R.string.categories)
-        Graph.CategoriesGraph.MealListScreen.route -> currentBackStackEntry?.arguments?.getString(
-            PARAM_NAME
-        ) ?: stringResource(R.string.meals)
+    val topBarTitle =
+        when (destination) {
+            Graph.HomeGraph.HomeScreen.route -> stringResource(R.string.dish_of_the_day)
+            Graph.CategoriesGraph.CategoryListScreen.route -> stringResource(R.string.categories)
+            Graph.CategoriesGraph.MealListScreen.route ->
+                currentBackStackEntry?.arguments?.getString(
+                    PARAM_NAME,
+                ) ?: stringResource(R.string.meals)
 
-        Graph.MealDetailsScreen.route -> currentBackStackEntry?.arguments?.getString(PARAM_NAME)
-            ?: stringResource(R.string.details)
+            Graph.MealDetailsScreen.route ->
+                currentBackStackEntry?.arguments?.getString(PARAM_NAME)
+                    ?: stringResource(R.string.details)
 
-        Graph.SearchGraph.SearchScreen.route -> stringResource(R.string.ingredients)
-        Graph.FavoritesGraph.FavoritesScreen.route -> stringResource(R.string.favorites)
-        else -> ""
-    }
+            Graph.SearchGraph.SearchScreen.route -> stringResource(R.string.ingredients)
+            Graph.FavoritesGraph.FavoritesScreen.route -> stringResource(R.string.favorites)
+            else -> ""
+        }
 
-    val icon = when (destination) {
-        Graph.MealDetailsScreen.route -> Icons.AutoMirrored.Filled.ArrowBack
-        else -> null
-    }
+    val icon =
+        when (destination) {
+            Graph.MealDetailsScreen.route -> Icons.AutoMirrored.Filled.ArrowBack
+            else -> null
+        }
 
-    val iconClick: () -> Unit = when (destination) {
-        Graph.MealDetailsScreen.route -> ({ navController.navigateUp() })
-        else -> ({ })
-    }
+    val iconClick: () -> Unit =
+        when (destination) {
+            Graph.MealDetailsScreen.route -> ({ navController.navigateUp() })
+            else -> ({ })
+        }
 
-    val showTopBar = when (destination) {
-        Graph.SplashGraph.SplashScreen.route -> false
-        else -> true
-    }
+    val showTopBar =
+        when (destination) {
+            Graph.SplashGraph.SplashScreen.route -> false
+            else -> true
+        }
     val expanded = remember { mutableStateOf(false) }
     val uriHandler = LocalUriHandler.current
 
@@ -110,7 +113,7 @@ fun NavigationSystem() {
                         Text(
                             text = topBarTitle,
                             maxLines = 2,
-                            overflow = TextOverflow.Ellipsis
+                            overflow = TextOverflow.Ellipsis,
                         )
                     },
                     navigationIcon = {
@@ -118,37 +121,40 @@ fun NavigationSystem() {
                             Icon(
                                 imageVector = icon,
                                 contentDescription = null,
-                                modifier = Modifier
-                                    .clickable { iconClick.invoke() }
-                                    .padding(16.dp)
+                                modifier =
+                                    Modifier
+                                        .clickable { iconClick.invoke() }
+                                        .padding(16.dp),
                             )
                         }
                     },
-                    colors = topAppBarColors(
-                        containerColor = MaterialTheme.colorScheme.primaryContainer,
-                        titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
-                        navigationIconContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
-                        actionIconContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
-                    ),
+                    colors =
+                        topAppBarColors(
+                            containerColor = MaterialTheme.colorScheme.primaryContainer,
+                            titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                            navigationIconContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                            actionIconContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                        ),
                     actions = {
                         IconButton(onClick = { expanded.value = true }) {
                             Icon(
                                 imageVector = Icons.Default.MoreVert,
-                                contentDescription = stringResource(com.cyd.ui.R.string.options)
+                                contentDescription = stringResource(com.cyd.ui.R.string.options),
                             )
                         }
                         DropdownMenu(
                             expanded = expanded.value,
-                            onDismissRequest = { expanded.value = false }
+                            onDismissRequest = { expanded.value = false },
                         ) {
                             DropdownMenuItem(
                                 text = { Text(stringResource(com.cyd.ui.R.string.privacy_policy)) },
                                 onClick = {
                                     expanded.value = false
                                     uriHandler.openUri(PRIVACY_POLICY)
-                                })
+                                },
+                            )
                         }
-                    }
+                    },
                 )
             }
         },
@@ -156,29 +162,22 @@ fun NavigationSystem() {
             AnimatedVisibility(isBottomNavBarVisible(currentBackStackEntry)) {
                 BottomNavBar(items, navController)
             }
-        }) { innerPadding ->
+        },
+        contentWindowInsets = WindowInsets(0, 0, 0, 0),
+    ) { innerPadding ->
         NavHost(
             navController = navController,
             startDestination = Graph.SplashGraph.route,
-            modifier = Modifier
-                .padding(innerPadding)
-                .semantics {
-                    testTagsAsResourceId = true
-                },
-            enterTransition = {
-                fadeIn(
-                    animationSpec = tween(durationMillis = 500), initialAlpha = 0.5f
-                )
-            },
-            exitTransition = {
-                fadeOut(
-                    animationSpec = tween(durationMillis = 500), targetAlpha = 0.5f
-                )
-            },
+            modifier =
+                Modifier
+                    .padding(innerPadding)
+                    .semantics {
+                        testTagsAsResourceId = true
+                    },
         ) {
             navigation(
                 route = Graph.SplashGraph.route,
-                startDestination = Graph.SplashGraph.SplashScreen.route
+                startDestination = Graph.SplashGraph.SplashScreen.route,
             ) {
                 composable(Graph.SplashGraph.SplashScreen.route) {
                     SplashScreenRoute(navController)
@@ -191,9 +190,11 @@ fun NavigationSystem() {
 
             composable(
                 route = Graph.MealDetailsScreen.route + "/{$PARAM_ID}/{$PARAM_NAME}",
-                arguments = listOf(
-                    navArgument(PARAM_ID) { type = NavType.StringType },
-                    navArgument(PARAM_NAME) { type = NavType.StringType })
+                arguments =
+                    listOf(
+                        navArgument(PARAM_ID) { type = NavType.StringType },
+                        navArgument(PARAM_NAME) { type = NavType.StringType },
+                    ),
             ) {
                 it.arguments?.let { args ->
                     MealDetailsRoute(
@@ -210,12 +211,13 @@ fun NavigationSystem() {
 @Composable
 private fun BottomNavBar(
     items: List<AppTab>,
-    navController: NavHostController
+    navController: NavHostController,
 ) {
     val currentBackStackEntry by navController.currentBackStackEntryAsState()
-    val closestNavGraphDestination = currentBackStackEntry?.destination?.hierarchy?.first {
-        it is NavGraph
-    }
+    val closestNavGraphDestination =
+        currentBackStackEntry?.destination?.hierarchy?.first {
+            it is NavGraph
+        }
     NavigationBar {
         val currentTab = items.firstOrNull { it.graph == closestNavGraphDestination?.route }
         items.forEach { tab ->
@@ -226,7 +228,7 @@ private fun BottomNavBar(
                         text = tab.title,
                         maxLines = 1,
                         softWrap = true,
-                        overflow = TextOverflow.Ellipsis
+                        overflow = TextOverflow.Ellipsis,
                     )
                 },
                 selected = currentTab == tab,
@@ -243,22 +245,20 @@ private fun BottomNavBar(
                         } else {
                             navController.navigateToRootScreen(
                                 tab.graph,
-                                closestNavGraphDestination
+                                closestNavGraphDestination,
                             )
                         }
                     }
-                }
+                },
             )
         }
     }
 }
 
-private fun NavGraphBuilder.addHomeRoute(
-    navController: NavHostController,
-) {
+private fun NavGraphBuilder.addHomeRoute(navController: NavHostController) {
     navigation(
         startDestination = Graph.HomeGraph.HomeScreen.route,
-        route = Graph.HomeGraph.route
+        route = Graph.HomeGraph.route,
     ) {
         composable(Graph.HomeGraph.HomeScreen.route) {
             RandomMealRoute(navController)
@@ -266,30 +266,32 @@ private fun NavGraphBuilder.addHomeRoute(
     }
 }
 
-private fun NavGraphBuilder.addCategoriesRoute(
-    navController: NavHostController,
-) {
+private fun NavGraphBuilder.addCategoriesRoute(navController: NavHostController) {
     navigation(
         route = Graph.CategoriesGraph.route,
-        startDestination = Graph.CategoriesGraph.CategoryListScreen.route
+        startDestination = Graph.CategoriesGraph.CategoryListScreen.route,
     ) {
         composable(Graph.CategoriesGraph.CategoryListScreen.route) {
             CategoryListRoute(navController)
         }
         composable(
             route = Graph.CategoriesGraph.MealListScreen.route + "/{$PARAM_ID}/{$PARAM_NAME}",
-            arguments = listOf(
-                navArgument(PARAM_ID) { type = NavType.StringType },
-                navArgument(PARAM_NAME) { type = NavType.StringType })
+            arguments =
+                listOf(
+                    navArgument(PARAM_ID) { type = NavType.StringType },
+                    navArgument(PARAM_NAME) { type = NavType.StringType },
+                ),
         ) {
             it.arguments?.let { args ->
                 MealListRoute(
-                    args.getString(PARAM_NAME).orEmpty(), navController
+                    args.getString(PARAM_NAME).orEmpty(),
+                    navController,
                 ) { navigateArgs ->
                     navController.navigate(
                         Graph.MealDetailsScreen.withStringArgs(
-                            navigateArgs.id, navigateArgs.name
-                        )
+                            navigateArgs.id,
+                            navigateArgs.name,
+                        ),
                     )
                 }
             }
@@ -297,9 +299,7 @@ private fun NavGraphBuilder.addCategoriesRoute(
     }
 }
 
-private fun NavGraphBuilder.addSearchRoute(
-    navController: NavHostController,
-) {
+private fun NavGraphBuilder.addSearchRoute(navController: NavHostController) {
     navigation(
         route = Graph.SearchGraph.route,
         startDestination = Graph.SearchGraph.SearchScreen.route,
@@ -310,12 +310,10 @@ private fun NavGraphBuilder.addSearchRoute(
     }
 }
 
-private fun NavGraphBuilder.addFavoritesRoute(
-    navController: NavHostController,
-) {
+private fun NavGraphBuilder.addFavoritesRoute(navController: NavHostController) {
     navigation(
         route = Graph.FavoritesGraph.route,
-        startDestination = Graph.FavoritesGraph.FavoritesScreen.route
+        startDestination = Graph.FavoritesGraph.FavoritesScreen.route,
     ) {
         composable(Graph.FavoritesGraph.FavoritesScreen.route) {
             FavouritesRoute(navController)
@@ -325,7 +323,7 @@ private fun NavGraphBuilder.addFavoritesRoute(
 
 private fun NavHostController.navigateToRootScreen(
     rootScreen: String,
-    closestNavGraphDestination: NavDestination?
+    closestNavGraphDestination: NavDestination?,
 ) {
     val dest = (closestNavGraphDestination as NavGraph).findStartDestination().route
     if (dest != currentDestination?.route) {
@@ -339,14 +337,19 @@ private fun NavHostController.navigateToRootScreen(
 }
 
 private fun isBottomNavBarVisible(currentBackStackEntry: NavBackStackEntry?) =
-    currentBackStackEntry != null && getSimpleRoute(currentBackStackEntry) !in setOf(
-        Graph.MealDetailsScreen.route,
-        Graph.SplashGraph.SplashScreen.route
-    )
+    currentBackStackEntry != null &&
+            getSimpleRoute(currentBackStackEntry) !in
+            setOf(
+                Graph.MealDetailsScreen.route,
+                Graph.SplashGraph.SplashScreen.route,
+            )
 
 private fun getSimpleRoute(currentBackStackEntry: NavBackStackEntry?) =
-    currentBackStackEntry?.destination?.route?.split("/")?.first()
-
+    currentBackStackEntry
+        ?.destination
+        ?.route
+        ?.split("/")
+        ?.first()
 
 const val PARAM_ID = "id"
 const val PARAM_NAME = "name"

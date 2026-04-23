@@ -10,19 +10,22 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class KtorMealNetwork @Inject constructor() {
-
+class KtorMealNetwork
+@Inject
+constructor() {
     // creates Ktor client with OkHttp engine
     val httpClient by lazy {
         HttpClient(OkHttp) {
             // default validation to throw exceptions for non-2xx responses
             expectSuccess = true
             engine {
-                addInterceptor(HttpLoggingInterceptor().apply {
-                    setLevel(
-                        HttpLoggingInterceptor.Level.BODY
-                    )
-                })
+                addInterceptor(
+                    HttpLoggingInterceptor().apply {
+                        setLevel(
+                            HttpLoggingInterceptor.Level.BODY,
+                        )
+                    },
+                )
             }
             // set default request parameters
             defaultRequest {
@@ -35,4 +38,3 @@ class KtorMealNetwork @Inject constructor() {
         }
     }
 }
-

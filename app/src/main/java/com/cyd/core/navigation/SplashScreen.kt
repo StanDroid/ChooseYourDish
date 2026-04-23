@@ -22,17 +22,17 @@ fun SplashScreen(onEndAction: () -> Unit) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.primaryContainer)
+            .background(MaterialTheme.colorScheme.primaryContainer),
     ) {
         val number by remember { mutableIntStateOf(Random.nextInt(0, 3)) }
         val composition by rememberLottieComposition(
-            LottieCompositionSpec.RawRes(getAnimationSource(number))
+            LottieCompositionSpec.RawRes(getAnimationSource(number)),
         )
         val logoAnimationState = animateLottieCompositionAsState(composition = composition)
         LottieAnimation(
             modifier = Modifier.align(Alignment.Center),
             composition = composition,
-            progress = { logoAnimationState.progress }
+            progress = { logoAnimationState.progress },
         )
         if (logoAnimationState.isAtEnd && logoAnimationState.isPlaying) {
             onEndAction.invoke()
@@ -40,10 +40,9 @@ fun SplashScreen(onEndAction: () -> Unit) {
     }
 }
 
-private fun getAnimationSource(number: Int): Int {
-    return when (number) {
+private fun getAnimationSource(number: Int): Int =
+    when (number) {
         0 -> R.raw.animation0
         1 -> R.raw.animation1
         else -> R.raw.animation2
     }
-}

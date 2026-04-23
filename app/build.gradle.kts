@@ -1,10 +1,11 @@
 plugins {
     id("com.android.application")
     id("kotlin-android")
-    id("dagger.hilt.android.plugin")
-    id("kotlin-kapt")
+    alias(libs.plugins.hilt)
+    id("com.google.devtools.ksp")
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
+    alias(libs.plugins.kotlin.compose)
 }
 apply(from = "${project.rootDir}/jacoco/jacoco.gradle")
 
@@ -34,7 +35,7 @@ android {
             isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
             isDebuggable = false
         }
@@ -49,14 +50,8 @@ android {
         sourceCompatibility = JavaVersion.VERSION_21
         targetCompatibility = JavaVersion.VERSION_21
     }
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_21.toString()
-    }
     buildFeatures {
         compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.15"
     }
     packaging {
         resources {
@@ -79,9 +74,9 @@ dependencies {
     implementation(project(":core:base"))
 
     implementation(project(":feature:categories"))
-    implementation(project(":feature:random_meal"))
-    implementation(project(":feature:category_meals"))
-    implementation(project(":feature:meal_details"))
+    implementation(project(":feature:randommeal"))
+    implementation(project(":feature:categorymeals"))
+    implementation(project(":feature:mealdetails"))
     implementation(project(":feature:search"))
 
     implementation(libs.androidx.ktx)
@@ -92,6 +87,8 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.material3.window.size)
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.material.icons.core)
 
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -101,7 +98,7 @@ dependencies {
 
     implementation(libs.hilt.android)
     implementation(libs.androidx.hilt.navigation.compose)
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
 
     implementation(libs.coil.compose)
     implementation(libs.coil.gif)

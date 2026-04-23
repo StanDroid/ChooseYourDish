@@ -19,11 +19,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.cyd.base.model.Ingredient
+import com.cyd.search.viewmodel.viewstate.SearchViewModelState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchScreen(
-    state: SearchViewModel.SearchViewModelState,
+    state: SearchViewModelState,
     onSearchTextChange: (String) -> Unit,
     onToggleSearch: () -> Unit,
     onItemClick: (Ingredient) -> Unit,
@@ -40,26 +41,30 @@ fun SearchScreen(
                     Icon(
                         Icons.Default.Clear,
                         contentDescription = null,
-                        modifier = Modifier.clickable {
-                            onSearchTextChange.invoke("")
-                        })
+                        modifier =
+                            Modifier.clickable {
+                                onSearchTextChange.invoke("")
+                            },
+                    )
                 }
             },
             onActiveChange = { onToggleSearch.invoke() },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp)
-                .padding(top = 16.dp)
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp)
+                    .padding(top = 16.dp),
         ) {
             LazyColumn {
                 items(state.list) { item ->
                     Text(
                         text = item.name,
                         style = MaterialTheme.typography.bodyMedium,
-                        modifier = Modifier
-                            .clickable { onItemClick(item) }
-                            .fillMaxWidth()
-                            .padding(16.dp),
+                        modifier =
+                            Modifier
+                                .clickable { onItemClick(item) }
+                                .fillMaxWidth()
+                                .padding(16.dp),
                     )
                 }
             }
@@ -67,23 +72,25 @@ fun SearchScreen(
     }
 }
 
-
 @Preview(showBackground = true)
 @Composable
 fun SearchScreenPreview() {
-    SearchScreen(state = SearchViewModel.SearchViewModelState(
-        searchText = "RET",
-        isSearching = true,
-        list = listOf(
-            Ingredient("RET", "RET", "RET"),
-            Ingredient("RET", "RET", "RET"),
-            Ingredient("RET", "RET", "RET"),
-            Ingredient("RET", "RET", "RET"),
-            Ingredient("RET", "RET", "RET"),
-        )
-    ),
+    SearchScreen(
+        state =
+            SearchViewModelState(
+                searchText = "RET",
+                isSearching = true,
+                list =
+                    listOf(
+                        Ingredient("RET", "RET", "RET"),
+                        Ingredient("RET", "RET", "RET"),
+                        Ingredient("RET", "RET", "RET"),
+                        Ingredient("RET", "RET", "RET"),
+                        Ingredient("RET", "RET", "RET"),
+                    ),
+            ),
         {},
         {},
-        {}
+        {},
     )
 }

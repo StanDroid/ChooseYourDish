@@ -8,30 +8,27 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.ui.graphics.vector.ImageVector
 import kotlinx.serialization.Serializable
 
-
 @Serializable
 sealed class Screen(
-    val route: String
+    val route: String,
 ) {
-
-    fun withStringArgs(vararg args: String): String {
-        return buildString {
+    fun withStringArgs(vararg args: String): String =
+        buildString {
             append(route)
             args.forEach {
                 append("/$it")
             }
         }
-    }
 }
 
 @Serializable
-sealed class Graph(val route: String) {
-
+sealed class Graph(
+    val route: String,
+) {
     @Serializable
     data object SplashGraph : Graph("SplashRoute") {
         @Serializable
         data object SplashScreen : Screen("SplashScreen")
-
     }
 
     @Serializable
@@ -68,12 +65,15 @@ sealed class Graph(val route: String) {
 interface RootScreen
 
 data class AppTab(
-    val graph: String, val title: String, val icon: ImageVector
+    val graph: String,
+    val title: String,
+    val icon: ImageVector,
 )
 
-val mainTabs = listOf(
-    AppTab(Graph.HomeGraph.route, "Home", Icons.Filled.Home),
-    AppTab(Graph.CategoriesGraph.route, "Categories", Icons.AutoMirrored.Filled.List),
-    AppTab(Graph.SearchGraph.route, "Search", Icons.Filled.Search),
-    AppTab(Graph.FavoritesGraph.route, "Favorites", Icons.Filled.Favorite),
-)
+val mainTabs =
+    listOf(
+        AppTab(Graph.HomeGraph.route, "Home", Icons.Filled.Home),
+        AppTab(Graph.CategoriesGraph.route, "Categories", Icons.AutoMirrored.Filled.List),
+        AppTab(Graph.SearchGraph.route, "Search", Icons.Filled.Search),
+        AppTab(Graph.FavoritesGraph.route, "Favorites", Icons.Filled.Favorite),
+    )

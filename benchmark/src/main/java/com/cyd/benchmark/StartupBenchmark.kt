@@ -1,6 +1,10 @@
 package com.cyd.benchmark
 
-import androidx.benchmark.macro.*
+import androidx.benchmark.macro.CompilationMode
+import androidx.benchmark.macro.FrameTimingMetric
+import androidx.benchmark.macro.MacrobenchmarkScope
+import androidx.benchmark.macro.StartupMode
+import androidx.benchmark.macro.StartupTimingMetric
 import androidx.benchmark.macro.junit4.MacrobenchmarkRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.uiautomator.By
@@ -35,40 +39,43 @@ class StartupBenchmark {
     @Test
     fun goToCategoriesAndScrollFull() = goToCategoriesAndScroll(CompilationMode.Full())
 
-    private fun startup(compilationMode: CompilationMode) = benchmarkRule.measureRepeated(
-        packageName = "com.cyd",
-        metrics = listOf(StartupTimingMetric()),
-        iterations = 5,
-        startupMode = StartupMode.COLD,
-        compilationMode = compilationMode
-    ) {
-        startUp()
-    }
+    private fun startup(compilationMode: CompilationMode) =
+        benchmarkRule.measureRepeated(
+            packageName = "com.cyd",
+            metrics = listOf(StartupTimingMetric()),
+            iterations = 5,
+            startupMode = StartupMode.COLD,
+            compilationMode = compilationMode,
+        ) {
+            startUp()
+        }
 
     private fun MacrobenchmarkScope.startUp() {
         pressHome()
         startActivityAndWait()
     }
 
-    private fun goToCategoriesAndScroll(compilationMode: CompilationMode) = benchmarkRule.measureRepeated(
-        packageName = "com.cyd",
-        metrics = listOf(FrameTimingMetric()),
-        iterations = 5,
-        startupMode = StartupMode.COLD,
-        compilationMode = compilationMode,
-        setupBlock = {
-            startUp()
-            device.findObject(By.text("Go to Categories"))
-                .clickAndWait(Until.newWindow(), 1_000)
+    private fun goToCategoriesAndScroll(compilationMode: CompilationMode) =
+        benchmarkRule.measureRepeated(
+            packageName = "com.cyd",
+            metrics = listOf(FrameTimingMetric()),
+            iterations = 5,
+            startupMode = StartupMode.COLD,
+            compilationMode = compilationMode,
+            setupBlock = {
+                startUp()
+                device
+                    .findObject(By.text("Go to Categories"))
+                    .clickAndWait(Until.newWindow(), 1_000)
+            },
+        ) {
+            val categoryList = device.findObject(By.res(CategoryListScreenConstants.CATEGORY_LIST))
+            val searchCondition = Until.hasObject(By.res(CATEGORY_ITEM))
+
+            categoryList.wait(searchCondition, 5_000)
+            categoryList.setGestureMargin(device.displayWidth / 5)
+            categoryList.fling(Direction.DOWN)
+
+            device.waitForIdle()
         }
-    ) {
-        val categoryList = device.findObject(By.res(CategoryListScreenConstants.CATEGORY_LIST))
-        val searchCondition = Until.hasObject(By.res(CATEGORY_ITEM))
-
-        categoryList.wait(searchCondition, 5_000)
-        categoryList.setGestureMargin(device.displayWidth / 5)
-        categoryList.fling(Direction.DOWN)
-
-        device.waitForIdle()
-    }
 }

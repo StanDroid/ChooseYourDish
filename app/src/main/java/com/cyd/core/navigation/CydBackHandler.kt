@@ -5,7 +5,6 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 
-
 @Composable
 fun CydBackHandler(navController: NavHostController) {
     BackHandler {

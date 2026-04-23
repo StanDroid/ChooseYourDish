@@ -8,17 +8,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.cyd.base.model.RandomMeal
+import com.cyd.base.viewmodel.UiState
 import com.cyd.core.navigation.Graph
-import com.cyd.feature.random_meal.RandomMealScreen
-import com.cyd.feature.random_meal.viewmodel.RandomMealUiState
-import com.cyd.feature.random_meal.viewmodel.RandomMealViewModel
+import com.cyd.feature.randommeal.RandomMealScreen
+import com.cyd.feature.randommeal.viewmodel.RandomMealViewModel
 
 @Composable
-fun RandomMealRoute(
-    navController: NavHostController
-) {
+fun RandomMealRoute(navController: NavHostController) {
     val viewModel = hiltViewModel<RandomMealViewModel>()
-    val state: RandomMealUiState by viewModel.uiState.collectAsState()
+    val state: UiState<RandomMeal> by viewModel.uiState.collectAsState()
     val activity = LocalContext.current as? Activity
     BackHandler {
         if (activity != null) {
@@ -28,14 +27,14 @@ fun RandomMealRoute(
         }
     }
     RandomMealScreen(
-        state,
-        viewModel::onLoadNextRandomMealClick,
+        uiState = state,
+        onLoadNextRandomMeal = viewModel::onLoadNextRandomMealClick,
     ) {
         navController.navigate(
             Graph.MealDetailsScreen.withStringArgs(
                 it.first,
-                it.second
-            )
+                it.second,
+            ),
         )
     }
 }
