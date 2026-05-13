@@ -176,7 +176,7 @@ private fun IngredientRow(
                 text = mealIngredient.name,
                 style = MaterialTheme.typography.titleSmall,
             )
-            mealIngredient.measure?.let {
+            mealIngredient.measure.ifNotNullOrEmpty {
                 Text(
                     modifier = Modifier,
                     text = it,
