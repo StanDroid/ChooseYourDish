@@ -1,8 +1,8 @@
-package com.cyd.feature.randommeal.usecase
+package com.cyd.domain.meal.random
 
 import com.cyd.base.model.RandomMeal
 import com.cyd.base.usecase.UseCase
-import com.cyd.data.meal.MealRepository
+import com.cyd.domain.meal.MealRepository
 import javax.inject.Inject
 
 class GetRandomMealUseCase

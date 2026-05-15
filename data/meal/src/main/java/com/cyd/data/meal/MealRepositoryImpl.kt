@@ -9,6 +9,7 @@ import com.cyd.data.meal.mapper.MealItemToFavoriteMealMapper
 import com.cyd.data.meal.mapper.MealListItemMapper
 import com.cyd.data.meal.mapper.RandomMealMapper
 import com.cyd.data.network.MealDataSource
+import com.cyd.domain.meal.MealRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject

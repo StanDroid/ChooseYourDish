@@ -4,7 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.cyd.base.model.Ingredient
 import com.cyd.base.usecase.execute
 import com.cyd.base.viewmodel.BaseViewModel
-import com.cyd.search.usecase.GetAllIngredientsUseCase
+import com.cyd.domain.ingredients.GetAllIngredientsUseCase
 import com.cyd.search.viewmodel.viewstate.SearchViewModelState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

@@ -20,9 +20,10 @@ import kotlin.random.Random
 @Composable
 fun SplashScreen(onEndAction: () -> Unit) {
     Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.primaryContainer),
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.primaryContainer),
     ) {
         val number by remember { mutableIntStateOf(Random.nextInt(0, 3)) }
         val composition by rememberLottieComposition(

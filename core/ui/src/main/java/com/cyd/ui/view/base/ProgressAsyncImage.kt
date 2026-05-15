@@ -31,31 +31,34 @@ fun ProgressAsyncImage(
     val context = LocalContext.current
     val density = LocalDensity.current
 
-    val imageRequest = remember(model, transformation, context) {
-        ImageRequest.Builder(context)
-            .data(model)
-            .memoryCacheKey(model)
-            .crossfade(true)
-            .apply {
-                transformation?.let { transformations(it) }
-            }
-            .build()
-    }
+    val imageRequest =
+        remember(model, transformation, context) {
+            ImageRequest
+                .Builder(context)
+                .data(model)
+                .memoryCacheKey(model)
+                .crossfade(true)
+                .apply {
+                    transformation?.let { transformations(it) }
+                }.build()
+        }
 
-    val loadingSizePx = remember(density) {
-        with(density) { LOADING_INDICATOR_SIZE_DP.dp.roundToPx() }
-    }
+    val loadingSizePx =
+        remember(density) {
+            with(density) { LOADING_INDICATOR_SIZE_DP.dp.roundToPx() }
+        }
 
-    val placeholderPainter = if (withLoadingIndicator) {
-        getGitPainter(
-            Size(
-                Dimension.Pixels(loadingSizePx),
-                Dimension.Pixels(loadingSizePx)
+    val placeholderPainter =
+        if (withLoadingIndicator) {
+            getGitPainter(
+                Size(
+                    Dimension.Pixels(loadingSizePx),
+                    Dimension.Pixels(loadingSizePx),
+                ),
             )
-        )
-    } else {
-        null
-    }
+        } else {
+            null
+        }
 
     AsyncImage(
         model = imageRequest,
@@ -63,6 +66,6 @@ fun ProgressAsyncImage(
         error = painterResource(id = R.drawable.no_data_found),
         contentScale = ContentScale.Inside,
         contentDescription = contentDescription,
-        modifier = modifier
+        modifier = modifier,
     )
 }

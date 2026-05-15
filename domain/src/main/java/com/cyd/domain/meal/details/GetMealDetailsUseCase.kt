@@ -1,8 +1,8 @@
-package com.cyd.feature.mealdetails.usecase
+package com.cyd.domain.meal.details
 
 import com.cyd.base.model.Meal
 import com.cyd.base.usecase.UseCase
-import com.cyd.data.meal.MealRepository
+import com.cyd.domain.meal.MealRepository
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import javax.inject.Inject

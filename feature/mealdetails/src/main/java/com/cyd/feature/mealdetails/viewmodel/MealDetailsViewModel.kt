@@ -8,9 +8,9 @@ import com.cyd.base.utils.ErrorMessage
 import com.cyd.base.viewmodel.BaseViewModel
 import com.cyd.base.viewmodel.UiState
 import com.cyd.base.viewmodel.ViewState
-import com.cyd.feature.mealdetails.usecase.GetMealDetailsUseCase
-import com.cyd.feature.mealdetails.usecase.MakeMealAsFavoriteUseCase
-import com.cyd.feature.mealdetails.usecase.RemoveMealFromFavoritesUseCase
+import com.cyd.domain.meal.details.GetMealDetailsUseCase
+import com.cyd.domain.meal.details.MakeMealAsFavoriteUseCase
+import com.cyd.domain.meal.details.RemoveMealFromFavoritesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

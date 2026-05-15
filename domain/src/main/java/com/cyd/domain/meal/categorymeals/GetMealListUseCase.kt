@@ -1,8 +1,8 @@
-package com.cyd.feature.categorymeals.usecase
+package com.cyd.domain.meal.categorymeals
 
 import com.cyd.base.model.MealItem
 import com.cyd.base.usecase.UseCase
-import com.cyd.data.meal.MealRepository
+import com.cyd.domain.meal.MealRepository
 import javax.inject.Inject
 
 class GetMealListUseCase
