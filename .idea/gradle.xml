@@ -20,6 +20,7 @@
             <option value="$PROJECT_DIR$/data/ingredients" />
             <option value="$PROJECT_DIR$/data/meal" />
             <option value="$PROJECT_DIR$/data/network" />
+            <option value="$PROJECT_DIR$/domain" />
             <option value="$PROJECT_DIR$/feature" />
             <option value="$PROJECT_DIR$/feature/categories" />
             <option value="$PROJECT_DIR$/feature/categorymeals" />

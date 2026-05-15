@@ -1,4 +1,4 @@
-package com.cyd.data.categories
+package com.cyd.domain.categories
 
 import com.cyd.base.model.Category
 

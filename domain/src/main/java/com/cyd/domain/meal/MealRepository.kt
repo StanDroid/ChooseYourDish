@@ -1,4 +1,4 @@
-package com.cyd.data.meal
+package com.cyd.domain.meal
 
 import com.cyd.base.model.Meal
 import com.cyd.base.model.MealItem

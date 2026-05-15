@@ -34,7 +34,7 @@ android {
 dependencies {
     implementation(project(":core:base"))
     implementation(project(":core:ui"))
-    implementation(project(":data:ingredients"))
+    implementation(project(":domain"))
 
     implementation(libs.androidx.ktx)
     implementation(libs.androidx.ui)

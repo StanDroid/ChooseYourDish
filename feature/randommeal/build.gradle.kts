@@ -38,7 +38,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":data:meal"))
+    implementation(project(":domain"))
     implementation(project(":core:ui"))
     implementation(project(":core:base"))
 

@@ -6,12 +6,12 @@ import com.cyd.data.db.entity.FavoriteMealEntity
 import javax.inject.Inject
 
 class FavoriteMealToMealItemMapper
-@Inject
-constructor() : Mapper<FavoriteMealEntity, MealItem> {
-    override fun map(param: FavoriteMealEntity): MealItem =
-        MealItem(
-            id = param.id,
-            name = param.name,
-            thumb = param.thumb,
-        )
+    @Inject
+    constructor() : Mapper<FavoriteMealEntity, MealItem> {
+        override fun map(param: FavoriteMealEntity): MealItem =
+            MealItem(
+                id = param.id,
+                name = param.name,
+                thumb = param.thumb,
+            )
     }

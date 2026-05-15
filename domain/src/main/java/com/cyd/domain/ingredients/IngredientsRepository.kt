@@ -1,4 +1,4 @@
-package com.cyd.data.ingredients
+package com.cyd.domain.ingredients
 
 import com.cyd.base.model.Ingredient
 

@@ -18,7 +18,7 @@ data class Meal(
     val source: String? = null,
     val tags: String? = null,
     val youtube: String? = null,
-    var isFavorite: Boolean = false,
+    val isFavorite: Boolean = false,
 ) {
     fun toMealItem(): MealItem = MealItem(id.orEmpty(), meal.orEmpty(), mealThumb.orEmpty())
 }
