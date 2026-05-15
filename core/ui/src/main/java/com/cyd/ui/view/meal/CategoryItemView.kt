@@ -10,9 +10,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowDown
-import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -26,9 +23,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.cyd.base.model.Category
+import com.cyd.ui.R
 import com.cyd.ui.view.base.CategoryListScreenConstants.CATEGORY_ITEM
 import com.cyd.ui.view.base.ProgressAsyncImage
 
@@ -78,11 +77,11 @@ fun CategoryItemView(
                             .clickable { expanded = !expanded }
                             .padding(16.dp)
                             .align(CenterVertically),
-                    imageVector =
+                    painter =
                         if (expanded) {
-                            Icons.Filled.KeyboardArrowUp
+                            painterResource(R.drawable.arrow_up)
                         } else {
-                            Icons.Filled.KeyboardArrowDown
+                            painterResource(R.drawable.arrow_down)
                         },
                     contentDescription = null,
                 )
