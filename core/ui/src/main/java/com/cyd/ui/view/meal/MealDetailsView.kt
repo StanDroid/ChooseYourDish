@@ -23,9 +23,6 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -40,6 +37,7 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -87,11 +85,11 @@ fun MealDetailsView(
             }
             var isFavorite by remember { mutableStateOf(meal.isFavorite) }
             Icon(
-                imageVector =
+                painter =
                     if (meal.isFavorite) {
-                        Icons.Default.Favorite
+                        painterResource(R.drawable.favorited)
                     } else {
-                        Icons.Default.FavoriteBorder
+                        painterResource(R.drawable.favorite)
                     },
                 tint = if (meal.isFavorite) Color.Red else Color.White,
                 contentDescription = "",

@@ -6,9 +6,6 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -28,6 +25,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
@@ -87,7 +85,7 @@ fun NavigationSystem() {
 
     val icon =
         when (destination) {
-            Graph.MealDetailsScreen.route -> Icons.AutoMirrored.Filled.ArrowBack
+            Graph.MealDetailsScreen.route -> painterResource(R.drawable.arrow_back)
             else -> null
         }
 
@@ -119,7 +117,7 @@ fun NavigationSystem() {
                     navigationIcon = {
                         if (icon != null) {
                             Icon(
-                                imageVector = icon,
+                                painter = icon,
                                 contentDescription = null,
                                 modifier =
                                     Modifier
@@ -138,7 +136,7 @@ fun NavigationSystem() {
                     actions = {
                         IconButton(onClick = { expanded.value = true }) {
                             Icon(
-                                imageVector = Icons.Default.MoreVert,
+                                painter = painterResource(R.drawable.more_vert),
                                 contentDescription = stringResource(com.cyd.ui.R.string.options),
                             )
                         }
@@ -222,7 +220,7 @@ private fun BottomNavBar(
         val currentTab = items.firstOrNull { it.graph == closestNavGraphDestination?.route }
         items.forEach { tab ->
             NavigationBarItem(
-                icon = { Icon(tab.icon, contentDescription = null) },
+                icon = { Icon(painterResource(tab.icon), contentDescription = null) },
                 label = {
                     Text(
                         text = tab.title,

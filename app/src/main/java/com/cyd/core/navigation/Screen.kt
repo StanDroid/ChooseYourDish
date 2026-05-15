@@ -1,11 +1,7 @@
 package com.cyd.core.navigation
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.List
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.annotation.DrawableRes
+import com.cyd.ui.R
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -67,13 +63,13 @@ interface RootScreen
 data class AppTab(
     val graph: String,
     val title: String,
-    val icon: ImageVector,
+    @param:DrawableRes val icon: Int,
 )
 
 val mainTabs =
     listOf(
-        AppTab(Graph.HomeGraph.route, "Home", Icons.Filled.Home),
-        AppTab(Graph.CategoriesGraph.route, "Categories", Icons.AutoMirrored.Filled.List),
-        AppTab(Graph.SearchGraph.route, "Search", Icons.Filled.Search),
-        AppTab(Graph.FavoritesGraph.route, "Favorites", Icons.Filled.Favorite),
+        AppTab(Graph.HomeGraph.route, "Home", R.drawable.fork_spoon),
+        AppTab(Graph.CategoriesGraph.route, "Categories", R.drawable.list),
+        AppTab(Graph.SearchGraph.route, "Search", R.drawable.search),
+        AppTab(Graph.FavoritesGraph.route, "Favorites", R.drawable.favorite),
     )
