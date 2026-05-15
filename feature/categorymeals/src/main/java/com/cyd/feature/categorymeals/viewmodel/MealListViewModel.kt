@@ -2,7 +2,8 @@ package com.cyd.feature.categorymeals.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.viewModelScope
-import com.cyd.base.extension.map
+import com.cyd.base.CydDispatchers
+import com.cyd.base.extension.mapLatest
 import com.cyd.base.model.MealItem
 import com.cyd.base.utils.ErrorMessage
 import com.cyd.base.viewmodel.BaseViewModel
@@ -27,13 +28,17 @@ class MealListViewModel
         private val useCase: GetMealListUseCase,
         private val useCaseByIngredientUseCase: GetMealListByIngredientUseCase,
         private val getFavoriteMealListUseCase: GetFavoriteMealListUseCase,
+        private val cydDispatchers: CydDispatchers,
     ) : BaseViewModel() {
         private val viewModelState: MutableStateFlow<ViewState<List<MealItem>>> =
             MutableStateFlow(ViewState(isLoading = true))
 
         val uiState: StateFlow<UiState<List<MealItem>>> =
             viewModelState
-                .map(viewModelScope) { it.toUiState() }
+                .mapLatest(
+                    viewModelScope,
+                    cydDispatchers,
+                ) { it.toUiState() }
 
         fun loadMeals(mealType: MealType) {
             launch {

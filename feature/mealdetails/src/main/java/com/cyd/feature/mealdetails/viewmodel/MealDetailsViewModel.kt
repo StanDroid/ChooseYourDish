@@ -2,7 +2,8 @@ package com.cyd.feature.mealdetails.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.viewModelScope
-import com.cyd.base.extension.map
+import com.cyd.base.CydDispatchers
+import com.cyd.base.extension.mapLatest
 import com.cyd.base.model.Meal
 import com.cyd.base.utils.ErrorMessage
 import com.cyd.base.viewmodel.BaseViewModel
@@ -25,13 +26,17 @@ class MealDetailsViewModel
         private val useCase: GetMealDetailsUseCase,
         private val makeMealAsFavoriteUseCase: MakeMealAsFavoriteUseCase,
         private val removeMealFromFavoritesUseCase: RemoveMealFromFavoritesUseCase,
+        private val cydDispatchers: CydDispatchers,
     ) : BaseViewModel() {
         private val viewModelState: MutableStateFlow<ViewState<Meal>> =
             MutableStateFlow(ViewState(isLoading = true))
 
         val uiState: StateFlow<UiState<Meal>> =
             viewModelState
-                .map(viewModelScope) { it.toUiState() }
+                .mapLatest(
+                    viewModelScope,
+                    cydDispatchers,
+                ) { it.toUiState() }
 
         fun loadMealDetails(id: String) {
             launch {

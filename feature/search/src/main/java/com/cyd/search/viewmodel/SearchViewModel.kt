@@ -1,6 +1,7 @@
 package com.cyd.search.viewmodel
 
 import androidx.lifecycle.viewModelScope
+import com.cyd.base.CydDispatchers
 import com.cyd.base.model.Ingredient
 import com.cyd.base.usecase.execute
 import com.cyd.base.viewmodel.BaseViewModel
@@ -12,6 +13,7 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -22,6 +24,7 @@ class SearchViewModel
     @Inject
     constructor(
         private val useCase: GetAllIngredientsUseCase,
+        private val cydDispatchers: CydDispatchers,
     ) : BaseViewModel() {
         private val _viewModelState = MutableStateFlow(SearchViewModelState())
         val viewModelState = _viewModelState.asStateFlow()
@@ -43,7 +46,8 @@ class SearchViewModel
                                 item.name.uppercase().contains(state.searchText.trim().uppercase())
                             }
                         }
-                    }.stateIn(
+                    }.flowOn(cydDispatchers.io)
+                    .stateIn(
                         scope = viewModelScope,
                         started = SharingStarted.WhileSubscribed(5000),
                         initialValue = viewModelState.value.initialList,

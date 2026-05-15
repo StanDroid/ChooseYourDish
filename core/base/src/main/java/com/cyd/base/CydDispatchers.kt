@@ -1,4 +1,4 @@
-package com.cyd.domain
+package com.cyd.base
 
 import kotlinx.coroutines.CoroutineDispatcher
 

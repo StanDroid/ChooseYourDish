@@ -1,5 +1,6 @@
 package com.cyd.data.meal
 
+import com.cyd.base.CydDispatchers
 import com.cyd.base.model.MealItem
 import com.cyd.data.db.FavoriteMealDao
 import com.cyd.data.db.entity.FavoriteMealEntity
@@ -9,7 +10,6 @@ import com.cyd.data.meal.mapper.MealItemToFavoriteMealMapper
 import com.cyd.data.meal.mapper.MealListItemMapper
 import com.cyd.data.meal.mapper.RandomMealMapper
 import com.cyd.data.network.MealDataSource
-import com.cyd.domain.CydDispatchers
 import com.cyd.domain.meal.MealRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

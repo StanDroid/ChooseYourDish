@@ -2,7 +2,8 @@ package com.cyd.feature.randommeal.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.viewModelScope
-import com.cyd.base.extension.map
+import com.cyd.base.CydDispatchers
+import com.cyd.base.extension.mapLatest
 import com.cyd.base.model.RandomMeal
 import com.cyd.base.usecase.execute
 import com.cyd.base.utils.ErrorMessage
@@ -22,12 +23,16 @@ class RandomMealViewModel
     @Inject
     constructor(
         private val useCase: GetRandomMealUseCase,
+        private val cydDispatchers: CydDispatchers,
     ) : BaseViewModel() {
         private val viewModelState: MutableStateFlow<ViewState<RandomMeal>> =
             MutableStateFlow(ViewState(isLoading = true))
 
         val uiState: StateFlow<UiState<RandomMeal>> =
-            viewModelState.map(viewModelScope) { it.toUiState() }
+            viewModelState.mapLatest(
+                viewModelScope,
+                cydDispatchers,
+            ) { it.toUiState() }
 
         init {
             loadRandomMeal()

@@ -1,5 +1,6 @@
 package com.cyd.data.meal
 
+import com.cyd.base.CydDispatchers
 import com.cyd.data.db.FavoriteMealDao
 import com.cyd.data.meal.mapper.FavoriteMealToMealItemMapper
 import com.cyd.data.meal.mapper.MealDetailsMapper
@@ -7,7 +8,6 @@ import com.cyd.data.meal.mapper.MealItemToFavoriteMealMapper
 import com.cyd.data.meal.mapper.MealListItemMapper
 import com.cyd.data.meal.mapper.RandomMealMapper
 import com.cyd.data.network.MealDataSource
-import com.cyd.domain.CydDispatchers
 import com.cyd.domain.meal.MealRepository
 import dagger.Module
 import dagger.Provides

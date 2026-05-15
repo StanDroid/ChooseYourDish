@@ -1,6 +1,7 @@
 package com.cyd.feature.categories.viewmodel
 
 import androidx.lifecycle.viewModelScope
+import com.cyd.base.CydDispatchers
 import com.cyd.base.extension.mapLatest
 import com.cyd.base.model.Category
 import com.cyd.base.usecase.execute
@@ -21,13 +22,17 @@ class CategoriesViewModel
     @Inject
     constructor(
         private val useCase: GetMealCategoriesUseCase,
+        private val cydDispatchers: CydDispatchers,
     ) : BaseViewModel() {
         private val viewModelState: MutableStateFlow<ViewState<List<Category>>> =
             MutableStateFlow(ViewState(isLoading = true))
 
         val uiState: StateFlow<UiState<List<Category>>> =
             viewModelState
-                .mapLatest(viewModelScope) { it.toUiState() }
+                .mapLatest(
+                    viewModelScope,
+                    cydDispatchers,
+                ) { it.toUiState() }
 
         init {
             loadCategories()

@@ -1,6 +1,6 @@
 package com.cyd.core
 
-import com.cyd.domain.CydDispatchers
+import com.cyd.base.CydDispatchers
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
 import javax.inject.Singleton

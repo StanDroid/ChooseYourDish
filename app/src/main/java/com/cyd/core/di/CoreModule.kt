@@ -1,7 +1,7 @@
 package com.cyd.core.di
 
+import com.cyd.base.CydDispatchers
 import com.cyd.core.CydDispatchersImpl
-import com.cyd.domain.CydDispatchers
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -12,7 +12,4 @@ import dagger.hilt.components.SingletonComponent
 interface CoreModule {
     @Binds
     fun bindCydDispatchers(cydDispatchers: CydDispatchersImpl): CydDispatchers
-//
-//    @Provides
-//    fun provideCydDispatchers(): CydDispatchers = CydDispatchersImpl()
 }
