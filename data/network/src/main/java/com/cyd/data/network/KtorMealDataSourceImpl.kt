@@ -20,53 +20,53 @@ import javax.inject.Singleton
 
 @Singleton
 class KtorMealDataSourceImpl
-@Inject
-constructor(
-    private val ktor: KtorMealNetwork,
-) : MealDataSource {
-    override suspend fun getRandomMeal(): RandomMealDTO? =
-        ktor.httpClient
-            .getResult<RandomMealResponse>("random.php")
-            .map { it.meals.firstOrNull() }
-            .getOrNull()
+    @Inject
+    constructor(
+        private val ktor: KtorMealNetwork,
+    ) : MealDataSource {
+        override suspend fun getRandomMeal(): RandomMealDTO? =
+            ktor.httpClient
+                .getResult<RandomMealResponse>("random.php")
+                .map { it.meals.firstOrNull() }
+                .getOrNull()
 
-    override suspend fun getMealCategories(): List<CategoryDTO>? =
-        ktor.httpClient
-            .getResult<CategoriesResponse>("categories.php")
-            .map { it.categories }
-            .getOrNull()
+        override suspend fun getMealCategories(): List<CategoryDTO>? =
+            ktor.httpClient
+                .getResult<CategoriesResponse>("categories.php")
+                .map { it.categories }
+                .getOrNull()
 
-    override suspend fun getMealsByCategory(name: String): List<MealListItemDTO>? =
-        ktor.httpClient
-            .get("filter.php") {
-                parameter("c", name)
-            }.body<MealListResponse>()
-            .meals
+        override suspend fun getMealsByCategory(name: String): List<MealListItemDTO>? =
+            ktor.httpClient
+                .get("filter.php") {
+                    parameter("c", name)
+                }.body<MealListResponse>()
+                .meals
 
-    override suspend fun getMealsByMainIngredient(name: String): List<MealListItemDTO>? =
-        ktor.httpClient
-            .get("filter.php") {
-                parameter("i", name)
-            }.body<MealListResponse>()
-            .meals
+        override suspend fun getMealsByMainIngredient(name: String): List<MealListItemDTO>? =
+            ktor.httpClient
+                .get("filter.php") {
+                    parameter("i", name)
+                }.body<MealListResponse>()
+                .meals
 
-    override suspend fun getMealDetails(idMeal: String): MealDetailsDTO? =
-        ktor.httpClient
-            .get("lookup.php") {
-                parameter("i", idMeal)
-            }.body<MealDetailsResponse>()
-            .meals
-            ?.firstOrNull()
+        override suspend fun getMealDetails(idMeal: String): MealDetailsDTO? =
+            ktor.httpClient
+                .get("lookup.php") {
+                    parameter("i", idMeal)
+                }.body<MealDetailsResponse>()
+                .meals
+                ?.firstOrNull()
 
-    override suspend fun getIngredients(): List<IngredientDTO>? =
-        ktor.httpClient
-            .get("list.php") {
-                parameter("i", "list")
-            }.body<IngredientsResponse>()
-            .ingredients
+        override suspend fun getIngredients(): List<IngredientDTO>? =
+            ktor.httpClient
+                .get("list.php") {
+                    parameter("i", "list")
+                }.body<IngredientsResponse>()
+                .ingredients
 
-    suspend inline fun <reified R> HttpClient.getResult(
-        urlString: String,
-        builder: HttpRequestBuilder.() -> Unit = {},
-    ): Result<R> = runCatching { get(urlString, builder).body() }
-}
+        suspend inline fun <reified R> HttpClient.getResult(
+            urlString: String,
+            builder: HttpRequestBuilder.() -> Unit = {},
+        ): Result<R> = runCatching { get(urlString, builder).body() }
+    }

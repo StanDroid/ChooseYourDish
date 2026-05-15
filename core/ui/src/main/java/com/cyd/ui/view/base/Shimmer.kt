@@ -76,7 +76,6 @@ fun ShimmerButton(modifier: Modifier = Modifier) {
                 .background(
                     shimmerBrush,
                     shape = ButtonDefaults.shape,
-                )
-                .height(40.dp),
+                ).height(40.dp),
     )
 }

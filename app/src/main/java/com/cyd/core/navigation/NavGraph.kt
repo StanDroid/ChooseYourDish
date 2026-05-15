@@ -338,11 +338,11 @@ private fun NavHostController.navigateToRootScreen(
 
 private fun isBottomNavBarVisible(currentBackStackEntry: NavBackStackEntry?) =
     currentBackStackEntry != null &&
-            getSimpleRoute(currentBackStackEntry) !in
-            setOf(
-                Graph.MealDetailsScreen.route,
-                Graph.SplashGraph.SplashScreen.route,
-            )
+        getSimpleRoute(currentBackStackEntry) !in
+        setOf(
+            Graph.MealDetailsScreen.route,
+            Graph.SplashGraph.SplashScreen.route,
+        )
 
 private fun getSimpleRoute(currentBackStackEntry: NavBackStackEntry?) =
     currentBackStackEntry

@@ -49,24 +49,27 @@ fun GifImage(modifier: Modifier = Modifier) {
 fun getGitPainter(size: Size = Size.ORIGINAL): Painter {
     val context = LocalContext.current
 
-    val imageLoader = remember(context) {
-        ImageLoader.Builder(context)
-            .components {
-                if (Build.VERSION.SDK_INT >= 28) {
-                    add(ImageDecoderDecoder.Factory())
-                } else {
-                    add(GifDecoder.Factory())
-                }
-            }
-            .build()
-    }
+    val imageLoader =
+        remember(context) {
+            ImageLoader
+                .Builder(context)
+                .components {
+                    if (Build.VERSION.SDK_INT >= 28) {
+                        add(ImageDecoderDecoder.Factory())
+                    } else {
+                        add(GifDecoder.Factory())
+                    }
+                }.build()
+        }
 
-    val imageRequest = remember(context, size) {
-        ImageRequest.Builder(context)
-            .data(data = R.drawable.gif_pizza)
-            .size(size)
-            .build()
-    }
+    val imageRequest =
+        remember(context, size) {
+            ImageRequest
+                .Builder(context)
+                .data(data = R.drawable.gif_pizza)
+                .size(size)
+                .build()
+        }
 
     return rememberAsyncImagePainter(
         model = imageRequest,

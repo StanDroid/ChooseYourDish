@@ -69,6 +69,8 @@ dependencies {
     implementation(project(":data:ingredients"))
     implementation(project(":data:meal"))
 
+    implementation(project(":domain"))
+
     implementation(project(":data:network"))
     implementation(project(":core:ui"))
     implementation(project(":core:base"))
@@ -119,6 +121,9 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.crashlytics)
     implementation(libs.firebase.analytics)
+
+    debugImplementation(libs.leakcanary.android)
+    implementation(libs.lifecycle.extensions)
 }
 
 allprojects {

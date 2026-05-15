@@ -1,12 +1,11 @@
 package com.cyd.core.navigation.route
 
-import android.app.Activity
 import androidx.activity.compose.BackHandler
+import androidx.activity.compose.LocalActivity
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.platform.LocalContext
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import com.cyd.base.model.RandomMeal
 import com.cyd.base.viewmodel.UiState
@@ -17,8 +16,8 @@ import com.cyd.feature.randommeal.viewmodel.RandomMealViewModel
 @Composable
 fun RandomMealRoute(navController: NavHostController) {
     val viewModel = hiltViewModel<RandomMealViewModel>()
-    val state: UiState<RandomMeal> by viewModel.uiState.collectAsState()
-    val activity = LocalContext.current as? Activity
+    val state: UiState<RandomMeal> by viewModel.uiState.collectAsStateWithLifecycle()
+    val activity = LocalActivity.current
     BackHandler {
         if (activity != null) {
             activity.finish()

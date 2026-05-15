@@ -81,8 +81,7 @@ fun MealDetailsView(
                                 .sharedBounds(
                                     rememberSharedContentState(key = meal.mealThumb.orEmpty()),
                                     animatedVisibilityScope = this,
-                                )
-                                .animateContentSize(),
+                                ).animateContentSize(),
                     )
                 }
             }
@@ -107,8 +106,7 @@ fun MealDetailsView(
                         ) {
                             isFavorite = !isFavorite
                             tapOnFavoritesAction.invoke()
-                        }
-                        .scale(animateFloatAsState(if (isFavorite) 1.2f else 1f, label = "").value),
+                        }.scale(animateFloatAsState(if (isFavorite) 1.2f else 1f, label = "").value),
             )
         }
         Column(
@@ -176,7 +174,7 @@ private fun IngredientRow(
                 text = mealIngredient.name,
                 style = MaterialTheme.typography.titleSmall,
             )
-            mealIngredient.measure?.let {
+            mealIngredient.measure.ifNotNullOrEmpty {
                 Text(
                     modifier = Modifier,
                     text = it,

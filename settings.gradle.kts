@@ -29,3 +29,4 @@ include(":feature:mealdetails")
 include(":feature:search")
 
 include(":benchmark")
+include(":domain")
