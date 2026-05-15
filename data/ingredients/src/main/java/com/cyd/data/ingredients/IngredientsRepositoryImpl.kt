@@ -6,10 +6,10 @@ import com.cyd.domain.ingredients.IngredientsRepository
 import javax.inject.Inject
 
 class IngredientsRepositoryImpl
-@Inject
-constructor(
-    private val mealDataSource: MealDataSource,
-    private val ingredientsMapper: IngredientsMapper,
-) : IngredientsRepository {
-    override suspend fun getIngredients() = mealDataSource.getIngredients()?.map { ingredientsMapper.map(it) }.orEmpty()
-}
+    @Inject
+    constructor(
+        private val mealDataSource: MealDataSource,
+        private val ingredientsMapper: IngredientsMapper,
+    ) : IngredientsRepository {
+        override suspend fun getIngredients() = mealDataSource.getIngredients()?.map { ingredientsMapper.map(it) }.orEmpty()
+    }

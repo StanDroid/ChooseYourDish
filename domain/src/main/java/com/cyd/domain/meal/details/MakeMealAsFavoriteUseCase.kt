@@ -6,11 +6,11 @@ import com.cyd.domain.meal.MealRepository
 import javax.inject.Inject
 
 class MakeMealAsFavoriteUseCase
-@Inject
-constructor(
-    private val repository: MealRepository,
-) : UseCase<Meal, Unit> {
-    override suspend fun execute(params: Meal) {
-        repository.insertFavoriteMeal(params.toMealItem())
+    @Inject
+    constructor(
+        private val repository: MealRepository,
+    ) : UseCase<Meal, Unit> {
+        override suspend fun execute(params: Meal) {
+            repository.insertFavoriteMeal(params.toMealItem())
+        }
     }
-}

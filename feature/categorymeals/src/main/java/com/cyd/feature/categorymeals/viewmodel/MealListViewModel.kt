@@ -22,44 +22,44 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MealListViewModel
-@Inject
-constructor(
-    private val useCase: GetMealListUseCase,
-    private val useCaseByIngredientUseCase: GetMealListByIngredientUseCase,
-    private val getFavoriteMealListUseCase: GetFavoriteMealListUseCase,
-) : BaseViewModel() {
-    private val viewModelState: MutableStateFlow<ViewState<List<MealItem>>> =
-        MutableStateFlow(ViewState(isLoading = true))
+    @Inject
+    constructor(
+        private val useCase: GetMealListUseCase,
+        private val useCaseByIngredientUseCase: GetMealListByIngredientUseCase,
+        private val getFavoriteMealListUseCase: GetFavoriteMealListUseCase,
+    ) : BaseViewModel() {
+        private val viewModelState: MutableStateFlow<ViewState<List<MealItem>>> =
+            MutableStateFlow(ViewState(isLoading = true))
 
-    val uiState: StateFlow<UiState<List<MealItem>>> =
-        viewModelState
-            .map(viewModelScope) { it.toUiState() }
+        val uiState: StateFlow<UiState<List<MealItem>>> =
+            viewModelState
+                .map(viewModelScope) { it.toUiState() }
 
-    fun loadMeals(mealType: MealType) {
-        launch {
-            val list =
-                when (mealType) {
-                    is MealType.Category -> flowOf(useCase.execute(mealType.name))
-                    is MealType.Ingredient -> flowOf(useCaseByIngredientUseCase.execute(mealType.name))
-                    is MealType.Favorites -> getFavoriteMealListUseCase.execute(null)
+        fun loadMeals(mealType: MealType) {
+            launch {
+                val list =
+                    when (mealType) {
+                        is MealType.Category -> flowOf(useCase.execute(mealType.name))
+                        is MealType.Ingredient -> flowOf(useCaseByIngredientUseCase.execute(mealType.name))
+                        is MealType.Favorites -> getFavoriteMealListUseCase.execute(null)
+                    }
+                list.collectLatest { result ->
+                    viewModelState.update { it.copy(data = result, isLoading = false) }
                 }
-            list.collectLatest { result ->
-                viewModelState.update { it.copy(data = result, isLoading = false) }
+            }
+        }
+
+        override fun handleException(throwable: Throwable?) {
+            super.handleException(throwable)
+            Log.e("CYD", "loadMealsByCategory failure: ${throwable?.message}")
+            viewModelState.update {
+                it.copy(
+                    isLoading = false,
+                    errorMessages =
+                        listOf(
+                            ErrorMessage(throwable.hashCode(), throwable?.message.orEmpty()),
+                        ),
+                )
             }
         }
     }
-
-    override fun handleException(throwable: Throwable?) {
-        super.handleException(throwable)
-        Log.e("CYD", "loadMealsByCategory failure: ${throwable?.message}")
-        viewModelState.update {
-            it.copy(
-                isLoading = false,
-                errorMessages =
-                    listOf(
-                        ErrorMessage(throwable.hashCode(), throwable?.message.orEmpty()),
-                    ),
-            )
-        }
-    }
-}

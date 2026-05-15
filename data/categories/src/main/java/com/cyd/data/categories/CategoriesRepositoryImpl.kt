@@ -6,15 +6,15 @@ import com.cyd.domain.categories.CategoriesRepository
 import javax.inject.Inject
 
 class CategoriesRepositoryImpl
-@Inject
-constructor(
-    private val mealDataSource: MealDataSource,
-    private val categoriesMapper: CategoriesMapper,
-) : CategoriesRepository {
-    override suspend fun getMealCategories() =
-        mealDataSource
-            .getMealCategories()
-            ?.map {
-                categoriesMapper.map(it)
-            }.orEmpty()
-}
+    @Inject
+    constructor(
+        private val mealDataSource: MealDataSource,
+        private val categoriesMapper: CategoriesMapper,
+    ) : CategoriesRepository {
+        override suspend fun getMealCategories() =
+            mealDataSource
+                .getMealCategories()
+                ?.map {
+                    categoriesMapper.map(it)
+                }.orEmpty()
+    }

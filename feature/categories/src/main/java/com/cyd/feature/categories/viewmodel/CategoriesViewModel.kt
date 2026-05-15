@@ -18,48 +18,48 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CategoriesViewModel
-@Inject
-constructor(
-    private val useCase: GetMealCategoriesUseCase,
-) : BaseViewModel() {
-    private val viewModelState: MutableStateFlow<ViewState<List<Category>>> =
-        MutableStateFlow(ViewState(isLoading = true))
+    @Inject
+    constructor(
+        private val useCase: GetMealCategoriesUseCase,
+    ) : BaseViewModel() {
+        private val viewModelState: MutableStateFlow<ViewState<List<Category>>> =
+            MutableStateFlow(ViewState(isLoading = true))
 
-    val uiState: StateFlow<UiState<List<Category>>> =
-        viewModelState
-            .mapLatest(viewModelScope) { it.toUiState() }
+        val uiState: StateFlow<UiState<List<Category>>> =
+            viewModelState
+                .mapLatest(viewModelScope) { it.toUiState() }
 
-    init {
-        loadCategories()
-    }
+        init {
+            loadCategories()
+        }
 
-    private fun loadCategories() {
-        launch {
-            val categories = useCase.execute()
-            viewModelState.update {
-                it.copy(data = categories, isLoading = false)
+        private fun loadCategories() {
+            launch {
+                val categories = useCase.execute()
+                viewModelState.update {
+                    it.copy(data = categories, isLoading = false)
+                }
             }
         }
-    }
 
-    override fun handleException(throwable: Throwable?) {
-        super.handleException(throwable)
-        throwable?.let { error ->
-            error.printStackTrace()
-            viewModelState.update {
-                it.copy(
-                    isLoading = false,
-                    errorMessages =
-                        listOf(
-                            ErrorMessage(
-                                it.hashCode(),
-                                error
-                                    .stackTrace
-                                    .toString(),
+        override fun handleException(throwable: Throwable?) {
+            super.handleException(throwable)
+            throwable?.let { error ->
+                error.printStackTrace()
+                viewModelState.update {
+                    it.copy(
+                        isLoading = false,
+                        errorMessages =
+                            listOf(
+                                ErrorMessage(
+                                    it.hashCode(),
+                                    error
+                                        .stackTrace
+                                        .toString(),
+                                ),
                             ),
-                        ),
-                )
+                    )
+                }
             }
         }
     }
-}

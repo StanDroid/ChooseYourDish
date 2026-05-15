@@ -53,8 +53,7 @@ fun CategoryItemView(
                                 dampingRatio = Spring.DampingRatioMediumBouncy,
                                 stiffness = Spring.StiffnessLow,
                             ),
-                    )
-                    .testTag(CATEGORY_ITEM),
+                    ).testTag(CATEGORY_ITEM),
         ) {
             Row(Modifier.fillMaxWidth()) {
                 ProgressAsyncImage(

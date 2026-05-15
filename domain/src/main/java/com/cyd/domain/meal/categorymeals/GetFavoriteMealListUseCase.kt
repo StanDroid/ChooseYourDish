@@ -7,9 +7,9 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class GetFavoriteMealListUseCase
-@Inject
-constructor(
-    private val repository: MealRepository,
-) : UseCase<Nothing?, Flow<List<MealItem>>> {
-    override suspend fun execute(params: Nothing?): Flow<List<MealItem>> = repository.getFavoritesMeals()
-}
+    @Inject
+    constructor(
+        private val repository: MealRepository,
+    ) : UseCase<Nothing?, Flow<List<MealItem>>> {
+        override suspend fun execute(params: Nothing?): Flow<List<MealItem>> = repository.getFavoritesMeals()
+    }

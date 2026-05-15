@@ -8,16 +8,16 @@ import kotlinx.coroutines.coroutineScope
 import javax.inject.Inject
 
 class GetMealDetailsUseCase
-@Inject
-constructor(
-    private val repository: MealRepository,
-) : UseCase<String, Meal> {
-    override suspend fun execute(params: String): Meal =
-        coroutineScope {
-            val isFavoriteTask = async { repository.getFavoritesMealIds().any { it == params } }
-            val detailMealTask = async { repository.getMealDetails(params) }
-            val mealDetails = detailMealTask.await() ?: throw NoSuchElementException()
-            mealDetails.isFavorite = isFavoriteTask.await()
-            mealDetails
-        }
-}
+    @Inject
+    constructor(
+        private val repository: MealRepository,
+    ) : UseCase<String, Meal> {
+        override suspend fun execute(params: String): Meal =
+            coroutineScope {
+                val isFavoriteTask = async { repository.getFavoritesMealIds().any { it == params } }
+                val detailMealTask = async { repository.getMealDetails(params) }
+                val mealDetails = detailMealTask.await() ?: throw NoSuchElementException()
+                mealDetails.isFavorite = isFavoriteTask.await()
+                mealDetails
+            }
+    }

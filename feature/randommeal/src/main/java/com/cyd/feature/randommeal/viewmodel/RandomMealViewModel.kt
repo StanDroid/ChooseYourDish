@@ -19,50 +19,50 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RandomMealViewModel
-@Inject
-constructor(
-    private val useCase: GetRandomMealUseCase,
-) : BaseViewModel() {
-    private val viewModelState: MutableStateFlow<ViewState<RandomMeal>> =
-        MutableStateFlow(ViewState(isLoading = true))
+    @Inject
+    constructor(
+        private val useCase: GetRandomMealUseCase,
+    ) : BaseViewModel() {
+        private val viewModelState: MutableStateFlow<ViewState<RandomMeal>> =
+            MutableStateFlow(ViewState(isLoading = true))
 
-    val uiState: StateFlow<UiState<RandomMeal>> =
-        viewModelState.map(viewModelScope) { it.toUiState() }
+        val uiState: StateFlow<UiState<RandomMeal>> =
+            viewModelState.map(viewModelScope) { it.toUiState() }
 
-    init {
-        loadRandomMeal()
-    }
+        init {
+            loadRandomMeal()
+        }
 
-    fun onLoadNextRandomMealClick() {
-        loadRandomMeal()
-    }
+        fun onLoadNextRandomMealClick() {
+            loadRandomMeal()
+        }
 
-    private fun loadRandomMeal() {
-        launch {
-            val randomMeal = useCase.execute()
-            viewModelState.update {
-                it.copy(data = randomMeal, isLoading = false)
+        private fun loadRandomMeal() {
+            launch {
+                val randomMeal = useCase.execute()
+                viewModelState.update {
+                    it.copy(data = randomMeal, isLoading = false)
+                }
             }
         }
-    }
 
-    override fun handleException(throwable: Throwable?) {
-        super.handleException(throwable)
-        throwable?.let { error ->
-            error.printStackTrace()
-            Log.e("CYD", "loadRandomMeal failure")
-            viewModelState.update {
-                it.copy(
-                    isLoading = false,
-                    errorMessages =
-                        listOf(
-                            ErrorMessage(
-                                it.hashCode(),
-                                error.stackTrace.toString(),
+        override fun handleException(throwable: Throwable?) {
+            super.handleException(throwable)
+            throwable?.let { error ->
+                error.printStackTrace()
+                Log.e("CYD", "loadRandomMeal failure")
+                viewModelState.update {
+                    it.copy(
+                        isLoading = false,
+                        errorMessages =
+                            listOf(
+                                ErrorMessage(
+                                    it.hashCode(),
+                                    error.stackTrace.toString(),
+                                ),
                             ),
-                        ),
-                )
+                    )
+                }
             }
         }
     }
-}

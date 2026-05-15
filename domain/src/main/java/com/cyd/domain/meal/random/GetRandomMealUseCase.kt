@@ -6,9 +6,9 @@ import com.cyd.domain.meal.MealRepository
 import javax.inject.Inject
 
 class GetRandomMealUseCase
-@Inject
-constructor(
-    private val repository: MealRepository,
-) : UseCase<Nothing?, RandomMeal?> {
-    override suspend fun execute(params: Nothing?): RandomMeal? = repository.getRandomMeal()
-}
+    @Inject
+    constructor(
+        private val repository: MealRepository,
+    ) : UseCase<Nothing?, RandomMeal?> {
+        override suspend fun execute(params: Nothing?): RandomMeal? = repository.getRandomMeal()
+    }

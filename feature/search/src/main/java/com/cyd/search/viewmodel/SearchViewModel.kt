@@ -19,72 +19,72 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel
-@Inject
-constructor(
-    private val useCase: GetAllIngredientsUseCase,
-) : BaseViewModel() {
-    private val _viewModelState = MutableStateFlow(SearchViewModelState())
-    val viewModelState = _viewModelState.asStateFlow()
+    @Inject
+    constructor(
+        private val useCase: GetAllIngredientsUseCase,
+    ) : BaseViewModel() {
+        private val _viewModelState = MutableStateFlow(SearchViewModelState())
+        val viewModelState = _viewModelState.asStateFlow()
 
-    init {
-        loadIngredients()
-        subscribeToSearch()
-    }
-
-    private fun subscribeToSearch() {
-        launch {
-            viewModelState
-                .filter { state -> state.isSearching }
-                .map { state ->
-                    if (state.searchText.isBlank()) {
-                        state.initialList
-                    } else {
-                        state.initialList.filter { item ->
-                            item.name.uppercase().contains(state.searchText.trim().uppercase())
-                        }
-                    }
-                }.stateIn(
-                    scope = viewModelScope,
-                    started = SharingStarted.WhileSubscribed(5000),
-                    initialValue = viewModelState.value.initialList,
-                ).collectLatest {
-                    _viewModelState.value = _viewModelState.value.copy(list = it)
-                }
+        init {
+            loadIngredients()
+            subscribeToSearch()
         }
-    }
 
-    private fun loadIngredients() {
-        launch {
-            val ingredientList = useCase.execute()
+        private fun subscribeToSearch() {
+            launch {
+                viewModelState
+                    .filter { state -> state.isSearching }
+                    .map { state ->
+                        if (state.searchText.isBlank()) {
+                            state.initialList
+                        } else {
+                            state.initialList.filter { item ->
+                                item.name.uppercase().contains(state.searchText.trim().uppercase())
+                            }
+                        }
+                    }.stateIn(
+                        scope = viewModelScope,
+                        started = SharingStarted.WhileSubscribed(5000),
+                        initialValue = viewModelState.value.initialList,
+                    ).collectLatest {
+                        _viewModelState.value = _viewModelState.value.copy(list = it)
+                    }
+            }
+        }
+
+        private fun loadIngredients() {
+            launch {
+                val ingredientList = useCase.execute()
+                _viewModelState.value =
+                    _viewModelState.value.copy(
+                        initialList = ingredientList,
+                    )
+            }
+        }
+
+        fun onSearchTextChange(text: String) {
             _viewModelState.value =
                 _viewModelState.value.copy(
-                    initialList = ingredientList,
+                    searchText = text,
                 )
         }
-    }
 
-    fun onSearchTextChange(text: String) {
-        _viewModelState.value =
-            _viewModelState.value.copy(
-                searchText = text,
-            )
-    }
+        fun onItemClick(item: Ingredient) {
+            _viewModelState.value =
+                _viewModelState.value.copy(
+                    searchText = item.name,
+                    isSearching = false,
+                )
+        }
 
-    fun onItemClick(item: Ingredient) {
-        _viewModelState.value =
-            _viewModelState.value.copy(
-                searchText = item.name,
-                isSearching = false,
-            )
-    }
-
-    fun onToggleSearch() {
-        _viewModelState.value =
-            _viewModelState.value.copy(
-                isSearching = _viewModelState.value.isSearching.not(),
-            )
-        if (!_viewModelState.value.isSearching) {
-            onSearchTextChange("")
+        fun onToggleSearch() {
+            _viewModelState.value =
+                _viewModelState.value.copy(
+                    isSearching = _viewModelState.value.isSearching.not(),
+                )
+            if (!_viewModelState.value.isSearching) {
+                onSearchTextChange("")
+            }
         }
     }
-}
