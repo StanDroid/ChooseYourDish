@@ -2,6 +2,7 @@ package com.cyd.data.categories
 
 import com.cyd.data.categories.mapper.CategoriesMapper
 import com.cyd.data.network.MealDataSource
+import com.cyd.domain.CydDispatchers
 import com.cyd.domain.categories.CategoriesRepository
 import dagger.Module
 import dagger.Provides
@@ -15,9 +16,11 @@ object CategoriesRepositoryModule {
     fun provideCategoriesRepository(
         mealDataSource: MealDataSource,
         categoriesMapper: CategoriesMapper,
+        cydDispatchers: CydDispatchers,
     ): CategoriesRepository =
         CategoriesRepositoryImpl(
             mealDataSource,
             categoriesMapper,
+            cydDispatchers,
         )
 }

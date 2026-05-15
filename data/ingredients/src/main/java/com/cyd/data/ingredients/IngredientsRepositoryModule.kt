@@ -2,6 +2,7 @@ package com.cyd.data.ingredients
 
 import com.cyd.data.ingredients.mapper.IngredientsMapper
 import com.cyd.data.network.MealDataSource
+import com.cyd.domain.CydDispatchers
 import com.cyd.domain.ingredients.IngredientsRepository
 import dagger.Module
 import dagger.Provides
@@ -15,9 +16,11 @@ object IngredientsRepositoryModule {
     fun provideIngredientsRepository(
         mealDataSource: MealDataSource,
         ingredientsMapper: IngredientsMapper,
+        cydDispatchers: CydDispatchers,
     ): IngredientsRepository =
         IngredientsRepositoryImpl(
             mealDataSource,
             ingredientsMapper,
+            cydDispatchers,
         )
 }

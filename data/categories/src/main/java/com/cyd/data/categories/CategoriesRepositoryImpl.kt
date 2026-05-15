@@ -2,7 +2,9 @@ package com.cyd.data.categories
 
 import com.cyd.data.categories.mapper.CategoriesMapper
 import com.cyd.data.network.MealDataSource
+import com.cyd.domain.CydDispatchers
 import com.cyd.domain.categories.CategoriesRepository
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class CategoriesRepositoryImpl
@@ -10,11 +12,14 @@ class CategoriesRepositoryImpl
     constructor(
         private val mealDataSource: MealDataSource,
         private val categoriesMapper: CategoriesMapper,
+        private val cydDispatchers: CydDispatchers,
     ) : CategoriesRepository {
         override suspend fun getMealCategories() =
-            mealDataSource
-                .getMealCategories()
-                ?.map {
-                    categoriesMapper.map(it)
-                }.orEmpty()
+            withContext(cydDispatchers.io) {
+                mealDataSource
+                    .getMealCategories()
+                    ?.map {
+                        categoriesMapper.map(it)
+                    }.orEmpty()
+            }
     }

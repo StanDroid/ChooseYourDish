@@ -7,6 +7,7 @@ import com.cyd.data.meal.mapper.MealItemToFavoriteMealMapper
 import com.cyd.data.meal.mapper.MealListItemMapper
 import com.cyd.data.meal.mapper.RandomMealMapper
 import com.cyd.data.network.MealDataSource
+import com.cyd.domain.CydDispatchers
 import com.cyd.domain.meal.MealRepository
 import dagger.Module
 import dagger.Provides
@@ -25,6 +26,7 @@ object MealRepositoryModule {
         favoriteMealDao: FavoriteMealDao,
         mealItemToFavoriteMealMapper: MealItemToFavoriteMealMapper,
         favoriteMealToMealItemMapper: FavoriteMealToMealItemMapper,
+        cydDispatchers: CydDispatchers,
     ): MealRepository =
         MealRepositoryImpl(
             mealDataSource,
@@ -34,5 +36,6 @@ object MealRepositoryModule {
             favoriteMealDao,
             favoriteMealToMealItemMapper,
             mealItemToFavoriteMealMapper,
+            cydDispatchers,
         )
 }
