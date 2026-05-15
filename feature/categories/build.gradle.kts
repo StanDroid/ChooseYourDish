@@ -32,9 +32,9 @@ android {
 }
 
 dependencies {
-    implementation(project(":data:categories"))
     implementation(project(":core:ui"))
     implementation(project(":core:base"))
+    implementation(project(":domain"))
 
     implementation(libs.androidx.ktx)
 

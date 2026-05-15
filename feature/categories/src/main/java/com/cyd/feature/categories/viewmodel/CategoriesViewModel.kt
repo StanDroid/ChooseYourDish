@@ -8,7 +8,7 @@ import com.cyd.base.utils.ErrorMessage
 import com.cyd.base.viewmodel.BaseViewModel
 import com.cyd.base.viewmodel.UiState
 import com.cyd.base.viewmodel.ViewState
-import com.cyd.feature.categories.usecase.GetMealCategoriesUseCase
+import com.cyd.domain.categories.GetMealCategoriesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

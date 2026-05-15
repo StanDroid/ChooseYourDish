@@ -13,11 +13,13 @@ android {
             enableAndroidTestCoverage = true
         }
     }
-    namespace = "com.cyd.data.categories"
+    namespace = "com.cyd.domain"
     compileSdk = 36
+
     defaultConfig {
         minSdk = 24
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_21
         targetCompatibility = JavaVersion.VERSION_21
@@ -25,9 +27,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":data:network"))
     implementation(project(":core:base"))
-    implementation(project(":domain"))
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)

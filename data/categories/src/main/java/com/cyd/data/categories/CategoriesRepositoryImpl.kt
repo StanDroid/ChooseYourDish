@@ -2,6 +2,7 @@ package com.cyd.data.categories
 
 import com.cyd.data.categories.mapper.CategoriesMapper
 import com.cyd.data.network.MealDataSource
+import com.cyd.domain.categories.CategoriesRepository
 import javax.inject.Inject
 
 class CategoriesRepositoryImpl
