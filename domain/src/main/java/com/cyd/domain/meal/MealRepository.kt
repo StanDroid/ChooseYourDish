@@ -14,7 +14,7 @@ interface MealRepository {
 
     suspend fun getMealDetails(id: String): Meal?
 
-    suspend fun getFavoritesMeals(): Flow<List<MealItem>>
+    fun getFavoritesMeals(): Flow<List<MealItem>>
 
     suspend fun insertFavoriteMeal(meal: MealItem)
 

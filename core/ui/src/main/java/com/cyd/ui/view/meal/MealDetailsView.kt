@@ -12,15 +12,13 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
@@ -56,6 +54,15 @@ fun MealDetailsView(
     meal: Meal,
     tapOnFavoritesAction: () -> Unit,
 ) {
+    val context = LocalContext.current
+    val imageRequest =
+        remember(meal.mealThumb, context) {
+            ImageRequest
+                .Builder(context)
+                .data(meal.mealThumb)
+                .crossfade(true)
+                .build()
+        }
     Column(
         Modifier
             .verticalScroll(rememberScrollState(0)),
@@ -64,12 +71,7 @@ fun MealDetailsView(
             SharedTransitionLayout {
                 this@Column.AnimatedVisibility(visible = true) {
                     AsyncImage(
-                        model =
-                            ImageRequest
-                                .Builder(LocalContext.current)
-                                .data(meal.mealThumb)
-                                .crossfade(true)
-                                .build(),
+                        model = imageRequest,
                         placeholder = null,
                         contentScale = ContentScale.FillWidth,
                         contentDescription = null,
@@ -112,13 +114,17 @@ fun MealDetailsView(
         ) {
             RowTitleText(stringResource(R.string.area), meal.area.orEmpty())
 
-            LazyVerticalGrid(
-                modifier = Modifier.heightIn(max = 2000.dp),
-                columns = GridCells.Fixed(2),
-                userScrollEnabled = false,
-            ) {
-                items(meal.mealIngredients) { item ->
-                    IngredientRow(item)
+            meal.mealIngredients.chunked(2).forEach { rowIngredients ->
+                Row(modifier = Modifier.fillMaxWidth()) {
+                    rowIngredients.forEach { item ->
+                        IngredientRow(
+                            mealIngredient = item,
+                            modifier = Modifier.weight(1f),
+                        )
+                    }
+                    if (rowIngredients.size < 2) {
+                        Spacer(modifier = Modifier.weight(1f))
+                    }
                 }
             }
             Text(

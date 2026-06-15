@@ -44,12 +44,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil.transform.RoundedCornersTransformation
+import androidx.compose.ui.draw.clip
 import com.cyd.base.extension.ifNotNullOrEmpty
 import com.cyd.base.model.RandomMeal
 import com.cyd.ui.view.base.AnnotatedClickableText
 import com.cyd.ui.view.base.ProgressAsyncImage
 import com.cyd.ui.view.base.style.CydTheme
+import com.cyd.ui.R
 
 @Composable
 fun RandomMealView(
@@ -90,9 +91,9 @@ fun RandomMealView(
                         modifier =
                             Modifier
                                 .fillMaxWidth()
-                                .height(200.dp),
+                                .height(200.dp)
+                                .clip(RoundedCornerShape(8.dp)),
                         withLoadingIndicator = false,
-                        transformation = RoundedCornersTransformation(8f),
                     )
                     Column(
                         modifier =
@@ -175,15 +176,17 @@ private fun SurpriseMeView(
 ) {
     val color = MaterialTheme.colorScheme.tertiaryContainer
     val largeRadialGradient =
-        object : ShaderBrush() {
-            override fun createShader(size: Size): Shader {
-                val biggerDimension = maxOf(size.height, size.width)
-                return RadialGradientShader(
-                    colors = listOf(color, Color.Transparent),
-                    center = size.center,
-                    radius = biggerDimension / 2f,
-                    colorStops = listOf(0f, 0.95f),
-                )
+        remember(color) {
+            object : ShaderBrush() {
+                override fun createShader(size: Size): Shader {
+                    val biggerDimension = maxOf(size.height, size.width)
+                    return RadialGradientShader(
+                        colors = listOf(color, Color.Transparent),
+                        center = size.center,
+                        radius = biggerDimension / 2f,
+                        colorStops = listOf(0f, 0.95f),
+                    )
+                }
             }
         }
     Row(

@@ -15,9 +15,12 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.cyd.ui.view.base.style.CydTheme
@@ -40,15 +43,19 @@ fun ShimmerButtonPreview() {
 
 @Composable
 fun ShimmerButton(modifier: Modifier = Modifier) {
+    val primary = MaterialTheme.colorScheme.primary
+    val primaryContainer = MaterialTheme.colorScheme.primaryContainer
     val shimmerColors =
-        listOf(
-            MaterialTheme.colorScheme.primary,
-            MaterialTheme.colorScheme.primaryContainer,
-            MaterialTheme.colorScheme.primary,
-            MaterialTheme.colorScheme.primary,
-            MaterialTheme.colorScheme.primaryContainer,
-            MaterialTheme.colorScheme.primary,
-        )
+        remember(primary, primaryContainer) {
+            listOf(
+                primary,
+                primaryContainer,
+                primary,
+                primary,
+                primaryContainer,
+                primary,
+            )
+        }
 
     val transition = rememberInfiniteTransition(label = "")
     val translateAnim by transition.animateFloat(
@@ -62,20 +69,24 @@ fun ShimmerButton(modifier: Modifier = Modifier) {
         label = "",
     )
 
-    val shimmerBrush =
-        Brush.linearGradient(
-            colors = shimmerColors,
-            start = Offset(x = translateAnim, y = -400f),
-            end = Offset(x = translateAnim + 500f, 100f),
-        )
-
+    val buttonShape = ButtonDefaults.shape
     Spacer(
         modifier =
             modifier
                 .padding(top = 4.dp, bottom = 10.dp)
-                .background(
-                    shimmerBrush,
-                    shape = ButtonDefaults.shape,
-                ).height(40.dp),
+                .graphicsLayer {
+                    clip = true
+                    shape = buttonShape
+                }
+                .drawBehind {
+                    val shimmerBrush =
+                        Brush.linearGradient(
+                            colors = shimmerColors,
+                            start = Offset(x = translateAnim, y = -400f),
+                            end = Offset(x = translateAnim + 500f, 100f),
+                        )
+                    drawRect(brush = shimmerBrush)
+                }
+                .height(40.dp),
     )
 }
