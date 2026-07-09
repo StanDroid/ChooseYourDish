@@ -38,7 +38,7 @@ fun SearchScreen(
             trailingIcon = {
                 if (state.searchText.isNotEmpty()) {
                     Icon(
-                        painter = painterResource(R.drawable.close),
+                        painter = painterResource(com.cyd.ui.R.drawable.close),
                         contentDescription = null,
                         modifier =
                             Modifier.clickable {
@@ -55,7 +55,7 @@ fun SearchScreen(
                     .padding(top = 16.dp),
         ) {
             LazyColumn {
-                items(state.list) { item ->
+                items(state.list, key = { it.id }) { item ->
                     Text(
                         text = item.name,
                         style = MaterialTheme.typography.bodyMedium,

@@ -19,6 +19,6 @@ fun <T, M> StateFlow<T>.mapLatest(
         .flowOn(cydDispatchers.io)
         .stateIn(
             coroutineScope,
-            SharingStarted.Eagerly,
+            SharingStarted.WhileSubscribed(5000),
             mapper(value),
         )

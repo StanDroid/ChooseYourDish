@@ -19,26 +19,32 @@ import com.cyd.ui.R
 fun GifImage(modifier: Modifier = Modifier) {
     val context = LocalContext.current
     val imageLoader =
-        ImageLoader
-            .Builder(context)
-            .components {
-                if (Build.VERSION.SDK_INT >= 28) {
-                    add(ImageDecoderDecoder.Factory())
-                } else {
-                    add(GifDecoder.Factory())
-                }
-            }.build()
+        remember(context) {
+            ImageLoader
+                .Builder(context)
+                .components {
+                    if (Build.VERSION.SDK_INT >= 28) {
+                        add(ImageDecoderDecoder.Factory())
+                    } else {
+                        add(GifDecoder.Factory())
+                    }
+                }.build()
+        }
+    val imageRequest =
+        remember(context) {
+            ImageRequest
+                .Builder(context)
+                .data(data = com.cyd.base.R.drawable.gif_pizza)
+                .apply(block = {
+                    size(Size.ORIGINAL)
+                })
+                .build()
+        }
     Image(
         modifier = modifier,
         painter =
             rememberAsyncImagePainter(
-                ImageRequest
-                    .Builder(context)
-                    .data(data = R.drawable.gif_pizza)
-                    .apply(block = {
-                        size(Size.ORIGINAL)
-                    })
-                    .build(),
+                model = imageRequest,
                 imageLoader = imageLoader,
             ),
         contentDescription = null,
@@ -66,9 +72,9 @@ fun getGitPainter(size: Size = Size.ORIGINAL): Painter {
         remember(context, size) {
             ImageRequest
                 .Builder(context)
-                .data(data = R.drawable.gif_pizza)
+                .data(data = com.cyd.base.R.drawable.gif_pizza)
                 .size(size)
-                .build()
+            .build()
         }
 
     return rememberAsyncImagePainter(

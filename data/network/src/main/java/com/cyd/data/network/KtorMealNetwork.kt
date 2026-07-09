@@ -19,13 +19,15 @@ class KtorMealNetwork
                 // default validation to throw exceptions for non-2xx responses
                 expectSuccess = true
                 engine {
-                    addInterceptor(
-                        HttpLoggingInterceptor().apply {
-                            setLevel(
-                                HttpLoggingInterceptor.Level.BODY,
-                            )
-                        },
-                    )
+                    if (BuildConfig.DEBUG) {
+                        addInterceptor(
+                            HttpLoggingInterceptor().apply {
+                                setLevel(
+                                    HttpLoggingInterceptor.Level.BODY,
+                                )
+                            },
+                        )
+                    }
                 }
                 // set default request parameters
                 defaultRequest {

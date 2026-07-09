@@ -17,6 +17,7 @@ import com.cyd.base.model.MealItem
 import com.cyd.base.viewmodel.UiState
 import com.cyd.ui.view.meal.MealItemView
 import com.cyd.ui.view.meal.ProgressLoadingView
+import com.cyd.ui.R
 
 @Composable
 fun MealListScreen(
@@ -44,7 +45,7 @@ fun MealListScreen(
                 contentPadding = PaddingValues(16.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
-                items(list) { meal ->
+                items(list, key = { it.id }) { meal ->
                     MealItemView(meal, onMealClick)
                 }
             }

@@ -46,6 +46,7 @@ import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.cyd.R
+import com.cyd.ui.R as uiR
 import com.cyd.base.utils.PRIVACY_POLICY
 import com.cyd.core.navigation.route.CategoryListRoute
 import com.cyd.core.navigation.route.FavouritesRoute
@@ -67,8 +68,8 @@ fun NavigationSystem() {
 
     val topBarTitle =
         when (destination) {
-            Graph.HomeGraph.HomeScreen.route -> stringResource(R.string.dish_of_the_day)
-            Graph.CategoriesGraph.CategoryListScreen.route -> stringResource(R.string.categories)
+            Graph.HomeGraph.HomeScreen.route -> stringResource(uiR.string.dish_of_the_day)
+            Graph.CategoriesGraph.CategoryListScreen.route -> stringResource(uiR.string.categories)
             Graph.CategoriesGraph.MealListScreen.route ->
                 currentBackStackEntry?.arguments?.getString(
                     PARAM_NAME,
@@ -78,14 +79,14 @@ fun NavigationSystem() {
                 currentBackStackEntry?.arguments?.getString(PARAM_NAME)
                     ?: stringResource(R.string.details)
 
-            Graph.SearchGraph.SearchScreen.route -> stringResource(R.string.ingredients)
-            Graph.FavoritesGraph.FavoritesScreen.route -> stringResource(R.string.favorites)
+            Graph.SearchGraph.SearchScreen.route -> stringResource(uiR.string.ingredients)
+            Graph.FavoritesGraph.FavoritesScreen.route -> stringResource(uiR.string.favorites)
             else -> ""
         }
 
     val icon =
         when (destination) {
-            Graph.MealDetailsScreen.route -> painterResource(R.drawable.arrow_back)
+            Graph.MealDetailsScreen.route -> painterResource(uiR.drawable.arrow_back)
             else -> null
         }
 
@@ -136,7 +137,7 @@ fun NavigationSystem() {
                     actions = {
                         IconButton(onClick = { expanded.value = true }) {
                             Icon(
-                                painter = painterResource(R.drawable.more_vert),
+                                painter = painterResource(uiR.drawable.more_vert),
                                 contentDescription = stringResource(com.cyd.ui.R.string.options),
                             )
                         }

@@ -12,6 +12,7 @@ import com.cyd.data.meal.mapper.RandomMealMapper
 import com.cyd.data.network.MealDataSource
 import com.cyd.domain.meal.MealRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -54,12 +55,10 @@ class MealRepositoryImpl
                     }.orEmpty()
             }
 
-        override suspend fun getFavoritesMeals(): Flow<List<MealItem>> =
-            withContext(cydDispatchers.io) {
-                favoriteMealDao.getFavoriteMeals().map {
-                    favoriteMealToMealItemMapper.map(it)
-                }
-            }
+        override fun getFavoritesMeals(): Flow<List<MealItem>> =
+            favoriteMealDao.getFavoriteMeals().map {
+                favoriteMealToMealItemMapper.map(it)
+            }.flowOn(cydDispatchers.io)
 
         override suspend fun getFavoritesMealIds(): List<String> =
             withContext(cydDispatchers.io) {
