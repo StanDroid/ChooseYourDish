@@ -49,22 +49,14 @@ class CategoriesViewModel
 
         override fun handleException(throwable: Throwable?) {
             super.handleException(throwable)
-            throwable?.let { error ->
-                error.printStackTrace()
-                viewModelState.update {
-                    it.copy(
-                        isLoading = false,
-                        errorMessages =
-                            listOf(
-                                ErrorMessage(
-                                    it.hashCode(),
-                                    error
-                                        .stackTrace
-                                        .toString(),
-                                ),
-                            ),
-                    )
-                }
+            viewModelState.update {
+                it.copy(
+                    isLoading = false,
+                    errorMessages =
+                        listOf(
+                            ErrorMessage(throwable.hashCode(), throwable?.message.orEmpty()),
+                        ),
+                )
             }
         }
     }

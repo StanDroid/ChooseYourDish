@@ -14,6 +14,7 @@ fun RandomMealScreen(
     uiState: UiState<RandomMeal>,
     onLoadNextRandomMeal: () -> Unit = {},
     onClickGoToMealDetails: (Pair<String, String>) -> Unit = {},
+    onAskAiClick: () -> Unit = {},
 ) {
     Box(modifier.fillMaxSize()) {
         when (uiState) {
@@ -22,6 +23,7 @@ fun RandomMealScreen(
                     uiState.data,
                     onLoadNextRandomMeal,
                     onClickGoToMealDetails,
+                    onAskAiClick,
                 )
             }
 

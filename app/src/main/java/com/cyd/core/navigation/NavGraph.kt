@@ -46,8 +46,8 @@ import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.cyd.R
-import com.cyd.ui.R as uiR
 import com.cyd.base.utils.PRIVACY_POLICY
+import com.cyd.core.navigation.route.AiChatRoute
 import com.cyd.core.navigation.route.CategoryListRoute
 import com.cyd.core.navigation.route.FavouritesRoute
 import com.cyd.core.navigation.route.MealDetailsRoute
@@ -55,6 +55,7 @@ import com.cyd.core.navigation.route.MealListRoute
 import com.cyd.core.navigation.route.RandomMealRoute
 import com.cyd.core.navigation.route.SearchRoute
 import com.cyd.core.navigation.route.SplashScreenRoute
+import com.cyd.ui.R as uiR
 
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterial3Api::class)
 @Composable
@@ -81,18 +82,21 @@ fun NavigationSystem() {
 
             Graph.SearchGraph.SearchScreen.route -> stringResource(uiR.string.ingredients)
             Graph.FavoritesGraph.FavoritesScreen.route -> stringResource(uiR.string.favorites)
+            Graph.AiChatGraph.AiChatScreen.route -> stringResource(uiR.string.ai_chat_title)
             else -> ""
         }
 
     val icon =
         when (destination) {
             Graph.MealDetailsScreen.route -> painterResource(uiR.drawable.arrow_back)
+            Graph.AiChatGraph.AiChatScreen.route -> painterResource(uiR.drawable.arrow_back)
             else -> null
         }
 
     val iconClick: () -> Unit =
         when (destination) {
             Graph.MealDetailsScreen.route -> ({ navController.navigateUp() })
+            Graph.AiChatGraph.AiChatScreen.route -> ({ navController.navigateUp() })
             else -> ({ })
         }
 
@@ -138,7 +142,7 @@ fun NavigationSystem() {
                         IconButton(onClick = { expanded.value = true }) {
                             Icon(
                                 painter = painterResource(uiR.drawable.more_vert),
-                                contentDescription = stringResource(com.cyd.ui.R.string.options),
+                                contentDescription = stringResource(uiR.string.options),
                             )
                         }
                         DropdownMenu(
@@ -146,7 +150,7 @@ fun NavigationSystem() {
                             onDismissRequest = { expanded.value = false },
                         ) {
                             DropdownMenuItem(
-                                text = { Text(stringResource(com.cyd.ui.R.string.privacy_policy)) },
+                                text = { Text(stringResource(uiR.string.privacy_policy)) },
                                 onClick = {
                                     expanded.value = false
                                     uriHandler.openUri(PRIVACY_POLICY)
@@ -186,6 +190,7 @@ fun NavigationSystem() {
             addCategoriesRoute(navController)
             addSearchRoute(navController)
             addFavoritesRoute(navController)
+            addAiChatRoute(navController)
 
             composable(
                 route = Graph.MealDetailsScreen.route + "/{$PARAM_ID}/{$PARAM_NAME}",
@@ -320,6 +325,17 @@ private fun NavGraphBuilder.addFavoritesRoute(navController: NavHostController) 
     }
 }
 
+private fun NavGraphBuilder.addAiChatRoute(navController: NavHostController) {
+    navigation(
+        route = Graph.AiChatGraph.route,
+        startDestination = Graph.AiChatGraph.AiChatScreen.route,
+    ) {
+        composable(Graph.AiChatGraph.AiChatScreen.route) {
+            AiChatRoute()
+        }
+    }
+}
+
 private fun NavHostController.navigateToRootScreen(
     rootScreen: String,
     closestNavGraphDestination: NavDestination?,
@@ -341,6 +357,7 @@ private fun isBottomNavBarVisible(currentBackStackEntry: NavBackStackEntry?) =
         setOf(
             Graph.MealDetailsScreen.route,
             Graph.SplashGraph.SplashScreen.route,
+            Graph.AiChatGraph.AiChatScreen.route,
         )
 
 private fun getSimpleRoute(currentBackStackEntry: NavBackStackEntry?) =

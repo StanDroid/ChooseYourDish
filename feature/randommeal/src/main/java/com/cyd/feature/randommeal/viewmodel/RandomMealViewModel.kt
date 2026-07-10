@@ -1,6 +1,5 @@
 package com.cyd.feature.randommeal.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.cyd.base.CydDispatchers
 import com.cyd.base.extension.mapLatest
@@ -53,21 +52,14 @@ class RandomMealViewModel
 
         override fun handleException(throwable: Throwable?) {
             super.handleException(throwable)
-            throwable?.let { error ->
-                error.printStackTrace()
-                Log.e("CYD", "loadRandomMeal failure")
-                viewModelState.update {
-                    it.copy(
-                        isLoading = false,
-                        errorMessages =
-                            listOf(
-                                ErrorMessage(
-                                    it.hashCode(),
-                                    error.stackTrace.toString(),
-                                ),
-                            ),
-                    )
-                }
+            viewModelState.update {
+                it.copy(
+                    isLoading = false,
+                    errorMessages =
+                        listOf(
+                            ErrorMessage(throwable.hashCode(), throwable?.message.orEmpty()),
+                        ),
+                )
             }
         }
     }

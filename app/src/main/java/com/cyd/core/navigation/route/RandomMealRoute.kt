@@ -28,12 +28,16 @@ fun RandomMealRoute(navController: NavHostController) {
     RandomMealScreen(
         uiState = state,
         onLoadNextRandomMeal = viewModel::onLoadNextRandomMealClick,
-    ) {
-        navController.navigate(
-            Graph.MealDetailsScreen.withStringArgs(
-                it.first,
-                it.second,
-            ),
-        )
-    }
+        onAskAiClick = {
+            navController.navigate(Graph.AiChatGraph.route)
+        },
+        onClickGoToMealDetails = {
+            navController.navigate(
+                Graph.MealDetailsScreen.withStringArgs(
+                    it.first,
+                    it.second,
+                ),
+            )
+        },
+    )
 }

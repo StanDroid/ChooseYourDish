@@ -1,0 +1,11 @@
+# Project configuration for ChooseYourDish
+model = "gpt-5.5"                  # Pin your preferred engineering model
+approval_policy = "on-request"     # Prompt before executing terminal commands
+sandbox_mode = "workspace-write"   # Restrict file writes strictly to this project
+
+[sandbox_workspace_write]
+network_access = true             # Allows Codex to pull dependencies if needed
+
+[features]
+shell_snapshot = true             # Speed up repeated gradle check environments
+codex_git_commit = true           # Let Codex write structured Git commits automatically

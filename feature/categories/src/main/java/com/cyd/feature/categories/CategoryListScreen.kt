@@ -30,7 +30,18 @@ fun CategoryListScreen(
     onCategoryClick: (Category) -> Unit,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    AnimatedContent(uiState) { state ->
+    CategoryListContent(
+        uiState = uiState,
+        onCategoryClick = onCategoryClick,
+    )
+}
+
+@Composable
+fun CategoryListContent(
+    uiState: UiState<List<Category>>,
+    onCategoryClick: (Category) -> Unit,
+) {
+    AnimatedContent(uiState, label = "CategoryListAnimation") { state ->
         when (state) {
             is UiState.InProgress -> {
                 ProgressLoadingView()

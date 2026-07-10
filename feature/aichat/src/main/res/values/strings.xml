@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sorry_i_m_having_trouble_right_now_please_try_again_later">Sorry, I\'m having trouble right now. Please try again later.</string>
+    <string name="sorry_something_went_wrong_please_check_your_connection_and_try_again">Sorry, something went wrong. Please check your connection and try again.</string>
+    <string name="i_couldn_t_generate_a_response_please_try_again">I couldn\'t generate a response. Please try again.</string>
+</resources>

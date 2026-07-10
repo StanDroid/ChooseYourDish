@@ -1,0 +1,11 @@
+# Block heavy build artifacts from entering agent context windows
+.gradle/
+.idea/
+build/
+**/build/
+app/build/
+*.apk
+*.aar
+*.jar
+capture/
+docs/active_state.md # Exclude the live state file from global directory scans

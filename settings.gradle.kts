@@ -21,6 +21,7 @@ include(":data:db")
 
 include(":core:base")
 include(":core:ui")
+include(":core:testing")
 
 include(":feature:randommeal")
 include(":feature:categories")
@@ -28,5 +29,6 @@ include(":feature:categorymeals")
 include(":feature:mealdetails")
 include(":feature:search")
 
+include(":feature:aichat")
 include(":benchmark")
 include(":domain")

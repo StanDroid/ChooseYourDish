@@ -13,7 +13,6 @@ import coil.decode.GifDecoder
 import coil.decode.ImageDecoderDecoder
 import coil.request.ImageRequest
 import coil.size.Size
-import com.cyd.ui.R
 
 @Composable
 fun GifImage(modifier: Modifier = Modifier) {
@@ -74,7 +73,7 @@ fun getGitPainter(size: Size = Size.ORIGINAL): Painter {
                 .Builder(context)
                 .data(data = com.cyd.base.R.drawable.gif_pizza)
                 .size(size)
-            .build()
+                .build()
         }
 
     return rememberAsyncImagePainter(
