@@ -3,4 +3,8 @@
     <string name="sorry_i_m_having_trouble_right_now_please_try_again_later">Sorry, I\'m having trouble right now. Please try again later.</string>
     <string name="sorry_something_went_wrong_please_check_your_connection_and_try_again">Sorry, something went wrong. Please check your connection and try again.</string>
     <string name="i_couldn_t_generate_a_response_please_try_again">I couldn\'t generate a response. Please try again.</string>
+    <string name="ai_chat_backend_not_configured">AI chat is not configured yet. Add AI_CHAT_BASE_URL to local.properties and connect it to your backend endpoint.</string>
+    <string name="ai_chat_backend_unavailable">AI chat is unavailable. Please check your connection and try again.</string>
+    <string name="ai_chat_request_rejected">I couldn\'t send that request. Please try a shorter food-related question.</string>
+    <string name="ai_chat_backend_problem">AI chat is having trouble right now. Please try again later.</string>
 </resources>

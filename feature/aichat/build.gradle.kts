@@ -41,6 +41,7 @@ android {
 dependencies {
     implementation(project(":core:ui"))
     implementation(project(":core:base"))
+    implementation(project(":domain"))
 
     implementation(libs.androidx.ktx)
     implementation(libs.androidx.ui)
@@ -58,8 +59,6 @@ dependencies {
 
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
-
-    implementation(libs.google.generativeai)
 
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.test.manifest)

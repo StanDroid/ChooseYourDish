@@ -1,5 +1,3 @@
-import java.util.Properties
-
 plugins {
     id("com.android.application")
     id("kotlin-android")
@@ -10,11 +8,6 @@ plugins {
     alias(libs.plugins.kotlin.compose)
 }
 apply(from = "${project.rootDir}/jacoco/jacoco.gradle")
-
-val localProps = Properties()
-val localPropsFile = rootProject.file("local.properties")
-if (localPropsFile.exists()) localProps.load(localPropsFile.inputStream())
-val geminiApiKey: String = localProps.getProperty("GEMINI_API_KEY") ?: ""
 
 android {
     compileSdk = 36
@@ -30,7 +23,6 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
-        buildConfigField("String", "GEMINI_API_KEY", "\"$geminiApiKey\"")
     }
 
     buildTypes {
@@ -77,6 +69,7 @@ dependencies {
     implementation(project(":data:categories"))
     implementation(project(":data:ingredients"))
     implementation(project(":data:meal"))
+    implementation(project(":data:aichat"))
 
     implementation(project(":domain"))
 

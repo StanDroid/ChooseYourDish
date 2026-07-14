@@ -1,3 +1,1 @@
-# Add project specific ProGuard rules here.
-# Keep Gemini GenerativeAI classes
--keep class com.google.ai.client.generativeai.** { *; }
+# AI chat calls the project backend through Ktor; no client-side Gemini rules are required.
