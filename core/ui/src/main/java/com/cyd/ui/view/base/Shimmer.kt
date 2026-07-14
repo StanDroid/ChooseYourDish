@@ -6,7 +6,6 @@ import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -77,8 +76,7 @@ fun ShimmerButton(modifier: Modifier = Modifier) {
                 .graphicsLayer {
                     clip = true
                     shape = buttonShape
-                }
-                .drawBehind {
+                }.drawBehind {
                     val shimmerBrush =
                         Brush.linearGradient(
                             colors = shimmerColors,
@@ -86,7 +84,6 @@ fun ShimmerButton(modifier: Modifier = Modifier) {
                             end = Offset(x = translateAnim + 500f, 100f),
                         )
                     drawRect(brush = shimmerBrush)
-                }
-                .height(40.dp),
+                }.height(40.dp),
     )
 }

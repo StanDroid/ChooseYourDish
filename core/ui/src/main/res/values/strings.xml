@@ -21,4 +21,9 @@
     <string name="favorites">Favorites</string>
     <string name="ingredients">Dishes by ingredients</string>
     <string name="dish_of_the_day">Dish Of The Day</string>
+    <string name="ask_ai_chef">Ask AI Chef</string>
+    <string name="ai_chat_title">AI Recipe Assistant</string>
+    <string name="ai_chat_hint">Ask about any recipe or food…</string>
+    <string name="ai_chat_welcome">Hi! I&#8217;m your AI culinary assistant 🍳\nAsk me anything about recipes, cooking, or food!</string>
+    <string name="ai_chat_error">Sorry, something went wrong. Please try again.</string>
 </resources>

@@ -56,9 +56,11 @@ class MealRepositoryImpl
             }
 
         override fun getFavoritesMeals(): Flow<List<MealItem>> =
-            favoriteMealDao.getFavoriteMeals().map {
-                favoriteMealToMealItemMapper.map(it)
-            }.flowOn(cydDispatchers.io)
+            favoriteMealDao
+                .getFavoriteMeals()
+                .map {
+                    favoriteMealToMealItemMapper.map(it)
+                }.flowOn(cydDispatchers.io)
 
         override suspend fun getFavoritesMealIds(): List<String> =
             withContext(cydDispatchers.io) {

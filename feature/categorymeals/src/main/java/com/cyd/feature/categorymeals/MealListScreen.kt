@@ -15,9 +15,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.cyd.base.model.MealItem
 import com.cyd.base.viewmodel.UiState
+import com.cyd.ui.R
 import com.cyd.ui.view.meal.MealItemView
 import com.cyd.ui.view.meal.ProgressLoadingView
-import com.cyd.ui.R
 
 @Composable
 fun MealListScreen(

@@ -1,6 +1,5 @@
 package com.cyd.feature.categorymeals.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.cyd.base.CydDispatchers
 import com.cyd.base.extension.mapLatest
@@ -56,7 +55,6 @@ class MealListViewModel
 
         override fun handleException(throwable: Throwable?) {
             super.handleException(throwable)
-            Log.e("CYD", "loadMealsByCategory failure: ${throwable?.message}")
             viewModelState.update {
                 it.copy(
                     isLoading = false,

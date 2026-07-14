@@ -8,12 +8,7 @@ plugins {
 apply(from = "${project.rootDir}/jacoco/jacoco.gradle")
 
 android {
-    buildTypes {
-        getByName("debug") {
-            enableUnitTestCoverage = true
-            enableAndroidTestCoverage = true
-        }
-    }
+
     namespace = "com.cyd.feature.categories"
     compileSdk = 36
 
@@ -28,6 +23,20 @@ android {
 
     buildFeatures {
         compose = true
+    }
+
+    buildTypes {
+        release {
+            isMinifyEnabled = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro",
+            )
+        }
+        getByName("debug") {
+            enableUnitTestCoverage = true
+            enableAndroidTestCoverage = true
+        }
     }
 }
 
@@ -53,4 +62,13 @@ dependencies {
     implementation(libs.coil.gif)
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
+
+    debugImplementation(libs.androidx.ui.test.manifest)
+
+    testImplementation(libs.junit)
+    testImplementation(libs.mockk)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.androidx.ui.test.junit4)
+    testImplementation(libs.turbine)
+    testImplementation(project(":core:testing"))
 }

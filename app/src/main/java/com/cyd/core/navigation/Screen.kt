@@ -1,5 +1,6 @@
 package com.cyd.core.navigation
 
+import android.net.Uri
 import androidx.annotation.DrawableRes
 import com.cyd.ui.R
 import kotlinx.serialization.Serializable
@@ -12,7 +13,7 @@ sealed class Screen(
         buildString {
             append(route)
             args.forEach {
-                append("/$it")
+                append("/${Uri.encode(it)}")
             }
         }
 }
@@ -55,6 +56,12 @@ sealed class Graph(
     data object FavoritesGraph : Graph("FavoritesRoute") {
         @Serializable
         data object FavoritesScreen : Screen("BottomBarRootScreen%Favorites"), RootScreen
+    }
+
+    @Serializable
+    data object AiChatGraph : Graph("AiChatRoute") {
+        @Serializable
+        data object AiChatScreen : Screen("AiChatScreen")
     }
 }
 

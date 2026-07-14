@@ -52,6 +52,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     packaging {
         resources {
@@ -68,6 +69,7 @@ dependencies {
     implementation(project(":data:categories"))
     implementation(project(":data:ingredients"))
     implementation(project(":data:meal"))
+    implementation(project(":data:aichat"))
 
     implementation(project(":domain"))
 
@@ -80,6 +82,7 @@ dependencies {
     implementation(project(":feature:categorymeals"))
     implementation(project(":feature:mealdetails"))
     implementation(project(":feature:search"))
+    implementation(project(":feature:aichat"))
 
     implementation(libs.androidx.ktx)
     implementation(libs.material)

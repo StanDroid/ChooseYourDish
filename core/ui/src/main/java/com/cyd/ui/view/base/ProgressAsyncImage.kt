@@ -27,6 +27,7 @@ fun ProgressAsyncImage(
     withLoadingIndicator: Boolean = true,
     transformation: Transformation? = null,
     contentDescription: String? = null,
+    contentScale: ContentScale = ContentScale.Inside,
 ) {
     val context = LocalContext.current
     val density = LocalDensity.current
@@ -64,7 +65,7 @@ fun ProgressAsyncImage(
         model = imageRequest,
         placeholder = placeholderPainter,
         error = painterResource(id = R.drawable.no_data_found),
-        contentScale = ContentScale.Inside,
+        contentScale = contentScale,
         contentDescription = contentDescription,
         modifier = modifier,
     )

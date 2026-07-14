@@ -22,7 +22,8 @@
         <activity
             android:name="com.cyd.core.MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.ChooseYourDish.NoActionBar">
+            android:theme="@style/Theme.ChooseYourDish.NoActionBar"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
