@@ -20,3 +20,4 @@ feature/build
 local.properties
 .kotlin/sessions
 .agents/scope/active/
+agent-progress.md
