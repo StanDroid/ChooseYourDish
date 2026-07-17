@@ -19,3 +19,4 @@ feature/build
 .cxx
 local.properties
 .kotlin/sessions
+.agents/scope/active/
