@@ -5,6 +5,15 @@
 
 ---
 
+## Harness Architecture Definition
+This project strictly enforces the five essential subsystems of an Agent Harness to ensure deterministic and reproducible workflows:
+- **Instructions:** `AGENTS.md` and the `.agents/` directory dictate all behavioral rules and context.
+- **Tools:** The Gradle wrapper (`./gradlew`) is the primary execution tool for compilation, linting, and testing.
+- **Environment:** Must be validated via the `./init.sh` script (Java 21, Android SDK configuration, Gradle cache).
+- **State:** Global features are tracked in `feature_list.json`, and active session context is tracked in `agent-progress.md` to prevent context loss.
+- **Feedback:** Compilation (`assembleDebug`) and test results must be verified and logged before marking any task as complete.
+
+---
 ## 1. Project Overview
 
 **ChooseYourDish** is a modern Android application that helps users discover meals, browse culinary categories, search for specific dishes, get random meal suggestions, and interact with an AI-powered chat assistant. The app fetches live data from [TheMealDB API](https://www.themealdb.com/api.php) and persists favourites in a local Room database.
@@ -233,9 +242,9 @@ UI (Composable) ──▶ ViewModel ──▶ UseCase ──▶ Repository (inte
 
 ## 6. Code Quality & Style
 
+For universal code style and terminal execution guardrails (such as No Stubs and Compile Verification), see `@.agents/rules/android-engineer.md`.
+
 - **KtLint** is applied to **all** modules via the root build script. Always run `./gradlew ktlintCheck` before submitting changes.
-- **No Stubs:** Never output placeholder methods or `// TODO` comments. All generated code must be fully functional.
-- **Idiomatic Kotlin:** Use trailing lambdas, scope functions (`let`, `apply`, `run`, `also`), and `when` expressions. Prefer `val` over `var`.
 - **Visibility:** Always use the most restrictive visibility modifier (`private`, `internal`).
 - **Coroutines:** Never use `GlobalScope`. Always use `viewModelScope`, `lifecycleScope`, or an injected `CoroutineDispatcher`.
 - **Compose state:** Never hold UI state in a `MutableState` inside a `ViewModel`. Use `StateFlow`.
@@ -264,22 +273,26 @@ Spawn or refer to the appropriate expert for specialized tasks:
 | Networking, Repositories, Data Sources | `.agents/experts/data-layer-expert.md` | Ktor clients, Room DAOs, repository implementations |
 | Unit & UI Testing | `.agents/experts/qa-expert.md` | Writing tests, running coverage, MockK setup |
 | Feature Architecture Planning | `.agents/experts/architect.md` | New feature design, module boundaries, DI graph |
+| Core & Domain layers | `.agents/experts/architect.md` | Modifications to `:core:*` or `:domain` |
 
 ---
 
 ## 9. Task Initiation & Lifecycle
 
-1. Before writing any code, create or read the localized work item using the template at `.agents/scope/feature-scope-template.md`.
-2. **Scope File Location:** All Feature Specification Scope documents created from the template **must** be saved to `.agents/scope/active/<feature-name>.md`. This folder is listed in `.gitignore` and will **never** be committed to version control. Never save scope files directly in `.agents/scope/` alongside the template.
-3. The work item must define: **goal**, **affected modules**, **acceptance criteria**, and **verification command**.
-4. Mark tasks in-progress, then complete. Never leave tasks in an ambiguous state.
+1. Before writing any code, verify the environment using `./init.sh` (Mac/Linux) or `./init.ps1` (Windows).
+2. **Session Reset Protocol:** Open `agent-progress.md` and overwrite the "Active Session" block with the current date, active feature, and phase to clear old context.
+3. Update `feature_list.json` by setting the target feature's status to `in-progress`.
+4. Create or read the localized work item using the template at `.agents/scope/feature-scope-template.md`.
+5. **Scope File Location:** All Feature Specification Scope documents created from the template **must** be saved to `.agents/scope/active/<feature-name>.md`. This folder is listed in `.gitignore` and will **never** be committed to version control. Never save scope files directly in `.agents/scope/` alongside the template.
+6. The work item must define: **goal**, **affected modules**, **acceptance criteria**, and **verification command**.
+7. Mark tasks in-progress, then complete. When finished, update `feature_list.json` to mark the feature as `done`. Never leave tasks in an ambiguous state.
 
 ---
 
 ## 10. Multi-Agent Workflows
 
 For complex, end-to-end features that span multiple layers, use the phased hand-off protocol:
-
+[AGENTS.md](AGENTS.md)
 **Protocol:** `.agents/workflows/feature-studio.md`
 
 | Phase | Owner | Deliverable |

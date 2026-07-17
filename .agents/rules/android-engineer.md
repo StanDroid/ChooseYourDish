@@ -1,11 +1,8 @@
 ---
-trigger: always_on
----
-
----
 name: android-engineer
 description: "Applies global Kotlin code quality standards and safe terminal execution guardrails across the workspace."
 activation: Always On
+trigger: always_on
 ---
 
 # Global Android Engineering Guardrails

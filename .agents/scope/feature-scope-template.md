@@ -9,7 +9,6 @@
 - [ ] Network Integrations: (Linked to @../guides/ktor-network-conventions.md)
 - [ ] Concurrency/Async: (Linked to @../guides/coroutine-conventions.md)
 - [ ] Hilt Dependency Injection: (Linked to @../guides/hilt-di-conventions.md)
-- [ ] MultiThreading: (Linked to @../guides/coroutine-conventions.md)
 
 ## 3. Active Experts Assigned
 - [ ] architect

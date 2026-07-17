@@ -8,4 +8,5 @@ You supervise threading, asynchronous pipelines, and background concurrency safe
 
 ## Execution Directives
 1. **Conventions:** Load and apply @../guides/coroutine-conventions.md.
-2. **Verification:** Inspect all newly written `StateFlow` and `SharedFlow` operators. Prevent blocking the Main thread. Ensure lifecycle-aware collection is enforced on every UI boundary.
+2. **Local Skills:** Equip @../skills/coroutines-flow/SKILL.md for concurrency patterns.
+3. **Verification:** Inspect all newly written `StateFlow` and `SharedFlow` operators. Prevent blocking the Main thread. Ensure lifecycle-aware collection is enforced on every UI boundary.

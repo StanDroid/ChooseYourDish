@@ -1,0 +1,34 @@
+{
+  "features": [
+    {
+      "module": ":feature:categories",
+      "description": "Browse meal categories screen",
+      "status": "done"
+    },
+    {
+      "module": ":feature:categorymeals",
+      "description": "Meals list for a selected category",
+      "status": "done"
+    },
+    {
+      "module": ":feature:mealdetails",
+      "description": "Full detail view for a single meal",
+      "status": "done"
+    },
+    {
+      "module": ":feature:randommeal",
+      "description": "'Surprise Me' random meal screen",
+      "status": "done"
+    },
+    {
+      "module": ":feature:search",
+      "description": "Full-text meal search screen",
+      "status": "done"
+    },
+    {
+      "module": ":feature:aichat",
+      "description": "AI-powered chat assistant (Gemini)",
+      "status": "done"
+    }
+  ]
+}
