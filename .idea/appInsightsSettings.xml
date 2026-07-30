@@ -28,10 +28,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.cyd" />
+                  <option name="mobileSdkAppId" value="1:1083212427792:android:8e9f49bedd900933945095" />
+                  <option name="projectId" value="choose-your-dish" />
+                  <option name="projectNumber" value="1083212427792" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

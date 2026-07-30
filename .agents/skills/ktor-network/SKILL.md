@@ -8,6 +8,7 @@ description: "Provides configurations for robust API clients using Ktor, emphasi
 ## 1. Safe API Calls
 - Every network request call must be wrapped in a type-safe result wrapper (e.g., a sealed interface `Resource<T>` or Kotlin's native `Result<T>`).
 - Explicitly catch `ClientRequestException`, `ServerResponseException`, and `ConnectException`.
+- Always execute network tasks on `CydDispatchers.io`
 
 ## 2. Serialization Architecture
 - Enforce the use of **Kotlinx Serialization** with explicit `@Serializable` data transfer objects (DTOs).
